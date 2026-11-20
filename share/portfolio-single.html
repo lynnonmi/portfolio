@@ -609,6 +609,191 @@ main:focus { outline: none; }
 .about-grid .polaroid { max-width: 320px; }
 @media (max-width: 640px) { .about-grid .polaroid { max-width: 290px; } .about-grid__photo { display: flex; justify-content: center; } }
 
+/* ======== refinement: first-screen hero, editorial spreads, six project layouts ======== */
+
+/* hero: everything essential on the first screen */
+.giant { font-size: clamp(3.4rem, 8.6vw, 8rem); line-height: .86; margin: 0 0 6px; }
+.stage--home { padding-top: clamp(20px, 3vw, 40px); padding-bottom: 0; }
+.hero-grid { align-items: end; gap: clamp(20px, 4vw, 64px); }
+.hero-copy { gap: 12px; padding-bottom: clamp(28px, 3.5vw, 44px); }
+.hero-role { margin-top: 2px; font-size: clamp(1.25rem, 2.3vw, 1.9rem); max-width: none; }
+.hero-intro { max-width: 52ch; font-size: 1.02rem; line-height: 1.5; color: #e6ded1; }
+.hero-figs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; width: 100%; max-width: 640px; margin-top: 6px; }
+.hero-figs li { transform: rotate(var(--tilt)); }
+.hero-figs a { display: flex; flex-direction: column; gap: 4px; height: 100%; padding: 11px 13px 13px; background: var(--paper); background-image: var(--grain); color: var(--ink); text-decoration: none; box-shadow: 0 1px 0 #fff8 inset, 0 10px 18px -8px #000a; transition: transform .35s var(--ease); }
+.hero-figs a:hover, .hero-figs a:focus-visible { transform: translateY(-4px); }
+.hero-figs b { font: 400 clamp(1.8rem, 3.4vw, 2.7rem)/1 var(--serif); color: var(--rose-deep); }
+.hero-figs span { font-size: .74rem; line-height: 1.3; color: #4d4740; }
+.hero-asof { font-size: .7rem; color: #b9b0a3; letter-spacing: .04em; margin-top: -4px; }
+.hero-actions { margin-top: 4px; }
+.hero-featured { font-size: .8rem; color: #d7cfc2; }
+.hero-featured a { color: var(--cream); text-underline-offset: 3px; }
+.stack--band { margin-top: calc(clamp(20px, 3vw, 48px) * -1); height: clamp(400px, 38vw, 500px); }
+.sheet-stack { display: none; }
+
+/* spread at the top of every project */
+.spreadtop { display: grid; grid-template-columns: 1.15fr 1fr; gap: clamp(24px, 5vw, 80px); align-items: center; margin: 44px auto clamp(48px, 7vw, 96px); }
+.sp-main { position: relative; padding: clamp(28px, 4vw, 48px) clamp(24px, 4vw, 44px) clamp(24px, 3vw, 36px); background: var(--pink); background-image: var(--grain); box-shadow: 0 1px 0 #fff6 inset, 0 16px 28px -14px #0007; border-radius: 0 14px 4px 4px; }
+.spreadtop--blue .sp-main { background-color: var(--blue); } .spreadtop--cream .sp-main { background-color: #e9dcc3; }
+.spreadtop--rose .sp-main { background-color: #cf9aa2; } .spreadtop--char .sp-main { background-color: var(--char-2); color: var(--cream); }
+.sp-tab { position: absolute; left: 0; top: -30px; padding: 8px 20px 6px; background: inherit; background-image: var(--grain); border-radius: 12px 12px 0 0; font: 600 .66rem var(--sans); letter-spacing: .16em; text-transform: uppercase; color: var(--ink); }
+.sp-metric { display: flex; flex-direction: column; gap: 6px; }
+.sp-metric b { font: 400 clamp(3.4rem, 8vw, 6.4rem)/.95 var(--serif); letter-spacing: -.02em; }
+.sp-metric span { font-size: 1rem; max-width: 30ch; line-height: 1.35; }
+.sp-role { margin-top: 18px; padding-top: 12px; border-top: 1px solid #0003; font: 600 .7rem/1.4 var(--sans); letter-spacing: .12em; text-transform: uppercase; }
+.sp-side { position: relative; min-height: 280px; display: grid; place-items: center; padding: 20px; }
+.sp-side .doily { width: min(400px, 96%); left: 50%; top: 50%; transform: translate(-50%, -50%) rotate(8deg); }
+.sp-side .ribbon { width: 46%; left: 2%; top: 64%; transform: rotate(-12deg); }
+.sp-slip { position: relative; z-index: 2; margin: 0; max-width: 340px; padding: 30px 26px 26px; background: var(--paper); background-image: var(--grain); box-shadow: 0 12px 22px -10px #0007; transform: rotate(2deg); }
+.sp-slip p { font: italic 400 clamp(1.5rem, 2.6vw, 2.1rem)/1.15 var(--serif); color: var(--rose-deep); text-wrap: balance; }
+.sp-side .polaroid { position: relative; z-index: 2; max-width: 300px; }
+.pull { display: none; }
+
+/* layout sections that need the full width */
+.psec:has(.journey, .reelwall, .rundown, .tiers, .meter, .festlog, .gal) { grid-template-columns: 1fr; gap: 20px; }
+.psec:has(.gal) .prose { max-width: 62ch; }
+
+/* Solo Party: journey */
+.journey { position: relative; display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; padding-top: 6px; }
+.journey::before { content: ''; position: absolute; left: 0; right: 0; top: 30px; border-top: 2px dashed #0004; }
+.jstop { position: relative; z-index: 1; padding: 16px 14px 18px; background: var(--paper); background-image: var(--grain); border-top: 8px solid var(--pink); box-shadow: 0 10px 18px -12px #0007; display: flex; flex-direction: column; gap: 6px; }
+.jstop--blue { border-top-color: var(--blue); }
+.jstop:nth-child(even) { margin-top: 30px; transform: rotate(.6deg); } .jstop:nth-child(odd) { transform: rotate(-.6deg); }
+.jstop__when { font: 600 .62rem/1.3 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--rose-deep); }
+.jstop h3 { font: 500 1.5rem/1.1 var(--serif); }
+.jstop p { font-size: .86rem; line-height: 1.45; }
+.jstop__stat { margin-top: auto; padding-top: 8px; font: 500 1.15rem/1.15 var(--serif); color: var(--rose-deep); }
+
+/* @lynnonmi: reel wall */
+.reelwall { display: grid; grid-template-columns: 1.35fr 1fr 1fr 1fr; gap: 18px; align-items: start; }
+.rw { display: flex; flex-direction: column; gap: 6px; }
+.rw:nth-child(2) { margin-top: 28px; } .rw:nth-child(3) { margin-top: 8px; } .rw:nth-child(4) { margin-top: 40px; }
+.rw__frame { position: relative; aspect-ratio: 9 / 16; display: grid; place-items: center; background: var(--pink); background-image: var(--grain); box-shadow: 0 14px 24px -12px #0008; overflow: hidden; transform: rotate(var(--r, 0deg)); }
+.rw:nth-child(odd) { --r: -.8deg; } .rw:nth-child(even) { --r: .8deg; }
+.rw__frame--blue { background-color: var(--blue); } .rw__frame--rose { background-color: #cf9aa2; } .rw__frame--cream { background-color: #e6dac4; }
+.rw__frame--img .media { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.rw__views { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; font: 400 clamp(2.6rem, 5vw, 4.6rem)/1 var(--serif); }
+.rw--0 .rw__views { font-size: clamp(3.2rem, 6.4vw, 5.8rem); }
+.rw__views i { font: 600 .62rem var(--sans); letter-spacing: .18em; text-transform: uppercase; font-style: normal; margin-top: 4px; }
+.rw__frame--img .rw__views { position: absolute; left: 10px; bottom: 10px; align-items: flex-start; background: var(--paper); color: var(--ink); padding: 6px 10px 8px; font-size: 1.7rem; }
+.rw__play { position: absolute; top: 14px; right: 14px; width: 34px; height: 34px; border-radius: 50%; border: 1.5px solid currentColor; opacity: .6; }
+.rw__play::after { content: ''; position: absolute; left: 13px; top: 9px; border-left: 11px solid currentColor; border-top: 8px solid transparent; border-bottom: 8px solid transparent; }
+.rw__rank { font: 600 .66rem var(--sans); letter-spacing: .12em; text-transform: uppercase; color: var(--rose-deep); }
+.rw__note { font-size: .86rem; line-height: 1.4; }
+.rw__note b { display: block; font: 600 .6rem var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--mute); }
+
+/* TikTok LIVE: broadcast rundown */
+.rundown { display: grid; grid-template-columns: repeat(4, 1fr); background: var(--char-2); background-image: var(--grain); color: var(--cream); padding: clamp(20px, 3vw, 32px); box-shadow: 0 16px 28px -14px #000a; }
+.rundown li { padding: 6px 22px 8px 0; border-left: 1px solid #fff3; padding-left: 20px; }
+.rundown li:first-child { border-left: 0; padding-left: 0; }
+.rundown b { display: block; font: 400 3.4rem/1 var(--serif); color: var(--pink); }
+.rundown h3 { font: 600 .74rem var(--sans); letter-spacing: .18em; text-transform: uppercase; margin: 8px 0 6px; }
+.rundown p { font-size: .9rem; line-height: 1.45; color: #e2dacd; }
+
+/* Red Bull Korea: festival log */
+.festlog { display: grid; grid-template-columns: 2.2fr 1fr; gap: clamp(20px, 4vw, 48px); align-items: center; margin-bottom: 26px; }
+.stubs { display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px; }
+.stubs li { display: flex; flex-direction: column; align-items: center; padding: 10px 4px 9px; background: var(--paper); background-image: var(--grain); border: 1px solid #0003; border-left: 3px dashed #0005; box-shadow: 0 6px 10px -6px #0006; }
+.stubs li:nth-child(odd) { transform: rotate(-1.2deg); } .stubs li:nth-child(even) { transform: rotate(1deg); }
+.stubs b { font: 400 1.5rem/1 var(--serif); color: var(--rose-deep); }
+.stubs span { font: 600 .5rem var(--sans); letter-spacing: .14em; text-transform: uppercase; margin-top: 3px; }
+.festlog__cap { font-size: .95rem; }
+.festlog__cap b { display: block; font: 400 clamp(4rem, 8vw, 6.5rem)/.9 var(--serif); color: var(--rose-deep); }
+
+/* Pimadaziwin: growth meter and pipeline */
+.meter__bar { height: 34px; background: var(--paper); border: 1px solid var(--ink); padding: 4px; box-shadow: 0 8px 14px -10px #0006; }
+.meter__bar span { display: block; height: 100%; width: 100%; background: var(--rose); background-image: var(--grain); transform-origin: left; animation: fill 1s var(--ease) both; }
+@keyframes fill { from { transform: scaleX(.02); } to { transform: scaleX(1); } }
+.meter__ends { display: flex; justify-content: space-between; gap: 16px; margin: 14px 0 6px; }
+.meter__ends div:last-child { text-align: right; }
+.meter__ends b { display: block; font: 400 clamp(2.8rem, 6vw, 5rem)/1 var(--serif); }
+.meter__ends span { font: 600 .66rem var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--mute); }
+.pipeline { display: grid; grid-template-columns: repeat(4, 1fr); gap: 26px; }
+.pipeline li { position: relative; padding: 16px 16px 18px; background: var(--pink); background-image: var(--grain); box-shadow: 0 10px 18px -12px #0007; }
+.pipeline li:not(:last-child)::after { content: '→'; position: absolute; right: -22px; top: 50%; transform: translateY(-50%); font: 400 1.4rem var(--serif); color: var(--rose-deep); }
+.pipeline b { font: 400 1.9rem/1 var(--serif); color: var(--rose-deep); }
+.pipeline h3 { font: 600 .74rem var(--sans); letter-spacing: .14em; text-transform: uppercase; margin: 6px 0 4px; }
+.pipeline p { font-size: .88rem; }
+
+/* Constant / Refilled: two voices */
+.tiers { display: grid; gap: 14px; }
+.tier { position: relative; max-width: 700px; margin-left: calc(var(--k) * clamp(16px, 5vw, 72px)); padding: 18px 22px 20px; box-shadow: 0 12px 20px -12px #0007; background-image: var(--grain); }
+.tier--me { background-color: var(--pink); }
+.tier--them { background-color: var(--paper); border: 1px dashed #0006; box-shadow: none; }
+.tier__by { display: inline-block; font: 600 .6rem var(--sans); letter-spacing: .16em; text-transform: uppercase; background: var(--char); color: var(--cream); padding: 3px 8px; }
+.tier--them .tier__by { background: transparent; color: var(--rose-deep); border: 1px solid var(--rose-deep); }
+.tier h3 { font: 500 1.6rem/1.1 var(--serif); margin: 8px 0 4px; }
+.tier p { font-size: .95rem; max-width: 56ch; }
+.tier__stat { display: block; margin-top: 8px; font: 400 2.6rem/1 var(--serif); color: var(--rose-deep); }
+
+/* real media galleries, shown only when files exist */
+.gal { display: grid; gap: 18px; margin-top: 20px; }
+.gal--grid { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+.gal--video { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+.gal--posters { grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); align-items: start; }
+.gal--browser { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); align-items: start; }
+.gal--polaroids { grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); align-items: start; }
+.gal--masonry { display: block; columns: 3 260px; column-gap: 18px; }
+.gal--masonry .mf { break-inside: avoid; margin-bottom: 18px; }
+.mf { margin: 0; min-width: 0; }
+.mf img, .mf video, .mf .media { width: 100%; height: auto; display: block; }
+.mf figcaption { font-size: .8rem; line-height: 1.35; margin-top: 8px; }
+.gal--posters .mf { background: var(--paper); padding: 8px; box-shadow: 0 12px 20px -10px #0007; }
+.gal--posters .mf--0 { transform: rotate(-1.2deg); } .gal--posters .mf--1 { transform: rotate(.8deg) translateY(10px); } .gal--posters .mf--2 { transform: rotate(-.4deg); }
+.gal--browser .mf { background: var(--paper); padding: 24px 8px 8px; position: relative; box-shadow: 0 12px 20px -10px #0007; }
+.gal--browser .mf::before { content: ''; position: absolute; left: 10px; top: 9px; width: 8px; height: 8px; border-radius: 50%; background: #c9bfae; box-shadow: 14px 0 0 #c9bfae, 28px 0 0 #c9bfae; }
+.gal--polaroids .mf { background: var(--paper); padding: 9px 9px 14px; box-shadow: 0 12px 20px -10px #0007; }
+.gal--polaroids .mf--0 { transform: rotate(-2deg); } .gal--polaroids .mf--1 { transform: rotate(1.6deg); } .gal--polaroids .mf--2 { transform: rotate(-1deg); }
+.gal--video .mf { background: var(--char); padding: 8px; box-shadow: 0 12px 22px -10px #000a; color: var(--cream); }
+.gal--video video { background: #000; }
+.card__img .media { transition: transform .6s var(--ease); }
+.card:hover .card__img .media { transform: scale(1.04); }
+
+@media (max-width: 960px) {
+  .spreadtop { grid-template-columns: 1fr; }
+  .journey { grid-template-columns: 1fr; padding-left: 18px; border-left: 2px dashed #0004; }
+  .journey::before { display: none; }
+  .jstop:nth-child(even), .jstop:nth-child(odd) { margin-top: 0; transform: none; }
+  .reelwall { grid-template-columns: 1fr 1fr; }
+  .reelwall .rw:nth-child(n) { margin-top: 0; }
+  .rundown { grid-template-columns: 1fr 1fr; row-gap: 24px; }
+  .rundown li:nth-child(3) { border-left: 0; padding-left: 0; }
+  .festlog { grid-template-columns: 1fr; }
+  .pipeline { grid-template-columns: 1fr 1fr; }
+  .pipeline li:not(:last-child)::after { display: none; }
+}
+@media (max-width: 640px) {
+  .hero-grid { grid-template-columns: 1fr; }
+  .stack--band { display: none; }
+  .hero-figs { gap: 8px; }
+  .hero-figs a { padding: 9px 9px 11px; }
+  .hero-figs b { font-size: 1.7rem; }
+  .hero-figs span { font-size: .62rem; }
+  .hero-role { font-size: 1.15rem; }
+  .hero-intro { font-size: .95rem; }
+  .hero-actions .btn { padding: 12px 16px; }
+  .sheet-stack { display: block; background: var(--char); margin: calc(-1 * clamp(32px, 5vw, 72px)) calc(-1 * var(--gut)) 36px; padding: 36px var(--gut) 40px; max-width: none !important; }
+  .stack--sheet { width: min(340px, 94%); height: 440px; margin: 0 auto; }
+  .stubs { grid-template-columns: repeat(5, 1fr); }
+  .rundown { grid-template-columns: 1fr; }
+  .rundown li, .rundown li:nth-child(3) { border-left: 0; padding-left: 0; border-top: 1px solid #fff3; padding-top: 14px; }
+  .rundown li:first-child { border-top: 0; padding-top: 6px; }
+  .pipeline { grid-template-columns: 1fr; }
+  .tier { margin-left: calc(var(--k) * 14px); }
+  .sp-main { padding: 26px 20px 22px; }
+  .reelwall { gap: 12px; }
+}
+@media (prefers-reduced-motion: reduce) { .meter__bar span { animation: none; } .card:hover .card__img .media { transform: none; } }
+.sp-metric span { margin-top: 10px; }
+.sp-side .ribbon { z-index: 1; top: auto; bottom: 4%; left: 0; width: 48%; transform: rotate(-9deg); }
+.sp-slip { max-width: 380px; padding: 30px 28px 28px; }
+
+/* lace and ribbon return on About and Contact, kept to one frame each */
+.contact { grid-template-columns: 1.4fr 1fr; max-width: var(--max); align-items: center; }
+.contact__side { padding: 12px 0; }
+.contact__side .lace-wrap { max-width: 340px; }
+@media (max-width: 960px) { .contact { grid-template-columns: 1fr; } .contact__side .lace-wrap { max-width: 300px; } }
+
 </style>
 </head>
 <body>
@@ -619,13 +804,20 @@ main:focus { outline: none; }
   All site content lives here, taken from Lynn Kim's master portfolio brief
   (November 2026). Only verified facts are written in this file.
 
-  Each project has its own `sections`, so each story can use a different layout.
-  Section types: prose, compare, events, columns, steps, metrics, reels, split,
-  periods, list, chips, callout. See renderSection() in app.js.
+  Each project has a `layout` (journey, video, rundown, field, growth, voices),
+  so every project is presented as its own editorial spread.
 
-  Media is optional. A project with no `media` shows a text layout.
-  Add { src, alt, width, height, caption } items to `media` when files exist.
+  Media is optional. Each project has typed `media` slots. A slot with no files
+  is simply not shown. Add items like { src, alt, width, height, caption }.
+  Videos: { type: 'video', src, poster, caption }.
+  `lead` is the project's main image, used on its spread and on its card.
 */
+
+const heroFigures = [
+  { value: '3.18M', label: 'views on the top @lynnonmi Reel', slug: 'lynnonmi' },
+  { value: '23.4K', label: 'Instagram followers on @lynnonmi', slug: 'lynnonmi' },
+  { value: '180', label: 'applicants for the second Solo Party', slug: 'solo-party' },
+];
 
 const site = {
   name: 'Lynn Kim',
@@ -633,6 +825,7 @@ const site = {
   headline: 'Content Creator · Marketer · Event Organizer',
   secondary: 'Live Commerce · Photography',
   tagline: 'I create content, build communities, and bring ideas to life through marketing and events.',
+  introMore: 'My experience spans social media content, brand campaigns, live commerce, and event operations.',
   email: 'eggielikestaco@gmail.com',
   instagram: { handle: '@lynnonmi', url: 'https://www.instagram.com/lynnonmi/' },
   resume: null, // set to a PDF path such as 'assets/Lynn-Kim-Resume.pdf' when the file is supplied
@@ -652,6 +845,23 @@ const categories = [
 const projects = [
   {
     slug: 'solo-party',
+    layout: 'journey',
+    lead: null,
+    journey: [
+      { when: 'May 27, 2026', title: 'Event 01', text: 'Co-organized with Hogamdo. I created the promotional Reels and Stories, supported recruitment and secured five sponsors.', stat: '150 applicants, 66 attendees' },
+      { when: 'Planning', title: 'Designing Event 02', text: 'Planned the concept and structure, and designed the GUESS ME, FIND ME, and MATCH ME activities.', stat: null },
+      { when: 'Recruitment', title: 'Opening applications', text: 'Managed promotion, applications and participant screening.', stat: '180 unique applicants' },
+      { when: 'Digital operations', title: 'The web application', text: 'Coordinated a web application built with AI tools for approvals, voting and matching.', stat: null },
+      { when: 'August 9, 2026', title: 'Event 02', text: 'Independently organized. Coordinated staff and participants and managed on-site operations.', stat: '84 attendees' },
+    ],
+    promo: [
+      'For Event 01 I created promotional Instagram Reels and Stories and supported participant recruitment.',
+      'For Event 02 I managed promotion, applications, participant screening, and communication.',
+    ],
+    system: [
+      'I coordinated the development of a web application using AI tools.',
+      'It supported the participant approvals, voting, and matching processes that I managed for Event 02.',
+    ],
     categories: ['events'],
     title: 'Solo Party',
     subtitle: 'From co-organizing a social event to independently producing the next edition.',
@@ -747,12 +957,14 @@ const projects = [
         ],
       },
     ],
-    media: [],
+    media: { promo: [], system: [], photos: [] },
     wanted: ['Promotional Reels', 'Event posters', 'Event photographs', 'Application website screenshots', 'GUESS ME / FIND ME / MATCH ME materials', 'Participant communication examples, private information removed'],
     links: [],
   },
   {
     slug: 'lynnonmi',
+    layout: 'video',
+    lead: null,
     categories: ['content'],
     title: '@lynnonmi',
     subtitle: 'Building and managing my own social media channels.',
@@ -789,12 +1001,12 @@ const projects = [
         type: 'reels',
         title: 'Content that performed',
         items: [
-          { rank: 'Highest-performing Reel', views: '3.18M' },
-          { rank: 'High-performing Reel', views: '1.92M' },
-          { rank: 'High-performing Reel', views: '1.39M' },
-          { rank: 'High-performing Reel', views: '1.30M' },
+          { rank: 'Highest-performing Reel', views: '3.18M', thumb: null, href: null, concept: null, production: null },
+          { rank: 'High-performing Reel', views: '1.92M', thumb: null, href: null, concept: null, production: null },
+          { rank: 'High-performing Reel', views: '1.39M', thumb: null, href: null, concept: null, production: null },
+          { rank: 'High-performing Reel', views: '1.30M', thumb: null, href: null, concept: null, production: null },
         ],
-        note: 'Each Reel will get its link, concept and production notes as Lynn supplies them.',
+        note: 'Reel links, thumbnails and creative notes appear here as they are added.',
       },
       {
         type: 'columns',
@@ -830,12 +1042,20 @@ const projects = [
         ],
       },
     ],
-    media: [],
+    media: { extra: [] },
     wanted: ['Thumbnails for the four Reels', 'Links to the four Reels', 'Short notes on the creative decisions behind each Reel'],
     links: [{ text: 'Open @lynnonmi on Instagram', href: 'https://www.instagram.com/lynnonmi/' }],
   },
   {
     slug: 'witu-tiktok-live',
+    layout: 'rundown',
+    lead: null,
+    rundown: [
+      { step: 'Present', text: 'Present K-beauty products in English and explain their features and usage.' },
+      { step: 'Demonstrate', text: 'Demonstrate the products during the livestream.' },
+      { step: 'Respond', text: 'Answer viewer questions in real time.' },
+      { step: 'Keep it moving', text: 'Adapt explanations to the live audience and keep interaction going throughout the broadcast.' },
+    ],
     categories: ['live-commerce'],
     title: 'TikTok LIVE Shopping',
     subtitle: 'Hosting English-language shopping broadcasts for Korean beauty products.',
@@ -844,6 +1064,7 @@ const projects = [
     period: null,
     periods: ['July–September 2024', 'March–July 2025', 'July–August 2026'],
     periodShort: 'Three engagements, 2024 to 2026',
+    spreadStat: { value: '3', label: 'separate engagements as English shopping host, 2024 to 2026' },
     summary: 'Hosted English TikTok LIVE shopping broadcasts featuring Korean beauty products for viewers in Southeast Asia.',
     metric: null,
     heading: 'Presenting Korean beauty products to Southeast Asian audiences through TikTok LIVE.',
@@ -882,12 +1103,20 @@ const projects = [
         text: 'No verified sales, conversion, or viewership figures are available for this role, so none are shown.',
       },
     ],
-    media: [],
+    media: { clips: [], examples: [] },
     wanted: ['Broadcast screenshots', 'Short video clips', 'Product demonstration examples', 'Examples of live presentation'],
     links: [],
   },
   {
     slug: 'red-bull-korea',
+    layout: 'field',
+    lead: null,
+    festivals: 14,
+    activities: [
+      { title: 'University festivals', text: 'Supported brand activations at university festivals.' },
+      { title: 'Product sampling', text: 'Participated in product sampling activities.' },
+      { title: 'Sports and music promotions', text: 'Supported sports and music promotions.' },
+    ],
     categories: ['brand-marketing'],
     title: 'Red Bull Korea',
     subtitle: 'Campus marketing and brand activations as a Student Marketeer.',
@@ -935,12 +1164,21 @@ const projects = [
         items: ['Field marketing', 'Brand activation', 'Event operations', 'Coordination', 'On-site communication'],
       },
     ],
-    media: [],
+    media: { activation: [], sampling: [], wings: [] },
     wanted: ['Festival activation photographs', 'Sampling photographs', 'Event materials', 'Wings for Life World Run production images'],
     links: [],
   },
   {
     slug: 'pimadaziwin',
+    layout: 'growth',
+    lead: null,
+    growth: { from: 0, to: 3000, months: 4 },
+    pipeline: [
+      { step: 'Recruit', text: 'Organized supporter recruitment.' },
+      { step: 'Ship', text: 'Coordinated product shipments.' },
+      { step: 'Instruct', text: 'Prepared participant instructions.' },
+      { step: 'Stay in touch', text: 'Managed supporter communication.' },
+    ],
     categories: ['content', 'brand-marketing'],
     title: 'Pimadaziwin',
     subtitle: 'Launching and managing a brand account on X.',
@@ -991,12 +1229,19 @@ const projects = [
         ],
       },
     ],
-    media: [],
+    media: { screenshots: [], content: [], community: [] },
     wanted: ['Account screenshots', 'Follower growth evidence', 'Content examples', 'Supporter program materials'],
     links: [],
   },
   {
     slug: 'constant-refilled',
+    layout: 'voices',
+    lead: null,
+    tiers: [
+      { by: 'Lynn', title: 'Brand activity', text: 'Launched and managed brand activity on X, supported influencer seeding, and worked on Instagram content.', stat: null },
+      { by: 'Lynn', title: 'Recruitment', text: 'Recruited approximately 20 X users to take part in the Musinsa Beauty Festa activation and supported participant coordination.', stat: '~20 X users' },
+      { by: 'Participants', title: 'Organic posts', text: 'Participants generated approximately 100 organic posts. They created them themselves. I did not write them.', stat: '~100 posts' },
+    ],
     categories: ['brand-marketing'],
     title: 'Constant / Refilled',
     subtitle: 'Connecting beauty brands with online communities and offline experiences.',
@@ -1041,7 +1286,7 @@ const projects = [
         items: ['Beauty marketing', 'Social media management', 'Influencer coordination', 'Community recruitment', 'Offline activation support'],
       },
     ],
-    media: [],
+    media: { influencer: [], campaign: [], participantPosts: [] },
     wanted: ['X content examples', 'Instagram content', 'Musinsa Beauty Festa photographs', 'Participant-generated posts', 'Campaign materials'],
     links: [],
   },
@@ -1088,12 +1333,12 @@ const about = {
   ],
 };
 
-/* Four figures for the home page. Each belongs to the project named beside it. */
+/* More results, shown after the featured projects. These do not repeat the hero figures. */
 const homeFigures = [
-  { value: '23,400', label: 'Instagram followers on @lynnonmi', note: 'As of November 20, 2026', slug: 'lynnonmi' },
-  { value: '3.18M', label: 'views on the highest-performing @lynnonmi Reel', note: 'One video. As of November 20, 2026', slug: 'lynnonmi' },
   { value: '84', label: 'attendees at the second Solo Party', note: 'Up from 66 at the first event', slug: 'solo-party' },
   { value: '3,000', label: 'followers gained on Pimadaziwin\'s X account', note: 'In four months, from zero', slug: 'pimadaziwin' },
+  { value: '14', label: 'university festivals supported through Red Bull Korea', note: 'Festivals involved in', slug: 'red-bull-korea' },
+  { value: '~20', label: 'X users I recruited for the Musinsa Beauty Festa activation', note: 'Participants then wrote ~100 posts', slug: 'constant-refilled' },
 ];
 
 /* Home page features these three projects, in this order. */
@@ -1241,10 +1486,10 @@ function projectCard(p, i) {
   const c = firstCat(p);
   const tilt = [-1.3, 1.1, -0.8][i % 3];
   const per = periodText(p);
-  const hasImg = p.media && p.media[0] && p.media[0].src;
+  const hasImg = p.lead && p.lead.src;
   return `<a class="card" href="${projectUrl(p)}" style="--tilt:${tilt}deg">
     ${i % 2 === 0 ? clip() : ''}
-    ${hasImg ? `<div class="card__img">${media(p.media[0], c.tone)}</div>` : ''}
+    ${hasImg ? `<div class="card__img">${media(p.lead, c.tone)}</div>` : ''}
     <p class="card__band card__band--${c.tone}">${esc(c.label)}</p>
     <h3 class="card__title">${esc(p.title)}</h3>
     <p class="card__org">${esc(p.org)}</p>
@@ -1279,30 +1524,38 @@ function archiveIndex() {
 
 /* ---------- pages ---------- */
 
+function heroStack(cls) {
+  return `<div class="stack ${cls}">
+    <div class="paper paper--3"></div>
+    <div class="paper paper--2"></div>
+    <div class="paper paper--1">
+      ${polaroid({ img: about.portrait, tone: 'pink', caption: '<span>Lynn Kim</span>', clipped: true })}
+      <p class="typed">${esc(site.secondary)}</p>
+    </div>
+    <span class="script-mark" aria-hidden="true">portfolio</span>
+    <span class="year-mark" aria-hidden="true">(${site.year})</span>
+  </div>`;
+}
+
 function home() {
   const stage = `<div class="stage stage--home">
-    <h1 class="giant">${esc(site.name)}</h1>
     <div class="hero-grid">
       <div class="hero-copy">
+        <h1 class="giant">${esc(site.name)}</h1>
         <p class="hero-role">${esc(site.headline)}</p>
-        <p class="hero-sub">${esc(site.secondary)}</p>
-        <p class="hero-intro">${esc(site.tagline)}</p>
+        <p class="hero-intro">${esc(site.tagline)} ${esc(site.introMore)}</p>
+        <ul class="hero-figs" aria-label="Verified figures">
+          ${heroFigures.map((f, i) => `<li style="--tilt:${[-1.2, 0.8, -0.6][i]}deg"><a href="?page=project&slug=${f.slug}"><b>${esc(f.value)}</b><span>${esc(f.label)}</span></a></li>`).join('')}
+        </ul>
+        <p class="hero-asof">Instagram figures as of ${esc(site.asOf)}.</p>
         <div class="hero-actions">
-          <a class="btn btn--pink" href="?page=work">Explore My Work</a>
+          <a class="btn btn--pink" href="?page=work">Explore Work</a>
           <a class="btn btn--line" href="?page=about">About Me</a>
           <a class="btn btn--line" href="?page=contact">Get in Touch</a>
         </div>
+        <p class="hero-featured">Featured: ${featuredProjects.map((p) => `<a href="${projectUrl(p)}">${esc(p.title)}</a>`).join(' · ')}</p>
       </div>
-      <div class="stack">
-        <div class="paper paper--3"></div>
-        <div class="paper paper--2"></div>
-        <div class="paper paper--1">
-          ${polaroid({ img: about.portrait, tone: 'pink', caption: '<span>Lynn Kim</span>', clipped: true })}
-          <p class="typed">${esc(site.secondary)}</p>
-        </div>
-        <span class="script-mark" aria-hidden="true">portfolio</span>
-        <span class="year-mark" aria-hidden="true">(${site.year})</span>
-      </div>
+      ${heroStack('stack--band')}
     </div>
   </div>`;
 
@@ -1311,6 +1564,8 @@ function home() {
     : '';
 
   const body = `
+  <div class="sheet-stack">${heroStack('stack--sheet')}</div>
+
   <section class="block" aria-labelledby="feat">
     <div class="block__head">
       <h2 id="feat" class="display">Featured <em>work</em></h2>
@@ -1322,7 +1577,7 @@ function home() {
   <section class="block" aria-labelledby="kf">
     <div class="figs-wrap">
       <div class="block__head">
-        <h2 id="kf" class="display display--s">Selected <em>figures</em></h2>
+        <h2 id="kf" class="display display--s">More <em>results</em></h2>
         <p class="small">Each figure belongs to the project beside it. They are not combined totals.</p>
       </div>
       <ul class="figs">
@@ -1501,6 +1756,159 @@ function renderSection(s, n) {
   }
 }
 
+/* ---------- media helpers ---------- */
+
+const hasMedia = (arr) => Array.isArray(arr) && arr.some((m) => m.src);
+
+function mediaFig(m, tone, cls = '') {
+  const cap = m.caption ? `<figcaption>${esc(m.caption)}</figcaption>` : '';
+  if (m.type === 'video') {
+    return `<figure class="mf mf--video ${cls}"><video controls preload="metadata" playsinline${m.poster ? ` poster="${esc(m.poster)}"` : ''} aria-label="${esc(m.alt || m.caption || 'Video')}"><source src="${esc(m.src)}"><a href="${esc(m.src)}">Open the video</a></video>${cap}</figure>`;
+  }
+  return `<figure class="mf ${cls}">${media(m, tone)}${cap}</figure>`;
+}
+
+/* Renders only the items that have a real file. Returns '' when there are none. */
+function gallery(items, tone, variant = 'grid', forcedCaption = '') {
+  const list = (items || []).filter((m) => m.src);
+  if (!list.length) return '';
+  return `<div class="gal gal--${variant}">${list.map((m, i) => mediaFig(forcedCaption ? { ...m, caption: m.caption || forcedCaption } : m, tone, `mf--${i % 3}`)).join('')}</div>`;
+}
+
+const para = (arr) => `<div class="prose">${arr.map((t) => `<p>${esc(t)}</p>`).join('')}</div>`;
+const findSec = (p, type, title) => p.sections.find((s) => s.type === type && (!title || s.title === title));
+const secHtml = (p, type, title) => {
+  const s = findSec(p, type, title);
+  return s ? renderSection(s) : '';
+};
+const overview = (p) => ['Overview', secHtml(p, 'prose', 'Overview')];
+
+/* ---------- the six project layouts ---------- */
+
+const layouts = {
+  /* Solo Party: an event planning journey */
+  journey(p, c) {
+    const journey = `<ol class="journey">${p.journey
+      .map((j, i) => `<li class="jstop jstop--${c.tone}" style="--k:${i}"><span class="jstop__when">${esc(j.when)}</span><h3>${esc(j.title)}</h3><p>${esc(j.text)}</p>${j.stat ? `<b class="jstop__stat">${esc(j.stat)}</b>` : ''}</li>`)
+      .join('')}</ol>`;
+    return [
+      overview(p),
+      ['The journey', journey],
+      ['Two editions compared', secHtml(p, 'compare')],
+      ['What I did at each event', secHtml(p, 'events')],
+      ['Promotion', para(p.promo) + gallery(p.media.promo, c.tone, 'posters')],
+      ['The application system', para(p.system) + gallery(p.media.system, c.tone, 'browser')],
+      hasMedia(p.media.photos) ? ['On the day', gallery(p.media.photos, c.tone, 'polaroids')] : null,
+      ['Results', secHtml(p, 'metrics', 'Results')],
+    ];
+  },
+
+  /* @lynnonmi: a video-first wall */
+  video(p, c) {
+    const rs = findSec(p, 'reels');
+    const wall = `<ol class="reelwall">${rs.items
+      .map((r, i) => {
+        const tones = ['pink', 'blue', 'rose', 'cream'];
+        const frame = r.thumb && r.thumb.src
+          ? `<div class="rw__frame rw__frame--img">${media(r.thumb, tones[i])}<span class="rw__views">${esc(r.views)}<i>views</i></span></div>`
+          : `<div class="rw__frame rw__frame--${tones[i]}"><span class="rw__play" aria-hidden="true"></span><span class="rw__views">${esc(r.views)}<i>views</i></span></div>`;
+        return `<li class="rw rw--${i}">${frame}<p class="rw__rank">${esc(r.rank)}</p>${r.concept ? `<p class="rw__note"><b>Concept</b>${esc(r.concept)}</p>` : ''}${r.production ? `<p class="rw__note"><b>Production</b>${esc(r.production)}</p>` : ''}${r.href ? `<a class="textlink" href="${esc(r.href)}" target="_blank" rel="noopener">Watch the Reel</a>` : ''}</li>`;
+      })
+      .join('')}</ol><p class="note-line">Reel numbers are views on individual videos, not total account views.</p>`;
+    return [
+      ['Content that performed', wall],
+      overview(p),
+      ['Verified performance', secHtml(p, 'metrics', 'Verified performance')],
+      hasMedia(p.media.extra) ? ['More from the channels', gallery(p.media.extra, c.tone, 'grid')] : null,
+      ['Content themes', secHtml(p, 'columns')],
+      ['Production process', secHtml(p, 'steps')],
+      ['What I do on the channels', secHtml(p, 'list')],
+    ];
+  },
+
+  /* TikTok LIVE: a broadcast rundown */
+  rundown(p, c) {
+    const run = `<ol class="rundown">${p.rundown
+      .map((r, i) => `<li><b>${String(i + 1).padStart(2, '0')}</b><h3>${esc(r.step)}</h3><p>${esc(r.text)}</p></li>`)
+      .join('')}</ol>`;
+    return [
+      overview(p),
+      ['Broadcast rundown', run],
+      hasMedia(p.media.clips) ? ['Broadcast clips', gallery(p.media.clips, c.tone, 'video')] : null,
+      hasMedia(p.media.examples) ? ['Live presentation', gallery(p.media.examples, c.tone, 'grid')] : null,
+      ['Three engagements', secHtml(p, 'periods')],
+      ['Skills demonstrated', secHtml(p, 'chips')],
+      ['About the numbers', secHtml(p, 'callout')],
+    ];
+  },
+
+  /* Red Bull Korea: a field log */
+  field(p, c) {
+    const stubs = `<div class="festlog"><ul class="stubs" aria-label="${p.festivals} university festivals supported">${Array.from({ length: p.festivals }, (_, i) => `<li><b>${String(i + 1).padStart(2, '0')}</b><span>Festival</span></li>`).join('')}</ul><p class="festlog__cap"><b>${p.festivals}</b> university festivals with supported activations</p></div>`;
+    const acts = `<dl class="dcols dcols--3">${p.activities.map((a) => `<div><dt>${esc(a.title)}</dt><dd>${esc(a.text)}</dd></div>`).join('')}</dl>`;
+    const wings = secHtml(p, 'columns', 'Wings for Life World Run 2025');
+    return [
+      overview(p),
+      ['Festival log', stubs + acts],
+      ['Scope of my participation', secHtml(p, 'callout')],
+      hasMedia(p.media.activation) || hasMedia(p.media.sampling) ? ['Activations', gallery([...p.media.activation, ...p.media.sampling], c.tone, 'masonry')] : null,
+      ['Wings for Life World Run 2025', wings + gallery(p.media.wings, c.tone, 'grid')],
+      ['Skills demonstrated', secHtml(p, 'chips')],
+    ];
+  },
+
+  /* Pimadaziwin: account growth and community operations */
+  growth(p, c) {
+    const g = p.growth;
+    const meter = `<div class="meter" role="img" aria-label="Followers on the brand's X account grew from ${g.from} to ${g.to.toLocaleString('en-US')} in ${g.months} months">
+      <div class="meter__bar"><span></span></div>
+      <div class="meter__ends"><div><b>${g.from}</b><span>Account launched</span></div><div><b>${g.to.toLocaleString('en-US')}</b><span>Followers, ${g.months} months later</span></div></div>
+    </div>${secHtml(p, 'metrics', 'Verified growth').replace(/<div class="metrics">[\s\S]*?<\/div><\/div>/, '')}`;
+    const pipe = `<ol class="pipeline">${p.pipeline.map((x, i) => `<li><b>${String(i + 1).padStart(2, '0')}</b><h3>${esc(x.step)}</h3><p>${esc(x.text)}</p></li>`).join('')}</ol>`;
+    return [
+      overview(p),
+      ['Verified growth', meter],
+      ['From launch to growth', secHtml(p, 'steps')],
+      hasMedia(p.media.screenshots) || hasMedia(p.media.content) ? ['Account and content', gallery([...p.media.screenshots, ...p.media.content], c.tone, 'browser')] : null,
+      ['Community operations', pipe + gallery(p.media.community, c.tone, 'grid')],
+      ['What I did', secHtml(p, 'list')],
+    ];
+  },
+
+  /* Constant / Refilled: two voices */
+  voices(p, c) {
+    const tiers = `<ol class="tiers">${p.tiers
+      .map((t, i) => `<li class="tier tier--${t.by === 'Lynn' ? 'me' : 'them'}" style="--k:${i}"><span class="tier__by">${t.by === 'Lynn' ? 'Done by me' : 'Written by participants'}</span><h3>${esc(t.title)}</h3><p>${esc(t.text)}</p>${t.stat ? `<b class="tier__stat">${esc(t.stat)}</b>` : ''}</li>`)
+      .join('')}</ol>`;
+    return [
+      overview(p),
+      ['From recruitment to participation', tiers],
+      hasMedia(p.media.influencer) ? ['Influencer seeding', gallery(p.media.influencer, c.tone, 'grid')] : null,
+      hasMedia(p.media.campaign) ? ['Campaign materials', gallery(p.media.campaign, c.tone, 'grid')] : null,
+      hasMedia(p.media.participantPosts) ? ['Participant-generated posts', gallery(p.media.participantPosts, c.tone, 'browser', 'Written by a participant, not by me.')] : null,
+      ['Brand marketing work', secHtml(p, 'list')],
+      ['Skills demonstrated', secHtml(p, 'chips')],
+    ];
+  },
+};
+
+/* The editorial spread that opens every project: title paper, metric, and a clipped slip or lead image. */
+function spreadTop(p, c) {
+  const m = p.spreadStat || p.metric;
+  const per = periodText(p);
+  const lead = p.lead && p.lead.src
+    ? polaroid({ img: p.lead, tone: c.tone, tilt: 2, clipped: true, caption: `<span>${esc(p.title)}</span>` })
+    : `<blockquote class="sp-slip">${clip()}<p>${esc(p.heading)}</p></blockquote>`;
+  return `<section class="spreadtop spreadtop--${c.tone}" aria-label="Project summary">
+    <div class="sp-main">
+      <span class="sp-tab">${esc(c.label)}</span>
+      <p class="sp-metric"><b>${esc(m.value)}</b><span>${esc(m.label)}</span></p>
+      <p class="sp-role">${esc(p.role)}${per ? ` · ${esc(per)}` : ''}</p>
+    </div>
+    <div class="sp-side">${doily()}${ribbon()}${lead}</div>
+  </section>`;
+}
+
 function projectPage() {
   const slug = document.body.dataset.slug || new URLSearchParams(location.search).get('slug');
   const p = byOrder.find((x) => x.slug === slug);
@@ -1510,10 +1918,11 @@ function projectPage() {
   document.title = `${p.title}, Lynn Kim`;
   const folders = p.categories.map((id) => cat(id));
   let n = 0;
-  const section = (title, inner) => {
+  const section = ([title, inner]) => {
+    if (!inner) return '';
     n += 1;
     const id = `s${n}`;
-    return `<section class="psec" aria-labelledby="${id}"><header class="psec__head"><span class="num">${String(n).padStart(2, '0')}</span><h2 id="${id}" class="display display--s">${esc(title)}</h2></header><div class="psec__body">${inner}</div></section>`;
+    return `<section class="psec psec--${p.layout}" aria-labelledby="${id}"><header class="psec__head"><span class="num">${String(n).padStart(2, '0')}</span><h2 id="${id}" class="display display--s">${esc(title)}</h2></header><div class="psec__body">${inner}</div></section>`;
   };
 
   const facts = [['Organization', esc(p.org)], ['Role', esc(p.role)]];
@@ -1524,10 +1933,11 @@ function projectPage() {
   if (!p.platform && !p.asOf) facts.push(['Folder', folders.map((f) => esc(f.label)).join(', ')]);
 
   const links = p.links.length ? `<p class="links">${p.links.map((l) => `<a class="textlink" href="${esc(l.href)}"${l.href.startsWith('http') ? ' target="_blank" rel="noopener"' : ''}>${esc(l.text)}</a>`).join('')}</p>` : '';
-
-  const gallery = p.media.length
-    ? section('Visual evidence', `<div class="gallery">${p.media.map((m) => `<figure>${media(m, c.tone)}${m.caption ? `<figcaption>${esc(m.caption)}</figcaption>` : ''}</figure>`).join('')}</div>`)
-    : `<aside class="quiet"><h2 class="quiet__h">Supporting materials</h2><p>Not yet added: ${p.wanted.map((w) => esc(w.toLowerCase())).join(', ')}.</p></aside>`;
+  const missing = p.wanted.filter(Boolean);
+  const allMedia = Object.values(p.media).flat().concat(p.lead ? [p.lead] : []);
+  const quiet = allMedia.some((m) => m.src)
+    ? ''
+    : `<aside class="quiet"><h2 class="quiet__h">Supporting materials</h2><p>Not yet added: ${missing.map((w) => esc(w.toLowerCase())).join(', ')}.</p></aside>`;
 
   const prev = byOrder[(idx - 1 + byOrder.length) % byOrder.length];
   const next = byOrder[(idx + 1) % byOrder.length];
@@ -1541,10 +1951,10 @@ function projectPage() {
   const body = `
   <p class="crumb"><a href="?page=work#${c.id}">Work</a> / <a href="?page=work#${c.id}">${esc(c.label)}</a> / ${esc(p.title)}</p>
   <dl class="facts">${facts.map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join('')}</dl>
-  <p class="pull">${esc(p.heading)}</p>
+  ${spreadTop(p, c)}
   ${links}
-  ${p.sections.map((s) => section(s.title, renderSection(s))).join('')}
-  ${gallery}
+  ${layouts[p.layout](p, c).filter(Boolean).map(section).join('')}
+  ${quiet}
   <nav class="pager" aria-label="Other projects">
     <a href="${projectUrl(prev)}" rel="prev"><span>Previous</span>${esc(prev.title)}</a>
     <a href="${projectUrl(next)}" rel="next"><span>Next</span>${esc(next.title)}</a>
@@ -1644,7 +2054,7 @@ function initViewer() {
 function aboutPage() {
   const body = `
   <section class="about-grid">
-    <div class="about-grid__photo">${polaroid({ img: about.portrait, tone: 'pink', tilt: 2, clipped: true, caption: '<span>Lynn Kim</span>' })}</div>
+    <div class="about-grid__photo">${polaroid({ img: about.portrait, tone: 'pink', tilt: 2, clipped: true, lace: true, caption: '<span>Lynn Kim</span>' })}</div>
     <div class="about-grid__text">
       <h2 class="display">Hello, I'm <em class="script-em">Lynn</em></h2>
       <div class="prose prose--lead">${about.intro.map((t) => `<p>${esc(t)}</p>`).join('')}</div>
@@ -1705,6 +2115,7 @@ function contactPage() {
         <div><dt>Resume</dt><dd>${cv}</dd></div>
       </dl>
     </div>
+    <div class="contact__side">${polaroid({ img: about.portrait, tone: 'blue', tilt: -2, clipped: true, lace: true, bow: true, caption: '<span>Lynn Kim</span>' })}</div>
   </section>`;
   return shell(plainStage('Contact', "Let's Connect", 'For professional opportunities, brand collaborations, content projects, and photography inquiries, feel free to reach out.'), body, 'contact');
 }

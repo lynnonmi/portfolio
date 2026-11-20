@@ -1,4 +1,4 @@
-import { site, categories, projects, photos, about, homeFigures, homeFeatured, order } from './data.js';
+import { site, heroFigures, categories, projects, photos, about, homeFigures, homeFeatured, order } from './data.js';
 
 const page = document.body.dataset.page;
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -138,10 +138,10 @@ function projectCard(p, i) {
   const c = firstCat(p);
   const tilt = [-1.3, 1.1, -0.8][i % 3];
   const per = periodText(p);
-  const hasImg = p.media && p.media[0] && p.media[0].src;
+  const hasImg = p.lead && p.lead.src;
   return `<a class="card" href="${projectUrl(p)}" style="--tilt:${tilt}deg">
     ${i % 2 === 0 ? clip() : ''}
-    ${hasImg ? `<div class="card__img">${media(p.media[0], c.tone)}</div>` : ''}
+    ${hasImg ? `<div class="card__img">${media(p.lead, c.tone)}</div>` : ''}
     <p class="card__band card__band--${c.tone}">${esc(c.label)}</p>
     <h3 class="card__title">${esc(p.title)}</h3>
     <p class="card__org">${esc(p.org)}</p>
@@ -176,30 +176,38 @@ function archiveIndex() {
 
 /* ---------- pages ---------- */
 
+function heroStack(cls) {
+  return `<div class="stack ${cls}">
+    <div class="paper paper--3"></div>
+    <div class="paper paper--2"></div>
+    <div class="paper paper--1">
+      ${polaroid({ img: about.portrait, tone: 'pink', caption: '<span>Lynn Kim</span>', clipped: true })}
+      <p class="typed">${esc(site.secondary)}</p>
+    </div>
+    <span class="script-mark" aria-hidden="true">portfolio</span>
+    <span class="year-mark" aria-hidden="true">(${site.year})</span>
+  </div>`;
+}
+
 function home() {
   const stage = `<div class="stage stage--home">
-    <h1 class="giant">${esc(site.name)}</h1>
     <div class="hero-grid">
       <div class="hero-copy">
+        <h1 class="giant">${esc(site.name)}</h1>
         <p class="hero-role">${esc(site.headline)}</p>
-        <p class="hero-sub">${esc(site.secondary)}</p>
-        <p class="hero-intro">${esc(site.tagline)}</p>
+        <p class="hero-intro">${esc(site.tagline)} ${esc(site.introMore)}</p>
+        <ul class="hero-figs" aria-label="Verified figures">
+          ${heroFigures.map((f, i) => `<li style="--tilt:${[-1.2, 0.8, -0.6][i]}deg"><a href="project-${f.slug}.html"><b>${esc(f.value)}</b><span>${esc(f.label)}</span></a></li>`).join('')}
+        </ul>
+        <p class="hero-asof">Instagram figures as of ${esc(site.asOf)}.</p>
         <div class="hero-actions">
-          <a class="btn btn--pink" href="work.html">Explore My Work</a>
+          <a class="btn btn--pink" href="work.html">Explore Work</a>
           <a class="btn btn--line" href="about.html">About Me</a>
           <a class="btn btn--line" href="contact.html">Get in Touch</a>
         </div>
+        <p class="hero-featured">Featured: ${featuredProjects.map((p) => `<a href="${projectUrl(p)}">${esc(p.title)}</a>`).join(' · ')}</p>
       </div>
-      <div class="stack">
-        <div class="paper paper--3"></div>
-        <div class="paper paper--2"></div>
-        <div class="paper paper--1">
-          ${polaroid({ img: about.portrait, tone: 'pink', caption: '<span>Lynn Kim</span>', clipped: true })}
-          <p class="typed">${esc(site.secondary)}</p>
-        </div>
-        <span class="script-mark" aria-hidden="true">portfolio</span>
-        <span class="year-mark" aria-hidden="true">(${site.year})</span>
-      </div>
+      ${heroStack('stack--band')}
     </div>
   </div>`;
 
@@ -208,6 +216,8 @@ function home() {
     : '';
 
   const body = `
+  <div class="sheet-stack">${heroStack('stack--sheet')}</div>
+
   <section class="block" aria-labelledby="feat">
     <div class="block__head">
       <h2 id="feat" class="display">Featured <em>work</em></h2>
@@ -219,7 +229,7 @@ function home() {
   <section class="block" aria-labelledby="kf">
     <div class="figs-wrap">
       <div class="block__head">
-        <h2 id="kf" class="display display--s">Selected <em>figures</em></h2>
+        <h2 id="kf" class="display display--s">More <em>results</em></h2>
         <p class="small">Each figure belongs to the project beside it. They are not combined totals.</p>
       </div>
       <ul class="figs">
@@ -398,6 +408,159 @@ function renderSection(s, n) {
   }
 }
 
+/* ---------- media helpers ---------- */
+
+const hasMedia = (arr) => Array.isArray(arr) && arr.some((m) => m.src);
+
+function mediaFig(m, tone, cls = '') {
+  const cap = m.caption ? `<figcaption>${esc(m.caption)}</figcaption>` : '';
+  if (m.type === 'video') {
+    return `<figure class="mf mf--video ${cls}"><video controls preload="metadata" playsinline${m.poster ? ` poster="${esc(m.poster)}"` : ''} aria-label="${esc(m.alt || m.caption || 'Video')}"><source src="${esc(m.src)}"><a href="${esc(m.src)}">Open the video</a></video>${cap}</figure>`;
+  }
+  return `<figure class="mf ${cls}">${media(m, tone)}${cap}</figure>`;
+}
+
+/* Renders only the items that have a real file. Returns '' when there are none. */
+function gallery(items, tone, variant = 'grid', forcedCaption = '') {
+  const list = (items || []).filter((m) => m.src);
+  if (!list.length) return '';
+  return `<div class="gal gal--${variant}">${list.map((m, i) => mediaFig(forcedCaption ? { ...m, caption: m.caption || forcedCaption } : m, tone, `mf--${i % 3}`)).join('')}</div>`;
+}
+
+const para = (arr) => `<div class="prose">${arr.map((t) => `<p>${esc(t)}</p>`).join('')}</div>`;
+const findSec = (p, type, title) => p.sections.find((s) => s.type === type && (!title || s.title === title));
+const secHtml = (p, type, title) => {
+  const s = findSec(p, type, title);
+  return s ? renderSection(s) : '';
+};
+const overview = (p) => ['Overview', secHtml(p, 'prose', 'Overview')];
+
+/* ---------- the six project layouts ---------- */
+
+const layouts = {
+  /* Solo Party: an event planning journey */
+  journey(p, c) {
+    const journey = `<ol class="journey">${p.journey
+      .map((j, i) => `<li class="jstop jstop--${c.tone}" style="--k:${i}"><span class="jstop__when">${esc(j.when)}</span><h3>${esc(j.title)}</h3><p>${esc(j.text)}</p>${j.stat ? `<b class="jstop__stat">${esc(j.stat)}</b>` : ''}</li>`)
+      .join('')}</ol>`;
+    return [
+      overview(p),
+      ['The journey', journey],
+      ['Two editions compared', secHtml(p, 'compare')],
+      ['What I did at each event', secHtml(p, 'events')],
+      ['Promotion', para(p.promo) + gallery(p.media.promo, c.tone, 'posters')],
+      ['The application system', para(p.system) + gallery(p.media.system, c.tone, 'browser')],
+      hasMedia(p.media.photos) ? ['On the day', gallery(p.media.photos, c.tone, 'polaroids')] : null,
+      ['Results', secHtml(p, 'metrics', 'Results')],
+    ];
+  },
+
+  /* @lynnonmi: a video-first wall */
+  video(p, c) {
+    const rs = findSec(p, 'reels');
+    const wall = `<ol class="reelwall">${rs.items
+      .map((r, i) => {
+        const tones = ['pink', 'blue', 'rose', 'cream'];
+        const frame = r.thumb && r.thumb.src
+          ? `<div class="rw__frame rw__frame--img">${media(r.thumb, tones[i])}<span class="rw__views">${esc(r.views)}<i>views</i></span></div>`
+          : `<div class="rw__frame rw__frame--${tones[i]}"><span class="rw__play" aria-hidden="true"></span><span class="rw__views">${esc(r.views)}<i>views</i></span></div>`;
+        return `<li class="rw rw--${i}">${frame}<p class="rw__rank">${esc(r.rank)}</p>${r.concept ? `<p class="rw__note"><b>Concept</b>${esc(r.concept)}</p>` : ''}${r.production ? `<p class="rw__note"><b>Production</b>${esc(r.production)}</p>` : ''}${r.href ? `<a class="textlink" href="${esc(r.href)}" target="_blank" rel="noopener">Watch the Reel</a>` : ''}</li>`;
+      })
+      .join('')}</ol><p class="note-line">Reel numbers are views on individual videos, not total account views.</p>`;
+    return [
+      ['Content that performed', wall],
+      overview(p),
+      ['Verified performance', secHtml(p, 'metrics', 'Verified performance')],
+      hasMedia(p.media.extra) ? ['More from the channels', gallery(p.media.extra, c.tone, 'grid')] : null,
+      ['Content themes', secHtml(p, 'columns')],
+      ['Production process', secHtml(p, 'steps')],
+      ['What I do on the channels', secHtml(p, 'list')],
+    ];
+  },
+
+  /* TikTok LIVE: a broadcast rundown */
+  rundown(p, c) {
+    const run = `<ol class="rundown">${p.rundown
+      .map((r, i) => `<li><b>${String(i + 1).padStart(2, '0')}</b><h3>${esc(r.step)}</h3><p>${esc(r.text)}</p></li>`)
+      .join('')}</ol>`;
+    return [
+      overview(p),
+      ['Broadcast rundown', run],
+      hasMedia(p.media.clips) ? ['Broadcast clips', gallery(p.media.clips, c.tone, 'video')] : null,
+      hasMedia(p.media.examples) ? ['Live presentation', gallery(p.media.examples, c.tone, 'grid')] : null,
+      ['Three engagements', secHtml(p, 'periods')],
+      ['Skills demonstrated', secHtml(p, 'chips')],
+      ['About the numbers', secHtml(p, 'callout')],
+    ];
+  },
+
+  /* Red Bull Korea: a field log */
+  field(p, c) {
+    const stubs = `<div class="festlog"><ul class="stubs" aria-label="${p.festivals} university festivals supported">${Array.from({ length: p.festivals }, (_, i) => `<li><b>${String(i + 1).padStart(2, '0')}</b><span>Festival</span></li>`).join('')}</ul><p class="festlog__cap"><b>${p.festivals}</b> university festivals with supported activations</p></div>`;
+    const acts = `<dl class="dcols dcols--3">${p.activities.map((a) => `<div><dt>${esc(a.title)}</dt><dd>${esc(a.text)}</dd></div>`).join('')}</dl>`;
+    const wings = secHtml(p, 'columns', 'Wings for Life World Run 2025');
+    return [
+      overview(p),
+      ['Festival log', stubs + acts],
+      ['Scope of my participation', secHtml(p, 'callout')],
+      hasMedia(p.media.activation) || hasMedia(p.media.sampling) ? ['Activations', gallery([...p.media.activation, ...p.media.sampling], c.tone, 'masonry')] : null,
+      ['Wings for Life World Run 2025', wings + gallery(p.media.wings, c.tone, 'grid')],
+      ['Skills demonstrated', secHtml(p, 'chips')],
+    ];
+  },
+
+  /* Pimadaziwin: account growth and community operations */
+  growth(p, c) {
+    const g = p.growth;
+    const meter = `<div class="meter" role="img" aria-label="Followers on the brand's X account grew from ${g.from} to ${g.to.toLocaleString('en-US')} in ${g.months} months">
+      <div class="meter__bar"><span></span></div>
+      <div class="meter__ends"><div><b>${g.from}</b><span>Account launched</span></div><div><b>${g.to.toLocaleString('en-US')}</b><span>Followers, ${g.months} months later</span></div></div>
+    </div>${secHtml(p, 'metrics', 'Verified growth').replace(/<div class="metrics">[\s\S]*?<\/div><\/div>/, '')}`;
+    const pipe = `<ol class="pipeline">${p.pipeline.map((x, i) => `<li><b>${String(i + 1).padStart(2, '0')}</b><h3>${esc(x.step)}</h3><p>${esc(x.text)}</p></li>`).join('')}</ol>`;
+    return [
+      overview(p),
+      ['Verified growth', meter],
+      ['From launch to growth', secHtml(p, 'steps')],
+      hasMedia(p.media.screenshots) || hasMedia(p.media.content) ? ['Account and content', gallery([...p.media.screenshots, ...p.media.content], c.tone, 'browser')] : null,
+      ['Community operations', pipe + gallery(p.media.community, c.tone, 'grid')],
+      ['What I did', secHtml(p, 'list')],
+    ];
+  },
+
+  /* Constant / Refilled: two voices */
+  voices(p, c) {
+    const tiers = `<ol class="tiers">${p.tiers
+      .map((t, i) => `<li class="tier tier--${t.by === 'Lynn' ? 'me' : 'them'}" style="--k:${i}"><span class="tier__by">${t.by === 'Lynn' ? 'Done by me' : 'Written by participants'}</span><h3>${esc(t.title)}</h3><p>${esc(t.text)}</p>${t.stat ? `<b class="tier__stat">${esc(t.stat)}</b>` : ''}</li>`)
+      .join('')}</ol>`;
+    return [
+      overview(p),
+      ['From recruitment to participation', tiers],
+      hasMedia(p.media.influencer) ? ['Influencer seeding', gallery(p.media.influencer, c.tone, 'grid')] : null,
+      hasMedia(p.media.campaign) ? ['Campaign materials', gallery(p.media.campaign, c.tone, 'grid')] : null,
+      hasMedia(p.media.participantPosts) ? ['Participant-generated posts', gallery(p.media.participantPosts, c.tone, 'browser', 'Written by a participant, not by me.')] : null,
+      ['Brand marketing work', secHtml(p, 'list')],
+      ['Skills demonstrated', secHtml(p, 'chips')],
+    ];
+  },
+};
+
+/* The editorial spread that opens every project: title paper, metric, and a clipped slip or lead image. */
+function spreadTop(p, c) {
+  const m = p.spreadStat || p.metric;
+  const per = periodText(p);
+  const lead = p.lead && p.lead.src
+    ? polaroid({ img: p.lead, tone: c.tone, tilt: 2, clipped: true, caption: `<span>${esc(p.title)}</span>` })
+    : `<blockquote class="sp-slip">${clip()}<p>${esc(p.heading)}</p></blockquote>`;
+  return `<section class="spreadtop spreadtop--${c.tone}" aria-label="Project summary">
+    <div class="sp-main">
+      <span class="sp-tab">${esc(c.label)}</span>
+      <p class="sp-metric"><b>${esc(m.value)}</b><span>${esc(m.label)}</span></p>
+      <p class="sp-role">${esc(p.role)}${per ? ` · ${esc(per)}` : ''}</p>
+    </div>
+    <div class="sp-side">${doily()}${ribbon()}${lead}</div>
+  </section>`;
+}
+
 function projectPage() {
   const slug = document.body.dataset.slug || new URLSearchParams(location.search).get('slug');
   const p = byOrder.find((x) => x.slug === slug);
@@ -407,10 +570,11 @@ function projectPage() {
   document.title = `${p.title}, Lynn Kim`;
   const folders = p.categories.map((id) => cat(id));
   let n = 0;
-  const section = (title, inner) => {
+  const section = ([title, inner]) => {
+    if (!inner) return '';
     n += 1;
     const id = `s${n}`;
-    return `<section class="psec" aria-labelledby="${id}"><header class="psec__head"><span class="num">${String(n).padStart(2, '0')}</span><h2 id="${id}" class="display display--s">${esc(title)}</h2></header><div class="psec__body">${inner}</div></section>`;
+    return `<section class="psec psec--${p.layout}" aria-labelledby="${id}"><header class="psec__head"><span class="num">${String(n).padStart(2, '0')}</span><h2 id="${id}" class="display display--s">${esc(title)}</h2></header><div class="psec__body">${inner}</div></section>`;
   };
 
   const facts = [['Organization', esc(p.org)], ['Role', esc(p.role)]];
@@ -421,10 +585,11 @@ function projectPage() {
   if (!p.platform && !p.asOf) facts.push(['Folder', folders.map((f) => esc(f.label)).join(', ')]);
 
   const links = p.links.length ? `<p class="links">${p.links.map((l) => `<a class="textlink" href="${esc(l.href)}"${l.href.startsWith('http') ? ' target="_blank" rel="noopener"' : ''}>${esc(l.text)}</a>`).join('')}</p>` : '';
-
-  const gallery = p.media.length
-    ? section('Visual evidence', `<div class="gallery">${p.media.map((m) => `<figure>${media(m, c.tone)}${m.caption ? `<figcaption>${esc(m.caption)}</figcaption>` : ''}</figure>`).join('')}</div>`)
-    : `<aside class="quiet"><h2 class="quiet__h">Supporting materials</h2><p>Not yet added: ${p.wanted.map((w) => esc(w.toLowerCase())).join(', ')}.</p></aside>`;
+  const missing = p.wanted.filter(Boolean);
+  const allMedia = Object.values(p.media).flat().concat(p.lead ? [p.lead] : []);
+  const quiet = allMedia.some((m) => m.src)
+    ? ''
+    : `<aside class="quiet"><h2 class="quiet__h">Supporting materials</h2><p>Not yet added: ${missing.map((w) => esc(w.toLowerCase())).join(', ')}.</p></aside>`;
 
   const prev = byOrder[(idx - 1 + byOrder.length) % byOrder.length];
   const next = byOrder[(idx + 1) % byOrder.length];
@@ -438,10 +603,10 @@ function projectPage() {
   const body = `
   <p class="crumb"><a href="work.html#${c.id}">Work</a> / <a href="work.html#${c.id}">${esc(c.label)}</a> / ${esc(p.title)}</p>
   <dl class="facts">${facts.map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join('')}</dl>
-  <p class="pull">${esc(p.heading)}</p>
+  ${spreadTop(p, c)}
   ${links}
-  ${p.sections.map((s) => section(s.title, renderSection(s))).join('')}
-  ${gallery}
+  ${layouts[p.layout](p, c).filter(Boolean).map(section).join('')}
+  ${quiet}
   <nav class="pager" aria-label="Other projects">
     <a href="${projectUrl(prev)}" rel="prev"><span>Previous</span>${esc(prev.title)}</a>
     <a href="${projectUrl(next)}" rel="next"><span>Next</span>${esc(next.title)}</a>
@@ -541,7 +706,7 @@ function initViewer() {
 function aboutPage() {
   const body = `
   <section class="about-grid">
-    <div class="about-grid__photo">${polaroid({ img: about.portrait, tone: 'pink', tilt: 2, clipped: true, caption: '<span>Lynn Kim</span>' })}</div>
+    <div class="about-grid__photo">${polaroid({ img: about.portrait, tone: 'pink', tilt: 2, clipped: true, lace: true, caption: '<span>Lynn Kim</span>' })}</div>
     <div class="about-grid__text">
       <h2 class="display">Hello, I'm <em class="script-em">Lynn</em></h2>
       <div class="prose prose--lead">${about.intro.map((t) => `<p>${esc(t)}</p>`).join('')}</div>
@@ -602,6 +767,7 @@ function contactPage() {
         <div><dt>Resume</dt><dd>${cv}</dd></div>
       </dl>
     </div>
+    <div class="contact__side">${polaroid({ img: about.portrait, tone: 'blue', tilt: -2, clipped: true, lace: true, bow: true, caption: '<span>Lynn Kim</span>' })}</div>
   </section>`;
   return shell(plainStage('Contact', "Let's Connect", 'For professional opportunities, brand collaborations, content projects, and photography inquiries, feel free to reach out.'), body, 'contact');
 }

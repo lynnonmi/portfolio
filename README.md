@@ -9,7 +9,7 @@ All content is in `js/data.js`, taken from the master portfolio brief. Add only 
 
 - Each project has its own page, for example `project-solo-party.html`. Pages and their share metadata are generated: run `node tools/build-pages.mjs` after changing titles or summaries. Set `SITE_URL=https://your-domain` to write absolute share URLs.
 - `site`: email, Instagram, resume path. Setting `site.resume` turns on the resume download.
-- `projects`: each project lists its own `sections` (prose, compare, events, columns, steps, metrics, reels, split, periods, list, chips, callout).
+- `projects`: each project has a `layout` (journey, video, rundown, field, growth, voices), its own content fields, typed `media` slots and an optional `lead` image.
 - `photos`: leave empty until real photographs exist. The gallery and viewer appear automatically.
 - `share/build.py` builds the single-file `share/portfolio-single.html`.
 

@@ -2,13 +2,20 @@
   All site content lives here, taken from Lynn Kim's master portfolio brief
   (November 2026). Only verified facts are written in this file.
 
-  Each project has its own `sections`, so each story can use a different layout.
-  Section types: prose, compare, events, columns, steps, metrics, reels, split,
-  periods, list, chips, callout. See renderSection() in app.js.
+  Each project has a `layout` (journey, video, rundown, field, growth, voices),
+  so every project is presented as its own editorial spread.
 
-  Media is optional. A project with no `media` shows a text layout.
-  Add { src, alt, width, height, caption } items to `media` when files exist.
+  Media is optional. Each project has typed `media` slots. A slot with no files
+  is simply not shown. Add items like { src, alt, width, height, caption }.
+  Videos: { type: 'video', src, poster, caption }.
+  `lead` is the project's main image, used on its spread and on its card.
 */
+
+export const heroFigures = [
+  { value: '3.18M', label: 'views on the top @lynnonmi Reel', slug: 'lynnonmi' },
+  { value: '23.4K', label: 'Instagram followers on @lynnonmi', slug: 'lynnonmi' },
+  { value: '180', label: 'applicants for the second Solo Party', slug: 'solo-party' },
+];
 
 export const site = {
   name: 'Lynn Kim',
@@ -16,6 +23,7 @@ export const site = {
   headline: 'Content Creator · Marketer · Event Organizer',
   secondary: 'Live Commerce · Photography',
   tagline: 'I create content, build communities, and bring ideas to life through marketing and events.',
+  introMore: 'My experience spans social media content, brand campaigns, live commerce, and event operations.',
   email: 'eggielikestaco@gmail.com',
   instagram: { handle: '@lynnonmi', url: 'https://www.instagram.com/lynnonmi/' },
   resume: null, // set to a PDF path such as 'assets/Lynn-Kim-Resume.pdf' when the file is supplied
@@ -35,6 +43,23 @@ export const categories = [
 export const projects = [
   {
     slug: 'solo-party',
+    layout: 'journey',
+    lead: null,
+    journey: [
+      { when: 'May 27, 2026', title: 'Event 01', text: 'Co-organized with Hogamdo. I created the promotional Reels and Stories, supported recruitment and secured five sponsors.', stat: '150 applicants, 66 attendees' },
+      { when: 'Planning', title: 'Designing Event 02', text: 'Planned the concept and structure, and designed the GUESS ME, FIND ME, and MATCH ME activities.', stat: null },
+      { when: 'Recruitment', title: 'Opening applications', text: 'Managed promotion, applications and participant screening.', stat: '180 unique applicants' },
+      { when: 'Digital operations', title: 'The web application', text: 'Coordinated a web application built with AI tools for approvals, voting and matching.', stat: null },
+      { when: 'August 9, 2026', title: 'Event 02', text: 'Independently organized. Coordinated staff and participants and managed on-site operations.', stat: '84 attendees' },
+    ],
+    promo: [
+      'For Event 01 I created promotional Instagram Reels and Stories and supported participant recruitment.',
+      'For Event 02 I managed promotion, applications, participant screening, and communication.',
+    ],
+    system: [
+      'I coordinated the development of a web application using AI tools.',
+      'It supported the participant approvals, voting, and matching processes that I managed for Event 02.',
+    ],
     categories: ['events'],
     title: 'Solo Party',
     subtitle: 'From co-organizing a social event to independently producing the next edition.',
@@ -130,12 +155,14 @@ export const projects = [
         ],
       },
     ],
-    media: [],
+    media: { promo: [], system: [], photos: [] },
     wanted: ['Promotional Reels', 'Event posters', 'Event photographs', 'Application website screenshots', 'GUESS ME / FIND ME / MATCH ME materials', 'Participant communication examples, private information removed'],
     links: [],
   },
   {
     slug: 'lynnonmi',
+    layout: 'video',
+    lead: null,
     categories: ['content'],
     title: '@lynnonmi',
     subtitle: 'Building and managing my own social media channels.',
@@ -172,12 +199,12 @@ export const projects = [
         type: 'reels',
         title: 'Content that performed',
         items: [
-          { rank: 'Highest-performing Reel', views: '3.18M' },
-          { rank: 'High-performing Reel', views: '1.92M' },
-          { rank: 'High-performing Reel', views: '1.39M' },
-          { rank: 'High-performing Reel', views: '1.30M' },
+          { rank: 'Highest-performing Reel', views: '3.18M', thumb: null, href: null, concept: null, production: null },
+          { rank: 'High-performing Reel', views: '1.92M', thumb: null, href: null, concept: null, production: null },
+          { rank: 'High-performing Reel', views: '1.39M', thumb: null, href: null, concept: null, production: null },
+          { rank: 'High-performing Reel', views: '1.30M', thumb: null, href: null, concept: null, production: null },
         ],
-        note: 'Each Reel will get its link, concept and production notes as Lynn supplies them.',
+        note: 'Reel links, thumbnails and creative notes appear here as they are added.',
       },
       {
         type: 'columns',
@@ -213,12 +240,20 @@ export const projects = [
         ],
       },
     ],
-    media: [],
+    media: { extra: [] },
     wanted: ['Thumbnails for the four Reels', 'Links to the four Reels', 'Short notes on the creative decisions behind each Reel'],
     links: [{ text: 'Open @lynnonmi on Instagram', href: 'https://www.instagram.com/lynnonmi/' }],
   },
   {
     slug: 'witu-tiktok-live',
+    layout: 'rundown',
+    lead: null,
+    rundown: [
+      { step: 'Present', text: 'Present K-beauty products in English and explain their features and usage.' },
+      { step: 'Demonstrate', text: 'Demonstrate the products during the livestream.' },
+      { step: 'Respond', text: 'Answer viewer questions in real time.' },
+      { step: 'Keep it moving', text: 'Adapt explanations to the live audience and keep interaction going throughout the broadcast.' },
+    ],
     categories: ['live-commerce'],
     title: 'TikTok LIVE Shopping',
     subtitle: 'Hosting English-language shopping broadcasts for Korean beauty products.',
@@ -227,6 +262,7 @@ export const projects = [
     period: null,
     periods: ['July–September 2024', 'March–July 2025', 'July–August 2026'],
     periodShort: 'Three engagements, 2024 to 2026',
+    spreadStat: { value: '3', label: 'separate engagements as English shopping host, 2024 to 2026' },
     summary: 'Hosted English TikTok LIVE shopping broadcasts featuring Korean beauty products for viewers in Southeast Asia.',
     metric: null,
     heading: 'Presenting Korean beauty products to Southeast Asian audiences through TikTok LIVE.',
@@ -265,12 +301,20 @@ export const projects = [
         text: 'No verified sales, conversion, or viewership figures are available for this role, so none are shown.',
       },
     ],
-    media: [],
+    media: { clips: [], examples: [] },
     wanted: ['Broadcast screenshots', 'Short video clips', 'Product demonstration examples', 'Examples of live presentation'],
     links: [],
   },
   {
     slug: 'red-bull-korea',
+    layout: 'field',
+    lead: null,
+    festivals: 14,
+    activities: [
+      { title: 'University festivals', text: 'Supported brand activations at university festivals.' },
+      { title: 'Product sampling', text: 'Participated in product sampling activities.' },
+      { title: 'Sports and music promotions', text: 'Supported sports and music promotions.' },
+    ],
     categories: ['brand-marketing'],
     title: 'Red Bull Korea',
     subtitle: 'Campus marketing and brand activations as a Student Marketeer.',
@@ -318,12 +362,21 @@ export const projects = [
         items: ['Field marketing', 'Brand activation', 'Event operations', 'Coordination', 'On-site communication'],
       },
     ],
-    media: [],
+    media: { activation: [], sampling: [], wings: [] },
     wanted: ['Festival activation photographs', 'Sampling photographs', 'Event materials', 'Wings for Life World Run production images'],
     links: [],
   },
   {
     slug: 'pimadaziwin',
+    layout: 'growth',
+    lead: null,
+    growth: { from: 0, to: 3000, months: 4 },
+    pipeline: [
+      { step: 'Recruit', text: 'Organized supporter recruitment.' },
+      { step: 'Ship', text: 'Coordinated product shipments.' },
+      { step: 'Instruct', text: 'Prepared participant instructions.' },
+      { step: 'Stay in touch', text: 'Managed supporter communication.' },
+    ],
     categories: ['content', 'brand-marketing'],
     title: 'Pimadaziwin',
     subtitle: 'Launching and managing a brand account on X.',
@@ -374,12 +427,19 @@ export const projects = [
         ],
       },
     ],
-    media: [],
+    media: { screenshots: [], content: [], community: [] },
     wanted: ['Account screenshots', 'Follower growth evidence', 'Content examples', 'Supporter program materials'],
     links: [],
   },
   {
     slug: 'constant-refilled',
+    layout: 'voices',
+    lead: null,
+    tiers: [
+      { by: 'Lynn', title: 'Brand activity', text: 'Launched and managed brand activity on X, supported influencer seeding, and worked on Instagram content.', stat: null },
+      { by: 'Lynn', title: 'Recruitment', text: 'Recruited approximately 20 X users to take part in the Musinsa Beauty Festa activation and supported participant coordination.', stat: '~20 X users' },
+      { by: 'Participants', title: 'Organic posts', text: 'Participants generated approximately 100 organic posts. They created them themselves. I did not write them.', stat: '~100 posts' },
+    ],
     categories: ['brand-marketing'],
     title: 'Constant / Refilled',
     subtitle: 'Connecting beauty brands with online communities and offline experiences.',
@@ -424,7 +484,7 @@ export const projects = [
         items: ['Beauty marketing', 'Social media management', 'Influencer coordination', 'Community recruitment', 'Offline activation support'],
       },
     ],
-    media: [],
+    media: { influencer: [], campaign: [], participantPosts: [] },
     wanted: ['X content examples', 'Instagram content', 'Musinsa Beauty Festa photographs', 'Participant-generated posts', 'Campaign materials'],
     links: [],
   },
@@ -471,12 +531,12 @@ export const about = {
   ],
 };
 
-/* Four figures for the home page. Each belongs to the project named beside it. */
+/* More results, shown after the featured projects. These do not repeat the hero figures. */
 export const homeFigures = [
-  { value: '23,400', label: 'Instagram followers on @lynnonmi', note: 'As of November 20, 2026', slug: 'lynnonmi' },
-  { value: '3.18M', label: 'views on the highest-performing @lynnonmi Reel', note: 'One video. As of November 20, 2026', slug: 'lynnonmi' },
   { value: '84', label: 'attendees at the second Solo Party', note: 'Up from 66 at the first event', slug: 'solo-party' },
   { value: '3,000', label: 'followers gained on Pimadaziwin\'s X account', note: 'In four months, from zero', slug: 'pimadaziwin' },
+  { value: '14', label: 'university festivals supported through Red Bull Korea', note: 'Festivals involved in', slug: 'red-bull-korea' },
+  { value: '~20', label: 'X users I recruited for the Musinsa Beauty Festa activation', note: 'Participants then wrote ~100 posts', slug: 'constant-refilled' },
 ];
 
 /* Home page features these three projects, in this order. */
