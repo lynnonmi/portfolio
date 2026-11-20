@@ -71,8 +71,14 @@ main:focus { outline: none; }
 
 /* home stage: giant name over a stack of paper */
 .stage--home { padding-top: clamp(24px, 4vw, 56px); padding-bottom: 0; position: relative; }
-.giant { font: 400 clamp(4.6rem, 17.5vw, 15rem)/.8 var(--serif); color: var(--pink); letter-spacing: -.03em; position: relative; z-index: 3; text-align: center; margin: 0 0 -.09em; }
-.stack { position: relative; width: min(560px, 82%); margin: 0 auto; height: clamp(430px, 52vw, 560px); }
+.hero-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(300px, 540px); gap: clamp(24px, 5vw, 72px); align-items: end; position: relative; z-index: 2; }
+.hero-copy { padding-bottom: clamp(40px, 5vw, 64px); display: flex; flex-direction: column; gap: 14px; align-items: flex-start; }
+.hero-role { font: 500 clamp(1.5rem, 3vw, 2.3rem)/1.1 var(--serif); color: var(--cream); margin-top: clamp(20px, 3vw, 44px); max-width: 18ch; }
+.hero-sub { font: 500 .72rem/1 var(--sans); letter-spacing: .2em; text-transform: uppercase; color: var(--pink); }
+.hero-intro { color: #d7cfc2; max-width: 40ch; font-size: 1.02rem; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
+.giant { font: 400 clamp(4.2rem, 13.5vw, 12rem)/.82 var(--serif); color: var(--pink); letter-spacing: -.03em; position: relative; z-index: 3; margin: 0; overflow-wrap: anywhere; }
+.stack { position: relative; width: 100%; max-width: 540px; justify-self: end; height: clamp(420px, 44vw, 540px); margin-top: calc(clamp(30px, 5vw, 80px) * -1); }
 .paper { position: absolute; inset: 0; background: var(--cream); background-image: var(--grain); box-shadow: 0 1px 0 #fff8 inset, 0 12px 24px #0006; }
 .paper--3 { transform: rotate(3deg) translate(14px, 10px); background-color: var(--cream-2); }
 .paper--2 { transform: rotate(-2.2deg) translate(-10px, 4px); background-color: #ece3d1; }
@@ -138,14 +144,14 @@ main:focus { outline: none; }
 
 /* ---------- spines (folders seen edge-on) ---------- */
 .block--spines .display { margin-bottom: 36px; }
-.spines { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; height: clamp(300px, 36vw, 430px); }
-.spine { position: relative; margin-left: -14px; padding-top: calc(var(--i) * 26px); filter: drop-shadow(-6px 0 8px #0003); }
+.spines { display: grid; grid-template-columns: repeat(var(--n, 4), 1fr); grid-auto-rows: 100%; gap: 0; height: clamp(240px, 28vw, 330px); }
+.spine { position: relative; min-height: 0; margin-left: -14px; padding-top: calc(var(--i) * 26px); filter: drop-shadow(-6px 0 8px #0003); }
 .spine:first-child { margin-left: 0; }
 .spine a { display: flex; flex-direction: column; justify-content: space-between; height: 100%; padding: 18px 18px 18px 26px; text-decoration: none; background: var(--pink); background-image: var(--grain); border-radius: 22px 22px 0 0; color: var(--ink); transition: transform .45s var(--ease); }
 .spine a:hover, .spine a:focus-visible { transform: translateY(-14px); }
 .spine--blue a { background-color: var(--blue); } .spine--cream a { background-color: #e9dcc3; }
 .spine--rose a { background-color: #cf9aa2; } .spine--char a { background-color: var(--char-2); color: var(--cream); }
-.spine__label { writing-mode: vertical-rl; transform: rotate(180deg); font: 400 clamp(1.8rem, 3.6vw, 3rem)/1 var(--serif); font-style: italic; align-self: flex-start; }
+.spine__label { writing-mode: vertical-rl; transform: rotate(180deg); font: 400 clamp(1.3rem, 2.4vw, 2rem)/1 var(--serif); font-style: italic; align-self: flex-start; }
 .spine__count { background: var(--paper); color: var(--ink); font: 500 .6rem var(--sans); letter-spacing: .14em; text-transform: uppercase; padding: 4px 7px; align-self: flex-start; }
 
 /* ---------- photography strip on home ---------- */
@@ -198,11 +204,9 @@ main:focus { outline: none; }
 .folder--char .folder__head { border-color: #fff3; }
 .folder__head p { font-size: .9rem; }
 .count { display: inline-block; margin-left: 8px; font: 600 .62rem var(--sans); letter-spacing: .14em; text-transform: uppercase; background: var(--paper); color: var(--ink); padding: 4px 7px; }
-.folder__files { display: grid; grid-template-columns: repeat(12, 1fr); gap: 26px; align-items: start; }
+.folder__files { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; align-items: start; }
+.folder__files .card:nth-child(3n+2) { margin-top: 44px; }
 .folder__files .card { color: var(--ink); }
-.folder__files .card:nth-child(1) { grid-column: 1 / 8; }
-.folder__files .card:nth-child(2) { grid-column: 8 / 13; margin-top: 56px; margin-left: -14px; }
-.folder__files .card:nth-child(n+3) { grid-column: span 4; }
 .hint { text-align: center; font-size: .8rem; color: var(--mute); margin-top: 18px; }
 
 /* ---------- Project detail ---------- */
@@ -220,12 +224,12 @@ main:focus { outline: none; }
 .detail__sec > p { max-width: 54ch; font-size: 1.05rem; }
 .ticks li { padding: 10px 0 10px 26px; border-bottom: 1px solid #0002; position: relative; }
 .ticks li::before { content: ''; position: absolute; left: 0; top: 1.2em; width: 12px; height: 1px; background: var(--rose-deep); }
-.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; counter-reset: s; }
+.steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 0; counter-reset: s; }
 .steps li { display: flex; gap: 14px; padding: 18px 22px 18px 0; border-top: 1px solid var(--ink); }
 .steps b { font: 400 2.4rem/1 var(--serif); color: var(--rose); }
 .steps h3 { font: 600 .8rem var(--sans); letter-spacing: .08em; text-transform: uppercase; margin-bottom: 6px; }
 .steps p { font-size: .95rem; }
-.metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 20px; }
 .metric { background: var(--paper); background-image: var(--grain); padding: 24px 22px; box-shadow: 0 10px 18px -10px #0006; transform: rotate(-.6deg); }
 .metric:nth-child(2) { transform: rotate(.7deg) translateY(10px); }
 .metric__v { display: block; font: 400 clamp(2.4rem, 4vw, 3.6rem)/1 var(--serif); }
@@ -255,7 +259,7 @@ main:focus { outline: none; }
 .block--blue { background: #c3cdd7; background-image: var(--grain); padding: clamp(28px, 5vw, 64px); margin-left: calc(var(--gut) * -1); margin-right: calc(var(--gut) * -1); max-width: none !important; }
 .block--blue > * { max-width: var(--max); margin-left: auto; margin-right: auto; }
 .block--blue .display em { color: var(--rose-deep); }
-.snaps { display: grid; grid-template-columns: repeat(5, 1fr); gap: 22px; }
+.snaps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; max-width: 900px; }
 .snap { position: relative; display: block; border: 0; background: var(--paper); padding: 8px 8px 0; text-align: left; transform: rotate(var(--tilt)); box-shadow: 0 12px 20px -8px #0006; transition: transform .45s var(--ease); }
 .snap:nth-child(even) { margin-top: 34px; }
 .snap:hover, .snap:focus-visible { transform: rotate(0) translateY(-6px); }
@@ -303,6 +307,11 @@ main:focus { outline: none; }
 .big-link--ph { border: 0; font-size: 1.1rem; }
 .btn { display: inline-block; background: var(--char); color: var(--cream); text-decoration: none; padding: 14px 22px; font: 600 .72rem var(--sans); letter-spacing: .14em; text-transform: uppercase; min-height: 44px; }
 .btn:hover { background: var(--rose-deep); }
+.btn--pink { background: var(--pink); color: var(--char); }
+.btn--pink:hover { background: var(--cream); color: var(--char); }
+.btn--line { background: transparent; color: var(--cream); border: 1px solid #f3ebdc88; }
+.btn--line:hover { background: var(--cream); color: var(--char); }
+.btn { display: inline-flex; align-items: center; }
 .btn--off { background: transparent; color: var(--mute); border: 1px dashed var(--mute); font-style: italic; text-transform: none; letter-spacing: .02em; font-size: .9rem; }
 .contact__side .polaroid { margin: 0 auto; }
 
@@ -324,6 +333,102 @@ main:focus { outline: none; }
   .rings { display: block; background: radial-gradient(circle, var(--cream) 5px, #7d7468 5.5px, #7d7468 7px, transparent 7.5px) center 12% / 22px 22px no-repeat, radial-gradient(circle, var(--cream) 5px, #7d7468 5.5px, #7d7468 7px, transparent 7.5px) center 50% / 22px 22px no-repeat, radial-gradient(circle, var(--cream) 5px, #7d7468 5.5px, #7d7468 7px, transparent 7.5px) center 88% / 22px 22px no-repeat; left: -30px; }
 }
 @media (max-width: 640px) { .script-mark { right: 6%; bottom: 3%; font-size: 2.6rem; } .year-mark { display: none; } .typed { max-width: 17ch; } }
+
+
+/* ---------- master portfolio additions ---------- */
+.works { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; align-items: start; }
+.works .card:nth-child(3n+2) { margin-top: 44px; }
+.works .card:nth-child(3n) { margin-top: 14px; }
+.card__org { font: 600 .68rem/1.3 var(--sans); letter-spacing: .12em; text-transform: uppercase; color: var(--rose-deep); margin-top: 6px; }
+.card__facts { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 12px 0 0; padding-top: 10px; border-top: 1px solid #0002; }
+.card__facts dt { font: 600 .58rem var(--sans); letter-spacing: .16em; text-transform: uppercase; color: var(--mute); }
+.card__facts dd { font-size: .8rem; line-height: 1.35; }
+.card__summary { font-size: .9rem; margin-top: 12px; }
+.card__metric { display: flex; flex-direction: column; margin-top: 12px; padding-top: 10px; border-top: 1px dashed #0004; }
+.card__metric b { font: 500 1.9rem/1 var(--serif); color: var(--rose-deep); }
+.card__metric span { font-size: .76rem; color: var(--mute); margin-top: 2px; }
+.card__img { aspect-ratio: 16 / 10; }
+
+.figs-wrap { background: #c3cdd7; background-image: var(--grain); padding: clamp(24px, 4vw, 56px); box-shadow: 0 14px 26px -12px #0007; transform: rotate(-.3deg); max-width: none !important; }
+.figs-wrap .display em { color: var(--rose-deep); }
+.figs-wrap .block__head { margin-bottom: 20px; }
+.figs-wrap .small { max-width: 44ch; color: #55606c; }
+.figs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0 clamp(20px, 3vw, 44px); }
+.figs a { display: flex; flex-direction: column; gap: 4px; text-decoration: none; padding: 18px 0 20px; border-top: 1px solid var(--ink); height: 100%; }
+.fig__v { font: 400 clamp(2.6rem, 5vw, 4.2rem)/1 var(--serif); }
+.fig__l { font-size: .92rem; line-height: 1.35; max-width: 28ch; }
+.fig__n { font: 600 .6rem var(--sans); letter-spacing: .16em; text-transform: uppercase; color: #55606c; margin-top: 4px; }
+.figs a:hover .fig__v, .figs a:focus-visible .fig__v { color: var(--rose-deep); }
+
+.mini-photo { display: grid; grid-template-columns: 5fr 6fr; gap: clamp(20px, 4vw, 56px); align-items: center; padding: clamp(20px, 3vw, 36px) 0 0; border-top: 1px solid var(--ink); }
+.mini-photo__copy { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; }
+.mini-photo__copy p { max-width: 34ch; }
+.mini-photo__row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; max-width: 420px; }
+.mini { margin: 0; background: var(--paper); padding: 6px 6px 18px; transform: rotate(var(--tilt)); box-shadow: 0 8px 14px -6px #0006; }
+.mini .ph, .mini img { aspect-ratio: 1; height: auto; min-height: 0; }
+.mini .ph span { font-size: .5rem; padding: 3px 4px; }
+.archive-link { text-align: center; margin-top: 6px; }
+
+/* project detail */
+.pull { font: italic 400 clamp(1.9rem, 3.8vw, 3.1rem)/1.1 var(--serif); color: var(--rose-deep); max-width: var(--max); padding-right: 30%; text-wrap: balance; margin: 0 auto clamp(40px, 6vw, 80px); }
+.periods span { display: block; }
+.psec { display: grid; grid-template-columns: 4fr 8fr; gap: clamp(20px, 5vw, 72px); padding-top: 26px; border-top: 1px solid var(--ink); margin-bottom: clamp(44px, 6vw, 84px); }
+.psec__head .display { margin-top: 2px; }
+.psec__body { min-width: 0; }
+.prose p { font-size: 1.1rem; max-width: 60ch; margin-bottom: .9rem; }
+.sub { font: 600 .72rem var(--sans); letter-spacing: .16em; text-transform: uppercase; margin: 30px 0 12px; }
+.events { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
+.event { background: var(--paper); background-image: var(--grain); padding: 22px 22px 24px; box-shadow: 0 12px 20px -10px #0006; transform: rotate(var(--tilt)); }
+.event__date { font: 600 .66rem var(--sans); letter-spacing: .16em; text-transform: uppercase; color: var(--rose-deep); }
+.event h3 { font: 500 1.9rem/1.05 var(--serif); margin: 4px 0; }
+.event__role { font-size: .88rem; color: var(--mute); margin-bottom: 8px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.chips span { border: 1px solid var(--ink); padding: 5px 10px; font-size: .8rem; line-height: 1.3; }
+.chips--solid span { background: var(--char); color: var(--cream); border-color: var(--char); }
+.themes { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 28px; }
+.themes dt { font: 500 1.35rem var(--serif); }
+.themes dd { font-size: .9rem; color: #4d4740; }
+.extra { background: #c6d0da; background-image: var(--grain); padding: 18px 22px; margin-top: 26px; max-width: 54ch; transform: rotate(.4deg); box-shadow: 0 10px 18px -10px #0006; }
+.extra h3 { font: 500 1.5rem var(--serif); margin-bottom: 4px; }
+.note-line { font-style: italic; margin-top: 16px; max-width: 54ch; }
+.notes { margin-top: 16px; display: grid; gap: 8px; }
+.notes li { border-left: 2px solid var(--rose); padding-left: 12px; font-size: .92rem; max-width: 60ch; }
+.reels { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 14px; }
+.reel { background: var(--paper); padding: 10px 10px 14px; box-shadow: 0 10px 16px -8px #0006; }
+.reel:nth-child(odd) { transform: rotate(-1deg); } .reel:nth-child(even) { transform: rotate(1deg) translateY(8px); }
+.reel__thumb { aspect-ratio: 9 / 13; overflow: hidden; }
+.reel__thumb .ph { height: 100%; }
+.reel__views { font: 400 2rem/1 var(--serif); margin-top: 10px; }
+.reel__views span { font: 600 .6rem var(--sans); letter-spacing: .14em; text-transform: uppercase; margin-left: 6px; color: var(--mute); }
+.reel__rank { font-size: .78rem; margin-top: 2px; }
+.reel__todo { font-size: .72rem; margin-top: 8px; }
+.evi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 14px; margin-top: 14px; }
+.evi { margin: 0; }
+.evi__img { aspect-ratio: 4 / 3; overflow: hidden; }
+.evi__img .ph span { font-size: .52rem; }
+.evi figcaption { font-size: .76rem; line-height: 1.35; margin-top: 6px; }
+
+/* about and photography */
+.block--intro { max-width: 760px !important; }
+.block--intro .display { margin-bottom: 18px; }
+.rules { max-width: 62ch; margin-top: 10px; }
+.prose--lead p { font: 400 clamp(1.15rem, 1.9vw, 1.5rem)/1.4 var(--serif); max-width: 40ch; margin-bottom: 1rem; }
+.edu__row { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 24px; margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--ink); }
+.edu__row b { font: 500 1.9rem var(--serif); }
+.timeline li { display: grid; grid-template-columns: 240px 1fr; gap: 24px; padding: 20px 0; border-top: 1px solid var(--ink); }
+.timeline li:last-child { border-bottom: 1px solid var(--ink); }
+.timeline__when span { display: block; font: 600 .72rem/1.6 var(--sans); letter-spacing: .12em; text-transform: uppercase; color: var(--rose-deep); }
+.timeline__when .pending { text-transform: none; letter-spacing: 0; font-weight: 400; }
+.timeline h3 { font: 500 1.8rem/1.1 var(--serif); }
+.timeline h3 a { text-decoration: none; border-bottom: 1px solid transparent; }
+.timeline h3 a:hover { border-color: currentColor; color: var(--rose-deep); }
+.timeline p { margin-top: 2px; }
+.skills { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.skill { padding: 26px 26px 30px; background-image: var(--grain); box-shadow: 0 12px 22px -12px #0006; border-radius: 16px 16px 4px 4px; }
+.skill h3 { font: 500 1.7rem var(--serif); margin-bottom: 8px; }
+.skill--blue { background-color: var(--blue); transform: rotate(-.4deg); } .skill--pink { background-color: var(--pink); transform: rotate(.4deg); }
+.skill--cream { background-color: #e9dcc3; transform: rotate(.3deg); } .skill--rose { background-color: #cf9aa2; transform: rotate(-.3deg); }
+.plain li { justify-content: flex-start; }
 
 /* ---------- lace and ribbon ---------- */
 .lace-wrap { position: relative; width: 100%; max-width: 440px; margin: 0 auto; padding: 8% 6%; }
@@ -348,11 +453,17 @@ main:focus { outline: none; }
   .scatter .card:nth-child(3) { grid-column: 1 / 5; margin-top: 0; margin-left: 0; }
   .strip-wrap, .about-note, .about-grid, .contact { grid-template-columns: 1fr; }
   .facts { grid-template-columns: repeat(2, 1fr); }
-  .detail, .steps, .metrics, .cols { grid-template-columns: 1fr; }
+  .detail, .cols { grid-template-columns: 1fr; }
   .col--pink, .col--cream { margin-left: 0; margin-top: 16px; }
-  .evidence__row { grid-template-columns: 1fr 1fr; }
   .snaps { grid-template-columns: repeat(3, 1fr); }
-  .folder__files .card:nth-child(1), .folder__files .card:nth-child(2), .folder__files .card:nth-child(n+3) { grid-column: span 6; margin-left: 0; }
+  .works, .folder__files { grid-template-columns: repeat(2, 1fr); }
+  .works .card, .folder__files .card { margin-top: 0 !important; }
+  .figs { grid-template-columns: repeat(2, 1fr); }
+  .psec { grid-template-columns: 1fr; gap: 16px; }
+  .events, .themes, .skills { grid-template-columns: 1fr; }
+  .timeline li { grid-template-columns: 1fr; gap: 4px; }
+  .hero-grid, .mini-photo { grid-template-columns: 1fr; }
+  .stack { justify-self: center; margin-top: 0; }
 }
 
 /* ---------- mobile ---------- */
@@ -366,9 +477,10 @@ main:focus { outline: none; }
   .spine a { flex-direction: row-reverse; align-items: center; padding: 22px 20px; height: 74px; border-radius: 18px 18px 0 0; }
   .spine__label { writing-mode: horizontal-tb; transform: none; font-size: 1.9rem; align-self: center; }
   .spine__count { align-self: center; }
-  .scatter, .folder__files { display: flex; flex-direction: column; gap: 34px; }
-  .scatter .card, .folder__files .card { margin: 0 !important; width: 94%; }
-  .scatter .card:nth-child(even), .folder__files .card:nth-child(even) { align-self: flex-end; }
+  .scatter, .works, .folder__files { display: flex; flex-direction: column; gap: 34px; }
+  .figs { grid-template-columns: 1fr; }
+  .scatter .card, .works .card, .folder__files .card { margin: 0 !important; width: 94%; }
+  .scatter .card:nth-child(even), .works .card:nth-child(even), .folder__files .card:nth-child(even) { align-self: flex-end; }
   .folder { padding: 22px 16px; }
   .cabinet__stack { padding-bottom: 52px; }
   .film { grid-template-columns: repeat(3, 1fr); }
@@ -385,6 +497,7 @@ main:focus { outline: none; }
   .pager a { font-size: 1.25rem; }
   .block--blue { margin-left: calc(var(--gut) * -1); margin-right: calc(var(--gut) * -1); }
 }
+.timeline, .skills { margin-top: 24px; }
 
 </style>
 </head>
@@ -393,98 +506,347 @@ main:focus { outline: none; }
 <div id="root"></div>
 <script>
 /*
-  All site content lives here.
+  All site content lives here, taken from Lynn Kim's master portfolio brief
+  (November 2026). Only verified facts are written in this file.
 
-  Rule for this file: only real, verified information goes in. Anything that
-  is null or empty renders as a clearly marked placeholder on the page.
-  To fill a field, replace null (or the empty list) with the real value.
-  Nothing on the site is invented.
+  Pending media (photographs, videos, screenshots) is listed under `evidence`
+  or `photos` and shows as a labelled placeholder until a real file is set.
+  Items not yet confirmed stay out of the site; see `pendingConfirmation`.
 */
 
 const site = {
   name: 'Lynn Kim',
   year: 2026,
-  // Fill these in. Empty values render as "to be added", not as broken links.
+  headline: 'Content Creator · Marketer · Event Organizer',
+  secondary: 'Live Commerce · Photography',
+  tagline: 'I create content, build communities, and bring ideas to life through marketing and events.',
+  intro: [
+    'I create content, build communities, and bring ideas to life through marketing and events.',
+    'My experience spans social media content, brand campaigns, live commerce, and event operations. I have worked with brands, developed my own projects, and managed the process from planning to execution.',
+  ],
   email: 'eggielikestaco@gmail.com',
   instagram: { handle: '@lynnonmi', url: 'https://www.instagram.com/lynnonmi/' },
-  resume: null, // e.g. 'assets/Lynn-Kim-Resume.pdf'
-  statement: 'Content, events, live commerce, brand marketing and photography.',
+  resume: null, // set to a PDF path such as 'assets/Lynn-Kim-Resume.pdf' when the file is supplied
+  asOf: 'November 20, 2026',
 };
 
-const allCategories = [
-  { id: 'content', label: 'Content', tone: 'pink', note: 'Written, visual and video content.' },
-  { id: 'events', label: 'Events', tone: 'blue', note: 'Planned and produced events.' },
-  { id: 'live-commerce', label: 'Live Commerce', tone: 'cream', note: 'Live sales broadcasts.' },
-  { id: 'brand-marketing', label: 'Brand Marketing', tone: 'rose', note: 'Campaigns and brand work.' },
-  { id: 'photography', label: 'Photography', tone: 'char', note: 'Commissioned and personal photographic work.' },
+/* Work archive folders. `all` shows every project. */
+const categories = [
+  { id: 'all', label: 'All Work', tone: 'char', note: 'Every project in one folder.' },
+  { id: 'content', label: 'Content & Social Media', tone: 'pink', note: 'Channels I create for and accounts I manage.' },
+  { id: 'events', label: 'Events & Community', tone: 'blue', note: 'Offline events planned and run.' },
+  { id: 'live-commerce', label: 'Live Commerce', tone: 'cream', note: 'Live shopping broadcasts.' },
+  { id: 'brand-marketing', label: 'Brand Marketing', tone: 'rose', note: 'Campaigns, activations and brand accounts.' },
 ];
 
 /*
-  One entry per project. Fields:
-  title, year, client, role         short facts
-  summary                           one sentence for cards
-  objective                         what the project had to achieve
-  responsibilities                  list of what Lynn personally did
-  process                           list of { step, text }
-  results                           list of { label, value, verified } (verified must be true to show as a result)
-  evidence                          list of { src, alt, caption } (src null = placeholder frame)
+  Project fields
+  slug, categories[]           folders the project appears in (besides All Work)
+  title, subtitle, org, role   identity
+  period / periods[]           one period, or several separate ones
+  summary, metric              card text; metric is { value, label } or null
+  heading                      pull-quote shown on the detail page
+  overview[]                   paragraphs
+  events[]                     optional, { name, date, role, responsibilities[], results[] }
+  responsibilities[]           what Lynn did
+  themes[], reels[], extras[]  optional extra blocks
+  process[]                    { step, text }
+  results[]                    { value, label }
+  notes[]                      clarifications shown with the results
+  skills[]                     skills demonstrated
+  evidence[]                   names of media still to be supplied
+  links[]                      { text, href }
 */
-const base = {
-  year: null,
-  client: null,
-  role: null,
-  summary: null,
-  objective: null,
-  responsibilities: [],
-  process: [],
-  results: [],
-  links: [], // [{ text, href }]
-  cover: { src: null, alt: '' },
-  evidence: [
-    { src: null, alt: '', caption: null },
-    { src: null, alt: '', caption: null },
-    { src: null, alt: '', caption: null },
-  ],
-};
-
-/*
-  Only projects with real content belong here. A category with no project
-  is hidden from the site until one is added.
-  Titles are the project names. Everything else stays empty until it is
-  filled from verified material.
-*/
-const list = [
-  { slug: 'solo-party', category: 'events', title: 'Solo Party: first and second events' },
-  { slug: 'witu-tiktok-live', category: 'live-commerce', title: 'WitU / TikTok LIVE' },
+const projects = [
   {
-    slug: 'lynnonmi-content',
-    category: 'content',
-    title: '@lynnonmi content creation',
+    slug: 'solo-party',
+    categories: ['events'],
+    title: 'Solo Party',
+    subtitle: 'From co-organizing a social event to independently producing the next edition.',
+    org: 'Solo Party',
+    role: 'Event Organizer / Project Lead for the second event',
+    period: 'May–August 2026',
+    summary: 'Co-organized the first Solo Party with Hogamdo, then planned and ran the second edition on my own.',
+    metric: { value: '66 → 84', label: 'attendees, first to second event' },
+    heading: '66 attendees. Then 84. Two editions of Solo Party.',
+    overview: [
+      'Solo Party is an offline social event designed to help participants meet and interact through structured activities.',
+      'I co-organized the first event with Hogamdo and independently planned and operated the second edition. My responsibilities covered promotion, participant recruitment, communication, program development, and event-day operations.',
+    ],
+    events: [
+      {
+        name: 'Event 01',
+        date: 'May 27, 2026',
+        role: 'Co-organizer with Hogamdo',
+        responsibilities: [
+          'Created promotional Instagram Reels and Stories',
+          'Supported participant recruitment',
+          'Managed participant communication',
+          'Secured five event sponsors',
+          'Helped host and operate the event',
+        ],
+        results: ['150 applicants', '66 attendees', 'Five sponsors secured'],
+      },
+      {
+        name: 'Event 02',
+        date: 'August 9, 2026',
+        role: 'Independent Organizer',
+        responsibilities: [
+          'Planned the event concept and structure',
+          'Managed recruitment and application screening',
+          'Designed the GUESS ME, FIND ME, and MATCH ME activities',
+          'Coordinated the development of a web application using AI tools',
+          'Managed participant approvals, voting, and matching processes',
+          'Coordinated staff and participant communication',
+          'Managed on-site operations',
+        ],
+        results: ['180 unique applicants', '84 attendees'],
+      },
+    ],
+    process: [
+      { step: 'Planning', text: 'Developed the event structure and designed activities that encouraged participants to interact.' },
+      { step: 'Recruitment', text: 'Managed promotion, applications, participant screening, and communication.' },
+      { step: 'Digital operations', text: 'Coordinated an application and matching workflow supported by a web application built with AI tools.' },
+      { step: 'Event execution', text: 'Managed staffing, participant experience, and on-site operations.' },
+    ],
+    results: [
+      { value: '150', label: 'applicants, first event' },
+      { value: '66', label: 'attendees, first event' },
+      { value: '180', label: 'unique applicants, second event' },
+      { value: '84', label: 'attendees, second event' },
+    ],
+    notes: [
+      'Applicants rose from 150 to 180 and attendance from 66 to 84. No single marketing activity is credited with that increase.',
+      'The first event was co-organized with Hogamdo. The second was independently organized.',
+    ],
+    skills: [],
+    evidence: [
+      'Promotional Reels',
+      'Event posters',
+      'Event photographs',
+      'Application website screenshots',
+      'GUESS ME / FIND ME / MATCH ME materials',
+      'Participant communication examples, private information removed',
+    ],
+    links: [],
+  },
+  {
+    slug: 'lynnonmi',
+    categories: ['content'],
+    title: '@lynnonmi',
+    subtitle: 'Building and managing my own social media channels.',
+    org: '@lynnonmi, my own channels',
+    role: 'Independent Content Creator',
+    period: null,
+    platform: 'Instagram and YouTube',
+    summary: 'Plans, films, edits and publishes content on student life, beauty, lifestyle and life in different cities.',
+    metric: { value: '23,400', label: 'Instagram followers' },
+    heading: 'Creating content for an audience of 23.4K.',
+    overview: [
+      'I plan, film, edit, and publish content for my personal channels, covering student life, beauty, lifestyle, and experiences in different cities.',
+      'I manage the creative process from topic selection and content planning to filming, editing, publishing, and reviewing performance.',
+    ],
+    responsibilities: [
+      'Develop content ideas and formats',
+      'Plan short-form videos',
+      'Film and edit content',
+      'Write captions and prepare posts',
+      'Manage the publishing process',
+      'Review content performance',
+      'Work on branded content when applicable',
+    ],
+    themes: [
+      { name: 'Student life', text: 'University experiences, academic life, and personal routines.' },
+      { name: 'Lifestyle', text: 'Everyday experiences, places, and activities.' },
+      { name: 'Beauty', text: 'Beauty-related content and product experiences.' },
+      { name: 'Personal experiences', text: 'Content built around real experiences and personal storytelling.' },
+    ],
+    process: [
+      { step: 'Idea', text: 'Identify a topic based on personal experience and audience interest.' },
+      { step: 'Production', text: 'Plan the format, film the content, and edit for the selected platform.' },
+      { step: 'Publishing', text: 'Prepare the final video and accompanying copy.' },
+      { step: 'Review', text: 'Compare views and other available performance indicators across posts.' },
+    ],
+    results: [
+      { value: '23,400', label: 'Instagram followers' },
+      { value: '3.18M', label: 'views on the highest-performing Reel' },
+    ],
+    notes: [
+      'Instagram figures are as of November 20, 2026.',
+      'Reel numbers are views on individual videos, not total account views.',
+    ],
+    reels: [
+      { rank: 'Highest-performing Reel', views: '3.18M' },
+      { rank: 'High-performing Reel', views: '1.92M' },
+      { rank: 'High-performing Reel', views: '1.39M' },
+      { rank: 'High-performing Reel', views: '1.30M' },
+    ],
+    skills: [],
+    evidence: [
+      'Thumbnails for the four Reels',
+      'Links to the four Reels',
+      'Short notes on the creative decisions behind each Reel',
+    ],
     links: [{ text: 'Open @lynnonmi on Instagram', href: 'https://www.instagram.com/lynnonmi/' }],
   },
-  { slug: 'photography-snap-sessions', category: 'photography', title: 'Photography and Snap Sessions', links: [{ text: 'Open the photography gallery', href: '?page=photography' }] },
+  {
+    slug: 'witu-tiktok-live',
+    categories: ['live-commerce'],
+    title: 'TikTok LIVE Shopping',
+    subtitle: 'Hosting English-language shopping broadcasts for Korean beauty products.',
+    org: 'WitU',
+    role: 'English Shopping Host',
+    period: null,
+    periods: ['July–September 2024', 'March–July 2025', 'July–August 2026'],
+    periodShort: 'Three periods, 2024 to 2026',
+    summary: 'Hosted English TikTok LIVE shopping broadcasts featuring Korean beauty products for viewers in Southeast Asia.',
+    metric: null,
+    heading: 'Presenting Korean beauty products to Southeast Asian audiences through TikTok LIVE.',
+    overview: [
+      'I hosted English-language TikTok LIVE shopping broadcasts featuring Korean beauty products for viewers in Southeast Asia.',
+      'The role required presenting products, explaining their features, responding to live questions, and maintaining the flow of a shopping broadcast.',
+    ],
+    responsibilities: [
+      'Present K-beauty products in English',
+      'Demonstrate products during livestreams',
+      'Explain product features and usage',
+      'Respond to viewer questions in real time',
+      'Adapt explanations to the live audience',
+      'Maintain audience interaction throughout broadcasts',
+    ],
+    process: [
+      { step: 'Present', text: 'Introduce each product in English.' },
+      { step: 'Explain', text: 'Cover features and usage, with product demonstrations on stream.' },
+      { step: 'Respond', text: 'Answer viewer questions in real time and adapt the explanation to the audience.' },
+      { step: 'Keep the flow', text: 'Maintain interaction so the broadcast keeps moving.' },
+    ],
+    processTitle: 'What a broadcast involves',
+    results: [],
+    resultsNote: 'No verified sales, conversion, or viewership figures are available for this role, so none are shown.',
+    notes: [
+      'Broadcast frequency: approximately two to three broadcasts per week during active engagement periods.',
+      'The three periods are separate engagements, not one continuous appointment.',
+    ],
+    skills: ['Live presentation', 'English-language communication', 'Product storytelling', 'Real-time audience engagement', 'Adaptation during live broadcasts'],
+    evidence: ['Broadcast screenshots', 'Short video clips', 'Product demonstration examples', 'Examples of live presentation'],
+    links: [],
+  },
+  {
+    slug: 'red-bull-korea',
+    categories: ['brand-marketing'],
+    title: 'Red Bull Korea',
+    subtitle: 'Campus marketing and brand activations as a Student Marketeer.',
+    org: 'Red Bull Korea',
+    role: 'Student Marketeer',
+    period: 'January–October 2025',
+    summary: 'Supported campus marketing and brand activations, including 14 university festivals, product sampling, and sports and music promotions.',
+    metric: { value: '14', label: 'university festivals supported' },
+    heading: 'Bringing Red Bull activations to 14 university festivals.',
+    overview: [
+      'I worked as a Student Marketeer at Red Bull Korea, supporting campus marketing activities and brand activations.',
+      'My work included university festivals, product sampling, and sports and music promotions.',
+    ],
+    responsibilities: [
+      'Supported brand activations at university festivals',
+      'Participated in product sampling activities',
+      'Supported sports and music promotions',
+      'Coordinated with event staff and university partners',
+      'Assisted with on-site execution',
+    ],
+    results: [{ value: '14', label: 'university festivals with supported activations' }],
+    notes: ['Fourteen is the number of festivals I was involved in, not the number I organized independently.'],
+    extras: [
+      { title: 'Wings for Life World Run 2025', text: 'Operated a camera for the Korean livestream of the event.' },
+    ],
+    skills: ['Field marketing', 'Brand activation', 'Event operations', 'Coordination', 'On-site communication'],
+    evidence: ['Festival activation photographs', 'Sampling photographs', 'Event materials', 'Wings for Life World Run production images'],
+    links: [],
+  },
+  {
+    slug: 'pimadaziwin',
+    categories: ['content', 'brand-marketing'],
+    title: 'Pimadaziwin',
+    subtitle: 'Launching and managing a brand account on X.',
+    org: 'Pimadaziwin',
+    role: 'X Account Manager',
+    period: 'November 2025–October 2026',
+    summary: 'Launched and managed the brand\'s X account, supported community engagement, and ran a product supporter program.',
+    metric: { value: '3,000', label: 'X followers gained in four months' },
+    heading: 'From zero to 3,000 followers in four months.',
+    overview: [
+      'I launched and managed Pimadaziwin\'s X account, developing its social media presence and supporting community engagement.',
+      'I also organized a product supporter program involving participant recruitment, shipping, and communication.',
+    ],
+    responsibilities: [
+      'Launched the brand\'s X account',
+      'Managed account content and publishing',
+      'Supported community growth',
+      'Organized supporter recruitment',
+      'Coordinated product shipments',
+      'Prepared participant instructions',
+      'Managed supporter communication',
+    ],
+    process: [
+      { step: 'Launch', text: 'Established the brand\'s presence on X.' },
+      { step: 'Content management', text: 'Managed content and account activity.' },
+      { step: 'Community', text: 'Supported engagement and audience growth.' },
+      { step: 'Supporter program', text: 'Coordinated recruitment, product distribution, and communication.' },
+    ],
+    results: [{ value: '0 → 3,000', label: 'followers on the brand\'s X account in four months' }],
+    notes: [],
+    skills: [],
+    evidence: ['Account screenshots', 'Follower growth evidence', 'Content examples', 'Supporter program materials'],
+    links: [],
+  },
+  {
+    slug: 'constant-refilled',
+    categories: ['brand-marketing'],
+    title: 'Constant / Refilled',
+    subtitle: 'Connecting beauty brands with online communities and offline experiences.',
+    org: 'Constant and Refilled, beauty brands',
+    role: 'Beauty Brand Marketer',
+    period: 'July–September 2025',
+    summary: 'Supported X, Instagram and influencer marketing for two beauty brands and recruited participants for an offline beauty activation.',
+    metric: { value: '~100', label: 'organic posts from about 20 recruited X users' },
+    heading: 'Connecting beauty brands with online communities and offline experiences.',
+    overview: [
+      'I supported social media marketing and influencer activities for the beauty brands Constant and Refilled.',
+      'My work included X account management, influencer seeding, Instagram content, and participant recruitment for an offline beauty activation.',
+    ],
+    responsibilities: [
+      'Launched and managed brand activity on X',
+      'Supported influencer seeding',
+      'Worked on Instagram content',
+      'Recruited X users for a beauty event activation',
+      'Supported participant coordination',
+    ],
+    extras: [
+      {
+        title: 'Musinsa Beauty Festa activation',
+        text: 'Recruited approximately 20 X users to take part in the activation. Participants generated approximately 100 organic posts.',
+      },
+    ],
+    results: [
+      { value: '~20', label: 'X users recruited for the activation' },
+      { value: '~100', label: 'organic posts created by participants' },
+    ],
+    notes: ['The roughly 100 posts were written by the participants, not by me.'],
+    skills: ['Beauty marketing', 'Social media management', 'Influencer coordination', 'Community recruitment', 'Offline activation support'],
+    evidence: ['X content examples', 'Instagram content', 'Musinsa Beauty Festa photographs', 'Participant-generated posts', 'Campaign materials'],
+    links: [],
+  },
 ];
-
-// Waiting for category placement from the portfolio brief:
-//   Red Bull Korea, Pimadaziwin, Constant / Refilled
-
-const featuredSlugs = ['solo-party', 'witu-tiktok-live', 'lynnonmi-content'];
-
-const projects = list.map((p) => {
-  const inCat = list.filter((q) => q.category === p.category);
-  return { ...base, ...p, no: String(inCat.indexOf(p) + 1).padStart(2, '0'), featured: featuredSlugs.includes(p.slug) };
-});
 
 /*
   Photographs taken by Lynn. type is 'portrait' or 'snap'.
-  src null shows a labelled placeholder frame. When a real file is added,
-  set src, width, height and alt; the gallery handles the rest.
+  Add real files by setting src, width, height, alt and caption.
+  Only add location, date or camera details that are verified.
 */
 const photo = (type, n, shape) => ({
   id: `${type}-${String(n).padStart(2, '0')}`,
   type,
   no: String(n).padStart(2, '0'),
-  shape, // 'tall' | 'wide' | 'square'
+  shape,
   src: null,
   width: null,
   height: null,
@@ -495,39 +857,71 @@ const photo = (type, n, shape) => ({
 const photos = [
   photo('portrait', 1, 'tall'),
   photo('portrait', 2, 'wide'),
-  photo('portrait', 3, 'tall'),
-  photo('portrait', 4, 'square'),
   photo('snap', 1, 'square'),
   photo('snap', 2, 'square'),
   photo('snap', 3, 'square'),
-  photo('snap', 4, 'square'),
-  photo('snap', 5, 'square'),
 ];
 
 const about = {
-  intro: null, // 2 to 4 sentences in Lynn's own words
+  intro: [
+    'I\'m Lynn Kim, a creator and marketer currently studying at Minerva University.',
+    'My experience includes producing content for my own channels, hosting TikTok LIVE shopping broadcasts, supporting brand campaigns, and organizing offline events.',
+    'I have worked in both established organizations and independent projects. These experiences have involved content planning, social media management, audience communication, event operations, and execution.',
+    'Alongside this work, I take portraits and snap photographs.',
+  ],
   portrait: { src: null, alt: '' },
-  experience: [], // { role, org, period, note }
-  education: [], // { school, degree, period }
-  skills: [], // short strings
+  education: [{ school: 'Minerva University', detail: 'Class of 2029', status: 'Currently enrolled' }],
+  experience: [
+    { role: 'Independent Content Creator', org: '@lynnonmi', period: null, slug: 'lynnonmi' },
+    { role: 'Event Organizer', org: 'Solo Party', period: '2026', slug: 'solo-party' },
+    { role: 'X Account Manager', org: 'Pimadaziwin', period: 'November 2025–October 2026', slug: 'pimadaziwin' },
+    { role: 'Student Marketeer', org: 'Red Bull Korea', period: 'January–October 2025', slug: 'red-bull-korea' },
+    { role: 'Beauty Brand Marketer', org: 'Constant / Refilled', period: 'July–September 2025', slug: 'constant-refilled' },
+    { role: 'English Shopping Host', org: 'WitU / TikTok LIVE', period: null, periods: ['July–September 2024', 'March–July 2025', 'July–August 2026'], slug: 'witu-tiktok-live' },
+  ],
+  skills: [
+    { group: 'Content & media', items: ['Content planning', 'Short-form video production', 'Filming', 'Video editing', 'Social media management', 'Photography'] },
+    { group: 'Marketing & operations', items: ['Brand activation', 'Event planning and operations', 'Community management', 'Influencer coordination', 'Live commerce', 'Audience communication'] },
+    { group: 'Software', items: ['Adobe Premiere Pro', 'Final Cut Pro', 'Adobe Photoshop', 'Adobe Illustrator', 'Figma', 'Microsoft Excel', 'Microsoft PowerPoint'] },
+    { group: 'Languages', items: ['Korean', 'English', 'Chinese'] },
+  ],
 };
+
+/* Home page figures. Each belongs to the project beside it, not to a combined total. */
+const keyFigures = [
+  { value: '23,400', label: 'Instagram followers on @lynnonmi', note: `As of ${site.asOf}`, slug: 'lynnonmi' },
+  { value: '3.18M', label: 'views on the highest-performing @lynnonmi Reel', note: 'One video, not account total', slug: 'lynnonmi' },
+  { value: '180', label: 'applicants for the second Solo Party', note: 'Unique applicants', slug: 'solo-party' },
+  { value: '84', label: 'attendees at the second Solo Party', note: 'August 9, 2026', slug: 'solo-party' },
+  { value: '14', label: 'university festivals supported through Red Bull Korea', note: 'Festivals involved in', slug: 'red-bull-korea' },
+  { value: '3,000', label: 'followers gained on Pimadaziwin\'s X account in four months', note: 'Account launched from zero', slug: 'pimadaziwin' },
+];
+
+const featured = ['solo-party', 'lynnonmi', 'witu-tiktok-live', 'red-bull-korea', 'pimadaziwin', 'constant-refilled'];
+
+/*
+  Not shown on the site until Lynn confirms exact dates, scope and wording:
+  Team 1llusion (YouTube channel, about 1.1 million subscribers), Samsung
+  Electronics advertising model experience, additional internships and
+  professional roles, interpretation experience.
+*/
+const pendingConfirmation = ['Team 1llusion', 'Samsung Electronics', 'Additional internships and roles', 'Interpretation experience'];
 
 
 const page = (new URLSearchParams(location.search).get('page') || 'home');
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-const categories = allCategories.filter((c) => projects.some((p) => p.category === c.id));
-const cat = (id) => allCategories.find((c) => c.id === id);
-const WORDS = ['No', 'One', 'Two', 'Three', 'Four', 'Five', 'Six'];
+const cat = (id) => categories.find((c) => c.id === id);
+const byOrder = featured.map((s) => projects.find((p) => p.slug === s)).filter(Boolean);
+const inFolder = (id) => (id === 'all' ? byOrder : byOrder.filter((p) => p.categories.includes(id)));
+const firstCat = (p) => cat(p.categories[0]);
+const projectUrl = (p) => `?page=project&slug=${p.slug}`;
 
 /* ---------- small building blocks ---------- */
 
 const pending = (text) => `<span class="pending">${esc(text)}</span>`;
-const val = (v, fallback) => (v ? esc(v) : pending(fallback));
-
 const clip = (cls = '') => `<svg class="clip ${cls}" aria-hidden="true" focusable="false"><use href="#clip"/></svg>`;
-
-const stamp = (text = 'Placeholder') => `<span class="stamp">${esc(text)}</span>`;
+const stamp = (text = 'Pending') => `<span class="stamp">${esc(text)}</span>`;
 
 /* Real image when src exists, labelled placeholder frame otherwise. */
 function media({ src, alt, width, height }, tone, label) {
@@ -535,9 +929,8 @@ function media({ src, alt, width, height }, tone, label) {
     const size = width && height ? ` width="${width}" height="${height}"` : '';
     return `<img class="media" src="${esc(src)}" alt="${esc(alt || '')}"${size} loading="lazy" decoding="async">`;
   }
-  return `<div class="ph ph--${tone}" role="img" aria-label="Placeholder: ${esc(label)}"><span>${esc(label)}</span></div>`;
+  return `<div class="ph ph--${tone}" role="img" aria-label="Pending: ${esc(label)}"><span>${esc(label)}</span></div>`;
 }
-
 
 /* Lace doily, drawn once as a scalloped disc with punched rings. */
 let doilyN = 0;
@@ -571,7 +964,7 @@ function ribbon(cls = '') {
 
 const label = (text) => `<span class="label">${esc(text)}</span>`;
 
-function polaroid({ img, caption, tone, tilt = 0, clipped = false, taped = false, lace = false, bow = false, ph = 'Photo placeholder' }) {
+function polaroid({ img, caption, tone, tilt = 0, clipped = false, taped = false, lace = false, bow = false, ph = 'Photo pending' }) {
   const fig = `<figure class="polaroid" style="--tilt:${tilt}deg">
     ${clipped ? clip() : ''}${taped ? '<span class="tape" aria-hidden="true"></span>' : ''}
     <div class="polaroid__img">${media(img, tone, ph)}</div>
@@ -586,8 +979,8 @@ function polaroid({ img, caption, tone, tilt = 0, clipped = false, taped = false
 const nav = [
   { id: 'home', href: '?page=home', text: 'Home' },
   { id: 'work', href: '?page=work', text: 'Work' },
-  { id: 'photography', href: '?page=photography', text: 'Photography' },
   { id: 'about', href: '?page=about', text: 'About' },
+  { id: 'photography', href: '?page=photography', text: 'Photography' },
   { id: 'contact', href: '?page=contact', text: 'Contact' },
 ];
 
@@ -604,7 +997,7 @@ function shell(stage, body, activeId) {
     <header class="band">
       <div class="top">
         <a class="logo" href="?page=home">${esc(site.name)}</a>
-        <span class="top__note">Portfolio archive ${site.year}</span>
+        <span class="top__note">Portfolio ${site.year}</span>
       </div>
       ${stage}
       <nav class="tabs" aria-label="Main"><div class="tabs__row">${tabs}</div></nav>
@@ -619,34 +1012,45 @@ function shell(stage, body, activeId) {
 }
 
 const plainStage = (eyebrow, title, lede) => `<div class="stage">
-  <p class="eyebrow">${eyebrow}</p>
-  <h1 class="stage__title">${title}</h1>
-  <p class="stage__lede">${lede}</p>
+  <p class="eyebrow">${esc(eyebrow)}</p>
+  <h1 class="stage__title">${esc(title)}</h1>
+  ${lede ? `<p class="stage__lede">${esc(lede)}</p>` : ''}
 </div>`;
 
 /* ---------- pieces used on several pages ---------- */
 
+function periodRow(p) {
+  const v = p.periodShort || p.period;
+  return v ? ['Period', esc(v)] : ['Data as of', esc(site.asOf)];
+}
+
 function projectCard(p, i) {
-  const c = cat(p.category);
-  const tilt = i % 2 ? 1.2 : -1.4;
-  return `<a class="card" href="?page=project&slug=${p.slug}" style="--tilt:${tilt}deg">
+  const c = firstCat(p);
+  const tilt = [-1.3, 1.1, -0.8][i % 3];
+  const [pk, pv] = periodRow(p);
+  return `<a class="card" href="${projectUrl(p)}" style="--tilt:${tilt}deg">
     ${i % 2 === 0 ? clip() : ''}
-    ${label(`${c.label} / ${p.no}`)}
-    <div class="card__img">${media(p.cover, c.tone, 'Project cover placeholder')}</div>
-    <h3 class="card__title">${p.title ? esc(p.title) : `${esc(c.label)} project ${p.no} ${pending('title to be added')}`}</h3>
-    <p class="card__meta">${val(p.role, 'Role to be added')}</p>
+    ${label(c.label)}
+    <div class="card__img">${media({ src: null }, c.tone, 'Cover image pending')}</div>
+    <h3 class="card__title">${esc(p.title)}</h3>
+    <p class="card__org">${esc(p.org)}</p>
+    <dl class="card__facts"><div><dt>Role</dt><dd>${esc(p.role)}</dd></div><div><dt>${pk}</dt><dd>${pv}</dd></div></dl>
+    <p class="card__summary">${esc(p.summary)}</p>
+    ${p.metric ? `<p class="card__metric"><b>${esc(p.metric.value)}</b><span>${esc(p.metric.label)}</span></p>` : ''}
     <span class="card__more">View project</span>
   </a>`;
 }
 
 function spines() {
-  return `<ol class="spines" aria-label="Folders">
-    ${categories
-      .map(
-        (c, i) => `<li class="spine spine--${c.tone}" style="--i:${i}">
-        <a href="?page=work#${c.id}"><span class="spine__label">${esc(c.label)}</span><span class="spine__count">${projects.filter((p) => p.category === c.id).length} ${projects.filter((p) => p.category === c.id).length === 1 ? 'file' : 'files'}</span></a>
-      </li>`
-      )
+  const list = categories.filter((c) => c.id !== 'all');
+  return `<ol class="spines" style="--n:${list.length}" aria-label="Work folders">
+    ${list
+      .map((c, i) => {
+        const n = inFolder(c.id).length;
+        return `<li class="spine spine--${c.tone}" style="--i:${i}">
+        <a href="?page=work#${c.id}"><span class="spine__label">${esc(c.label)}</span><span class="spine__count">${n} ${n === 1 ? 'project' : 'projects'}</span></a>
+      </li>`;
+      })
       .join('')}
   </ol>`;
 }
@@ -654,18 +1058,29 @@ function spines() {
 /* ---------- pages ---------- */
 
 function home() {
-  const featured = featuredSlugs.map((s) => projects.find((p) => p.slug === s)).filter(Boolean);
   const stage = `<div class="stage stage--home">
     <h1 class="giant">${esc(site.name)}</h1>
-    <div class="stack" aria-hidden="false">
-      <div class="paper paper--3"></div>
-      <div class="paper paper--2"></div>
-      <div class="paper paper--1">
-        ${polaroid({ img: { src: null }, tone: 'pink', caption: `${stamp('Placeholder')}<span>Portrait of Lynn, to be added</span>`, clipped: true, ph: 'Portrait of Lynn' })}
-        <p class="typed">${esc(site.statement)}</p>
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <p class="hero-role">${esc(site.headline)}</p>
+        <p class="hero-sub">${esc(site.secondary)}</p>
+        <p class="hero-intro">${esc(site.tagline)}</p>
+        <div class="hero-actions">
+          <a class="btn btn--pink" href="?page=work">Explore My Work</a>
+          <a class="btn btn--line" href="?page=about">About Me</a>
+          <a class="btn btn--line" href="?page=contact">Get in Touch</a>
+        </div>
       </div>
-      <span class="script-mark" aria-hidden="true">portfolio</span>
-      <span class="year-mark" aria-hidden="true">(${site.year})</span>
+      <div class="stack">
+        <div class="paper paper--3"></div>
+        <div class="paper paper--2"></div>
+        <div class="paper paper--1">
+          ${polaroid({ img: about.portrait, tone: 'pink', caption: `${stamp()}<span>Portrait of Lynn</span>`, clipped: true, ph: 'Portrait pending' })}
+          <p class="typed">${esc(site.secondary)}</p>
+        </div>
+        <span class="script-mark" aria-hidden="true">portfolio</span>
+        <span class="year-mark" aria-hidden="true">(${site.year})</span>
+      </div>
     </div>
   </div>`;
 
@@ -675,36 +1090,50 @@ function home() {
       <h2 id="sel" class="display">Selected <em>work</em></h2>
       <a class="textlink" href="?page=work">Open the archive</a>
     </div>
-    <div class="scatter">${featured.map((p, i) => projectCard(p, i)).join('')}</div>
+    <div class="works">${byOrder.map((p, i) => projectCard(p, i)).join('')}</div>
   </section>
 
   <section class="block block--spines" aria-labelledby="drawer">
-    <h2 id="drawer" class="display display--s">${WORDS[categories.length]} <em>${categories.length === 1 ? 'folder' : 'folders'}</em></h2>
+    <h2 id="drawer" class="display display--s">Browse by <em>folder</em></h2>
     ${spines()}
   </section>
 
-  <section class="block" aria-labelledby="pt">
-    <div class="strip-wrap">
-      <div class="strip-copy">
-        <p class="eyebrow eyebrow--dark">Photography</p>
-        <h2 id="pt" class="display display--s">Photographs by <em>Lynn</em></h2>
-        <p>Portraits and snap sessions, shot and edited by Lynn.</p>
-        <a class="textlink" href="?page=photography">See the gallery</a>
+  <section class="block" aria-labelledby="kf">
+    <div class="figs-wrap">
+      <div class="block__head">
+        <h2 id="kf" class="display display--s">Key <em>figures</em></h2>
+        <p class="small">Each figure belongs to the project beside it. They are not combined totals. Instagram figures are as of ${esc(site.asOf)}.</p>
       </div>
-      <div class="film" aria-hidden="true">
-        ${photos.slice(0, 6).map((p, i) => `<div class="film__frame">${media(p, ['pink', 'blue', 'cream', 'rose', 'blue', 'pink'][i], 'Photo ' + p.no)}<i>${String(i + 1).padStart(2, '0')}</i></div>`).join('')}
-      </div>
+      <ul class="figs">
+        ${keyFigures
+          .map((f) => `<li><a href="?page=project&slug=${f.slug}"><span class="fig__v">${esc(f.value)}</span><span class="fig__l">${esc(f.label)}</span><span class="fig__n">${esc(f.note)}</span></a></li>`)
+          .join('')}
+      </ul>
     </div>
   </section>
 
   <section class="block block--about" aria-labelledby="ab">
     <div class="about-note">
-      ${polaroid({ img: about.portrait, tone: 'rose', caption: `${stamp()}<span>Portrait to be added</span>`, tilt: -3, clipped: true, lace: true, bow: true, ph: 'Portrait of Lynn' })}
+      ${polaroid({ img: about.portrait, tone: 'rose', caption: `${stamp()}<span>Portrait of Lynn</span>`, tilt: -3, clipped: true, lace: true, bow: true, ph: 'Portrait pending' })}
       <div class="note">
-        <h2 id="ab" class="display display--s">About <em>Lynn</em></h2>
-        <p>${about.intro ? esc(about.intro) : pending('Introduction in Lynn\'s own words to be added.')}</p>
-        <a class="textlink" href="?page=about">Experience, education and skills</a>
+        <h2 id="ab" class="display display--s">A little <em>about me</em></h2>
+        <p>I'm a creator and marketer studying at Minerva University.</p>
+        <p>I have worked across social media, live commerce, brand activations, and event operations. Alongside my professional experience, I develop independent projects and produce content for my own channels.</p>
+        <p>I also enjoy photography and documenting people and everyday moments.</p>
+        <a class="textlink" href="?page=about">About Lynn</a>
       </div>
+    </div>
+  </section>
+
+  <section class="mini-photo" aria-labelledby="pt">
+    <div class="mini-photo__copy">
+      <p class="eyebrow eyebrow--dark">Photography</p>
+      <h2 id="pt" class="display display--s">Through <em>My Lens</em></h2>
+      <p>Portraits, snap sessions, and everyday moments photographed by me.</p>
+      <a class="textlink" href="?page=photography">View Photography</a>
+    </div>
+    <div class="mini-photo__row">
+      ${photos.slice(0, 3).map((p, i) => `<figure class="mini" style="--tilt:${[-2.5, 1.5, -1][i]}deg">${media(p, ['pink', 'blue', 'cream'][i], `Photo ${i + 1} pending`)}</figure>`).join('')}
     </div>
   </section>`;
   return shell(stage, body, 'home');
@@ -714,18 +1143,16 @@ function home() {
 
 function work() {
   const tabs = categories
-    .map(
-      (c, i) => `<button class="ftab ftab--${c.tone}" role="tab" id="tab-${c.id}" aria-controls="panel-${c.id}" aria-selected="false" tabindex="-1" data-i="${i}">${esc(c.label)}</button>`
-    )
+    .map((c, i) => `<button class="ftab ftab--${c.tone}" role="tab" id="tab-${c.id}" aria-controls="panel-${c.id}" aria-selected="false" tabindex="-1" data-i="${i}">${esc(c.label)}</button>`)
     .join('');
   const folders = categories
     .map((c) => {
-      const list = projects.filter((p) => p.category === c.id);
+      const list = inFolder(c.id);
       return `<section class="folder folder--${c.tone}" role="tabpanel" id="panel-${c.id}" aria-labelledby="tab-${c.id}" tabindex="0">
         <div class="folder__inner">
           <header class="folder__head">
             <h2 class="display display--s">${esc(c.label)}</h2>
-            <p>${esc(c.note)} <span class="count">${list.length} ${list.length === 1 ? 'file' : 'files'}</span></p>
+            <p>${esc(c.note)} <span class="count">${list.length} ${list.length === 1 ? 'project' : 'projects'}</span></p>
           </header>
           <div class="folder__files">${list.map((p, i) => projectCard(p, i)).join('')}</div>
         </div>
@@ -733,12 +1160,15 @@ function work() {
     })
     .join('');
   const body = `<div class="cabinet" id="cabinet">
-    <div class="ftabs" role="tablist" aria-label="Project categories"><div class="ftabs__row">${tabs}</div></div>
+    <div class="ftabs" role="tablist" aria-label="Project folders"><div class="ftabs__row">${tabs}</div></div>
     <div class="cabinet__stack">${folders}</div>
   </div>
-  <p class="hint">Select a tab, or use the left and right arrow keys, to bring a folder forward.</p>`;
-  const html = shell(plainStage('Archive / 02', 'Work', `${WORDS[categories.length]} ${categories.length === 1 ? 'folder' : 'folders'}. Bring one forward to see the projects inside.`), body, 'work');
-  return { html, after: initCabinet };
+  <p class="hint">Select a tab, or use the left and right arrow keys, to bring a folder forward.</p>
+  <p class="archive-link"><a class="textlink" href="?page=photography">Photography archive</a></p>`;
+  return {
+    html: shell(plainStage('Work', 'Work', 'Six projects in four folders. Bring one forward to see what is inside.'), body, 'work'),
+    after: initCabinet,
+  };
 }
 
 function initCabinet() {
@@ -751,7 +1181,6 @@ function initCabinet() {
     panels.forEach((p, i) => {
       const depth = (i - active + n) % n; // 0 is the front folder
       p.style.setProperty('--d', depth);
-      p.style.setProperty('--r', 0);
       p.classList.toggle('is-front', depth === 0);
       p.toggleAttribute('inert', depth !== 0);
       p.setAttribute('aria-hidden', depth !== 0 ? 'true' : 'false');
@@ -793,72 +1222,100 @@ function initCabinet() {
 
 function projectPage() {
   const slug = new URLSearchParams(location.search).get('slug');
-  const idx = projects.findIndex((p) => p.slug === slug);
-  if (idx < 0) {
+  const p = byOrder.find((x) => x.slug === slug);
+  if (!p) {
     return shell(
-      plainStage('Archive', 'File not found', 'This project is not in the archive.'),
+      plainStage('Work', 'Project not found', 'This project is not in the archive.'),
       `<div class="block"><p>Return to <a class="textlink" href="?page=work">the Work archive</a>.</p></div>`,
       'work'
     );
   }
-  const p = projects[idx];
-  const c = cat(p.category);
-  document.title = `${p.title || `${c.label} project ${p.no}`}, Lynn Kim`;
+  const idx = byOrder.indexOf(p);
+  const c = firstCat(p);
+  document.title = `${p.title}, Lynn Kim`;
+  const folders = p.categories.map((id) => cat(id));
+  const list = (items) => `<ul class="ticks">${items.map((r) => `<li>${esc(r)}</li>`).join('')}</ul>`;
+  let n = 0;
+  const section = (title, inner, cls = '') => {
+    n += 1;
+    const id = `s${n}`;
+    return `<section class="psec ${cls}" aria-labelledby="${id}"><header class="psec__head"><span class="num">${String(n).padStart(2, '0')}</span><h2 id="${id}" class="display display--s">${title}</h2></header><div class="psec__body">${inner}</div></section>`;
+  };
 
   const facts = [
-    ['Category', esc(c.label)],
-    ['Year', val(p.year, 'To be added')],
-    ['Client', val(p.client, 'To be added')],
-    ['Lynn\'s role', val(p.role, 'To be added')],
+    ['Organization', esc(p.org)],
+    ['Role', esc(p.role)],
+    p.periods
+      ? ['Periods', `<span class="periods">${p.periods.map((x) => `<span>${esc(x)}</span>`).join('')}</span>`]
+      : p.period
+        ? ['Period', esc(p.period)]
+        : ['Data as of', esc(site.asOf)],
+    p.platform ? ['Platform', esc(p.platform)] : ['Folder', folders.map((f) => esc(f.label)).join(', ')],
   ];
 
-  const resp = p.responsibilities.length
-    ? `<ul class="ticks">${p.responsibilities.map((r) => `<li>${esc(r)}</li>`).join('')}</ul>`
-    : `<ul class="ticks ticks--ph">${['What Lynn planned, made or ran herself', 'Tools or channels she used', 'Who she worked with and where she led'].map((r) => `<li>${pending(r)}</li>`).join('')}</ul>`;
+  const overview = `<div class="prose">${p.overview.map((t) => `<p>${esc(t)}</p>`).join('')}</div>${
+    p.links.length ? `<p class="links">${p.links.map((l) => `<a class="textlink" href="${esc(l.href)}"${l.href.startsWith('http') ? ' target="_blank" rel="noopener"' : ''}>${esc(l.text)}</a>`).join('')}</p>` : ''
+  }`;
 
-  const proc = p.process.length
-    ? p.process.map((s, i) => `<li><b>${String(i + 1).padStart(2, '0')}</b><div><h3>${esc(s.step)}</h3><p>${esc(s.text)}</p></div></li>`).join('')
-    : ['Research and brief', 'Planning and production', 'Launch and follow-up'].map((s, i) => `<li><b>${String(i + 1).padStart(2, '0')}</b><div><h3>${pending(s)}</h3><p>${pending('Describe this step.')}</p></div></li>`).join('');
+  let role = '';
+  if (p.events) {
+    role += `<div class="events">${p.events
+      .map(
+        (e, i) => `<article class="event" style="--tilt:${i ? 0.8 : -0.8}deg">
+        <p class="event__date">${esc(e.date)}</p>
+        <h3>${esc(e.name)}</h3>
+        <p class="event__role">${esc(e.role)}</p>
+        ${list(e.responsibilities)}
+        <p class="chips chips--solid">${e.results.map((r) => `<span>${esc(r)}</span>`).join('')}</p>
+      </article>`
+      )
+      .join('')}</div>`;
+  } else if (p.responsibilities) {
+    role += list(p.responsibilities);
+  }
+  if (p.themes) role += `<h3 class="sub">Content themes</h3><dl class="themes">${p.themes.map((t) => `<div><dt>${esc(t.name)}</dt><dd>${esc(t.text)}</dd></div>`).join('')}</dl>`;
+  if (p.extras) role += p.extras.map((x) => `<aside class="extra"><h3>${esc(x.title)}</h3><p>${esc(x.text)}</p></aside>`).join('');
+  if (p.skills && p.skills.length) role += `<h3 class="sub">Skills demonstrated</h3><p class="chips">${p.skills.map((s) => `<span>${esc(s)}</span>`).join('')}</p>`;
 
-  const verified = p.results.filter((r) => r.verified);
-  const res = verified.length
-    ? verified.map((r) => `<div class="metric"><span class="metric__v">${esc(r.value)}</span><span class="metric__l">${esc(r.label)}</span></div>`).join('')
-    : [1, 2, 3].map((k) => `<div class="metric metric--ph"><span class="metric__v">${pending('Verified figure')}</span><span class="metric__l">${pending(`Metric ${k}, with its source`)}</span></div>`).join('');
+  const proc = p.process
+    ? `<ol class="steps">${p.process.map((s, i) => `<li><b>${String(i + 1).padStart(2, '0')}</b><div><h3>${esc(s.step)}</h3><p>${esc(s.text)}</p></div></li>`).join('')}</ol>`
+    : '';
 
-  const ev = p.evidence
-    .map((e, i) => polaroid({ img: e, tone: c.tone, tilt: [-2, 1.5, -1][i % 3], clipped: i === 1, taped: i === 0, caption: e.caption ? esc(e.caption) : `${stamp()}<span>Evidence ${i + 1}</span>`, ph: `Evidence ${i + 1}` }))
-    .join('');
+  let res = '';
+  if (p.results.length) res += `<div class="metrics">${p.results.map((r) => `<div class="metric"><span class="metric__v">${esc(r.value)}</span><span class="metric__l">${esc(r.label)}</span></div>`).join('')}</div>`;
+  if (p.resultsNote) res += `<p class="note-line">${esc(p.resultsNote)}</p>`;
+  if (p.notes && p.notes.length) res += `<ul class="notes">${p.notes.map((t) => `<li>${esc(t)}</li>`).join('')}</ul>`;
+  if (p.reels) {
+    res += `<h3 class="sub">Representative Reels</h3><div class="reels">${p.reels
+      .map((r, i) => `<article class="reel"><div class="reel__thumb">${media({ src: null }, ['pink', 'blue', 'rose', 'cream'][i], 'Thumbnail pending')}</div><p class="reel__views">${esc(r.views)}<span>views</span></p><p class="reel__rank">${esc(r.rank)}</p><p class="reel__todo">${pending('Reel link and creative note to be added')}</p></article>`)
+      .join('')}</div>`;
+  }
 
-  const prev = projects[(idx - 1 + projects.length) % projects.length];
-  const next = projects[(idx + 1) % projects.length];
-  const nm = (q) => (q.title ? esc(q.title) : `${esc(cat(q.category).label)} project ${q.no}`);
+  const ev = `<p class="small">These materials are not yet uploaded. Each frame names what will go there.</p><div class="evi-grid">${p.evidence
+    .map((e, i) => `<figure class="evi"><div class="evi__img">${media({ src: null }, ['pink', 'blue', 'cream', 'rose'][i % 4], 'Pending')}</div><figcaption>${stamp()} ${esc(e)}</figcaption></figure>`)
+    .join('')}</div>`;
+
+  const prev = byOrder[(idx - 1 + byOrder.length) % byOrder.length];
+  const next = byOrder[(idx + 1) % byOrder.length];
 
   const stage = `<div class="stage">
-    <p class="eyebrow">${esc(c.label)} / ${p.no}</p>
-    <h1 class="stage__title">${p.title ? esc(p.title) : `${esc(c.label)} project ${p.no}`}</h1>
-    <p class="stage__lede">${p.summary ? esc(p.summary) : pending('One-sentence summary to be added.')}</p>
+    <p class="eyebrow">${folders.map((f) => esc(f.label)).join(' / ')}</p>
+    <h1 class="stage__title">${esc(p.title)}</h1>
+    <p class="stage__lede">${esc(p.subtitle)}</p>
   </div>`;
 
   const body = `
-  <p class="crumb"><a href="?page=work#${c.id}">Work</a> / <a href="?page=work#${c.id}">${esc(c.label)}</a> / ${p.no}</p>
+  <p class="crumb"><a href="?page=work#${c.id}">Work</a> / <a href="?page=work#${c.id}">${esc(c.label)}</a> / ${esc(p.title)}</p>
   <dl class="facts">${facts.map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join('')}</dl>
-
-  <div class="detail">
-    <section class="detail__sec" aria-labelledby="d1"><span class="num">01</span><h2 id="d1" class="display display--s">Objective</h2>
-      <p>${p.objective ? esc(p.objective) : pending('What this project had to achieve, in one or two sentences.')}</p></section>
-    <section class="detail__sec" aria-labelledby="d2"><span class="num">02</span><h2 id="d2" class="display display--s">What Lynn did</h2>${resp}</section>
-    <section class="detail__sec detail__sec--wide" aria-labelledby="d3"><span class="num">03</span><h2 id="d3" class="display display--s">Process</h2><ol class="steps">${proc}</ol></section>
-    <section class="detail__sec detail__sec--wide" aria-labelledby="d4"><span class="num">04</span><h2 id="d4" class="display display--s">Results</h2>
-      <div class="metrics">${res}</div>
-      ${verified.length ? '' : '<p class="small">Only verified figures are shown here.</p>'}</section>
-  </div>
-
-  ${p.links.length ? `<p class="links">${p.links.map((l) => `<a class="textlink" href="${esc(l.href)}"${l.href.startsWith('http') ? ' target="_blank" rel="noopener"' : ''}>${esc(l.text)}</a>`).join('')}</p>` : ''}
-  <section class="evidence" aria-labelledby="d5"><h2 id="d5" class="display display--s">Visual <em>evidence</em></h2><div class="evidence__row">${ev}</div></section>
-
+  <p class="pull">${esc(p.heading)}</p>
+  ${section('Overview', overview)}
+  ${section(p.events ? 'My role' : 'What I did', role)}
+  ${proc ? section(p.processTitle || 'Process', proc) : ''}
+  ${section('Results', res)}
+  ${section('Visual evidence', ev, 'psec--evi')}
   <nav class="pager" aria-label="Other projects">
-    <a href="?page=project&slug=${prev.slug}"><span>Previous</span>${nm(prev)}</a>
-    <a href="?page=project&slug=${next.slug}"><span>Next</span>${nm(next)}</a>
+    <a href="${projectUrl(prev)}"><span>Previous</span>${esc(prev.title)}</a>
+    <a href="${projectUrl(next)}"><span>Next</span>${esc(next.title)}</a>
   </nav>`;
   return shell(stage, body, 'work');
 }
@@ -870,33 +1327,41 @@ function photographyPage() {
   const snaps = photos.filter((p) => p.type === 'snap');
   const idxOf = (p) => photos.indexOf(p);
   const tones = ['pink', 'blue', 'rose', 'cream'];
+  const real = photos.filter((p) => p.src);
 
-  const frame = (p, i, extra = '') => `<button class="shot shot--${p.shape} ${extra}" data-open="${idxOf(p)}" aria-label="Open portrait ${p.no} in viewer">
-      ${media(p, tones[i % 4], `Portrait ${p.no}`)}
+  const frame = (p, i) => `<button class="shot shot--${p.shape}" data-open="${idxOf(p)}" aria-label="Open portrait ${p.no} in viewer">
+      ${media(p, tones[i % 4], `Portrait ${p.no} pending`)}
       <span class="shot__no">${p.no}</span>
     </button>`;
+  const credit = (p) => (p.src ? `${esc(p.caption || '')} Photograph by Lynn Kim.` : pending('Photograph, caption and credit to be added'));
 
   const body = `
+  <section class="block block--intro" aria-labelledby="po">
+    <h2 id="po" class="display display--s">Photography is an <em>additional</em> part of my creative work</h2>
+    <p class="lead">This page features photographs I have personally taken, including portraits, snap sessions, and other selected images.</p>
+    <p class="small">The photographs are still being added. Placeholder frames show where they will go.</p>
+  </section>
+
   <section class="block" aria-labelledby="pp">
-    <div class="block__head"><h2 id="pp" class="display">Portra<em>its</em></h2><p class="small">Photographed by Lynn Kim.</p></div>
+    <div class="block__head"><h2 id="pp" class="display display--s">Portra<em>its</em></h2></div>
     <div class="spread">
-      ${portraits.map((p, i) => `<div class="spread__item spread__item--${i + 1}">${frame(p, i)}<p class="cap">${p.caption ? esc(p.caption) : pending('Caption, sitter credit and date to be added')}</p></div>`).join('')}
+      ${portraits.map((p, i) => `<div class="spread__item spread__item--${i + 1}">${frame(p, i)}<p class="cap">${credit(p)}</p></div>`).join('')}
     </div>
   </section>
 
   <section class="block block--blue" aria-labelledby="sn">
-    <div class="block__head"><h2 id="sn" class="display">Snap <em>sessions</em></h2><p class="small">Quick sessions, printed like snapshots.</p></div>
+    <div class="block__head"><h2 id="sn" class="display display--s">Snap <em>sessions</em></h2></div>
     <div class="snaps">
-      ${snaps.map((p, i) => `<button class="snap" data-open="${idxOf(p)}" style="--tilt:${[-2.5, 1.8, -1, 2.4, -1.6][i]}deg" aria-label="Open snap ${p.no} in viewer">${i % 2 ? '' : clip()}<span class="snap__img">${media(p, tones[(i + 1) % 4], `Snap ${p.no}`)}</span><span class="snap__cap">${p.caption ? esc(p.caption) : `${stamp()}`}<i>${p.no}</i></span></button>`).join('')}
+      ${snaps.map((p, i) => `<button class="snap" data-open="${idxOf(p)}" style="--tilt:${[-2.5, 1.8, -1][i]}deg" aria-label="Open snap ${p.no} in viewer">${i % 2 ? '' : clip()}<span class="snap__img">${media(p, tones[(i + 1) % 4], `Snap ${p.no} pending`)}</span><span class="snap__cap">${p.src ? esc(p.caption || '') : stamp()}<i>${p.no}</i></span></button>`).join('')}
     </div>
   </section>
 
-  <section class="block" aria-labelledby="cs">
-    <div class="block__head"><h2 id="cs" class="display">Contact <em>sheet</em></h2><p class="small">Every frame in one place. Select one to enlarge it.</p></div>
-    <div class="sheetfilm">
-      ${photos.map((p, i) => `<button class="cs-frame" data-open="${i}" aria-label="Open frame ${i + 1} in viewer">${media(p, tones[i % 4], `${p.type === 'portrait' ? 'Portrait' : 'Snap'} ${p.no}`)}<i>${String(i + 1).padStart(2, '0')}</i></button>`).join('')}
-    </div>
-  </section>
+  ${real.length >= 6 ? `<section class="block" aria-labelledby="cs">
+    <div class="block__head"><h2 id="cs" class="display display--s">Contact <em>sheet</em></h2></div>
+    <div class="sheetfilm">${photos.map((p, i) => `<button class="cs-frame" data-open="${i}" aria-label="Open frame ${i + 1} in viewer">${media(p, tones[i % 4], 'Pending')}<i>${String(i + 1).padStart(2, '0')}</i></button>`).join('')}</div>
+  </section>` : ''}
+
+  <p class="small rules">Lifestyle, editorial and event series will be added when photographs are supplied. Every photograph is credited to Lynn Kim. Locations, dates and camera details appear only when verified.</p>
 
   <dialog class="viewer" id="viewer" aria-label="Photograph viewer">
     <div class="viewer__bar"><span id="viewer-count"></span><button class="vbtn" data-act="close">Close</button></div>
@@ -904,7 +1369,7 @@ function photographyPage() {
     <div class="viewer__nav"><button class="vbtn" data-act="prev">Previous</button><p id="viewer-cap"></p><button class="vbtn" data-act="next">Next</button></div>
   </dialog>`;
   return {
-    html: shell(plainStage('Archive / 03', 'Photography', 'Portraits and snap sessions, photographed by Lynn Kim.'), body, 'photography'),
+    html: shell(plainStage('Photography', 'Through My Lens', 'Portraits, snap sessions, and everyday moments photographed by me.'), body, 'photography'),
     after: initViewer,
   };
 }
@@ -919,8 +1384,8 @@ function initViewer() {
   const show = (i) => {
     cur = (i + photos.length) % photos.length;
     const p = photos[cur];
-    stageEl.innerHTML = media({ ...p }, tones[cur % 4], `${p.type === 'portrait' ? 'Portrait' : 'Snap'} ${p.no}, replace with Lynn's photograph`);
-    cap.innerHTML = p.src ? esc(p.caption || '') + ' Photograph by Lynn Kim.' : pending('Placeholder. Lynn\'s photograph will appear here.');
+    stageEl.innerHTML = media({ ...p }, tones[cur % 4], `${p.type === 'portrait' ? 'Portrait' : 'Snap'} ${p.no}, photograph pending`);
+    cap.innerHTML = p.src ? `${esc(p.caption || '')} Photograph by Lynn Kim.` : pending('Photograph pending. Lynn\'s photograph will appear here.');
     count.textContent = `${String(cur + 1).padStart(2, '0')} / ${String(photos.length).padStart(2, '0')}`;
   };
   document.querySelectorAll('[data-open]').forEach((b) =>
@@ -941,55 +1406,68 @@ function initViewer() {
 /* ----- About ----- */
 
 function aboutPage() {
-  const list = (items, render, empty) =>
-    items.length ? `<ul class="plain">${items.map(render).join('')}</ul>` : `<ul class="plain plain--ph">${empty.map((e) => `<li>${pending(e)}</li>`).join('')}</ul>`;
   const body = `
   <section class="about-grid">
-    <div class="about-grid__photo">${polaroid({ img: about.portrait, tone: 'pink', tilt: 2.5, clipped: true, lace: true, caption: `${stamp()}<span>Portrait to be added</span>`, ph: 'Portrait of Lynn' })}</div>
-    <div class="about-grid__text"><span class="rings" aria-hidden="true"></span>
+    <div class="about-grid__photo">${polaroid({ img: about.portrait, tone: 'pink', tilt: 2.5, clipped: true, lace: true, caption: `${stamp()}<span>Portrait of Lynn</span>`, ph: 'Portrait pending' })}</div>
+    <div class="about-grid__text">
+      <span class="rings" aria-hidden="true"></span>
       <h2 class="display">Hello, I'm <em class="script-em">Lynn</em></h2>
-      <p class="lead">${about.intro ? esc(about.intro) : pending('Introduction in Lynn\'s own words to be added. Two to four sentences on who she is and what she makes.')}</p>
-      <p class="small">Areas of work: Content, Events, Live Commerce, Brand Marketing and Photography.</p>
+      <div class="prose prose--lead">${about.intro.map((t) => `<p>${esc(t)}</p>`).join('')}</div>
     </div>
   </section>
 
-  <div class="cols">
-    <section class="col col--blue" aria-labelledby="ex"><h2 id="ex" class="display display--s">Experience</h2>
-      ${list(about.experience, (e) => `<li><b>${esc(e.role)}</b>, ${esc(e.org)}<span>${esc(e.period)}</span>${e.note ? `<p>${esc(e.note)}</p>` : ''}</li>`, ['Role, organisation and dates to be added', 'Role, organisation and dates to be added'])}</section>
-    <section class="col col--pink" aria-labelledby="ed"><h2 id="ed" class="display display--s">Education</h2>
-      ${list(about.education, (e) => `<li><b>${esc(e.school)}</b>${e.degree ? `, ${esc(e.degree)}` : ''}<span>${esc(e.period || '')}</span></li>`, ['School, degree and dates to be added'])}</section>
-    <section class="col col--cream" aria-labelledby="sk"><h2 id="sk" class="display display--s">Skills</h2>
-      ${list(about.skills, (s) => `<li>${esc(s)}</li>`, ['Skill to be added', 'Skill to be added', 'Skill to be added'])}</section>
-  </div>`;
-  return shell(plainStage('Archive / 04', 'About', 'The person behind the files.'), body, 'about');
+  <section class="block" aria-labelledby="ed">
+    <div class="edu">
+      <h2 id="ed" class="display display--s">Education</h2>
+      ${about.education.map((e) => `<p class="edu__row"><b>${esc(e.school)}</b><span>${esc(e.detail)}</span><span>${esc(e.status)}</span></p>`).join('')}
+    </div>
+  </section>
+
+  <section class="block" aria-labelledby="ex">
+    <h2 id="ex" class="display display--s">Professional <em>experience</em></h2>
+    <ol class="timeline">
+      ${about.experience
+        .map(
+          (e) => `<li>
+        <div class="timeline__when">${e.periods ? e.periods.map((x) => `<span>${esc(x)}</span>`).join('') : e.period ? `<span>${esc(e.period)}</span>` : `<span class="pending">Dates to be confirmed</span>`}</div>
+        <div class="timeline__what"><h3><a href="?page=project&slug=${e.slug}">${esc(e.role)}</a></h3><p>${esc(e.org)}</p>${e.periods ? '<p class="small">Three separate engagements.</p>' : ''}</div>
+      </li>`
+        )
+        .join('')}
+    </ol>
+  </section>
+
+  <section class="block" aria-labelledby="sk">
+    <h2 id="sk" class="display display--s">Skills</h2>
+    <div class="skills">
+      ${about.skills.map((g, i) => `<div class="skill skill--${['blue', 'pink', 'cream', 'rose'][i]}"><h3>${esc(g.group)}</h3><ul class="plain">${g.items.map((s) => `<li>${esc(s)}</li>`).join('')}</ul></div>`).join('')}
+    </div>
+  </section>`;
+  return shell(plainStage('About', 'About Lynn', 'Creator, marketer and event organizer, studying at Minerva University.'), body, 'about');
 }
 
 /* ----- Contact ----- */
 
 function contactPage() {
-  const email = site.email
-    ? `<a class="big-link" href="mailto:${esc(site.email)}">${esc(site.email)}</a>`
-    : `<span class="big-link big-link--ph">${pending('Email address to be added')}</span>`;
-  const ig = site.instagram
-    ? `<a class="big-link" href="${esc(site.instagram.url)}" rel="noopener" target="_blank">${esc(site.instagram.handle)}</a>`
-    : `<span class="big-link big-link--ph">${pending('Instagram handle to be added')}</span>`;
+  const email = `<a class="big-link" href="mailto:${esc(site.email)}">${esc(site.email)}</a>`;
+  const ig = `<a class="big-link" href="${esc(site.instagram.url)}" rel="noopener" target="_blank">${esc(site.instagram.handle)}</a>`;
   const cv = site.resume
     ? `<a class="btn" href="${esc(site.resume)}" download>Download resume (PDF)</a>`
-    : `<span class="btn btn--off" aria-disabled="true">Resume to be added</span>`;
+    : `<span class="btn btn--off" aria-disabled="true">Resume PDF to be added</span>`;
   const body = `
   <section class="contact">
     <div class="note-pad">
       ${clip('clip--rose')}
-      <h2 class="display">Have a project <em class="script-em">in mind?</em></h2>
+      <h2 class="display">Write to <em class="script-em">Lynn</em></h2>
       <dl class="contact__list">
         <div><dt>Email</dt><dd>${email}</dd></div>
         <div><dt>Instagram</dt><dd>${ig}</dd></div>
         <div><dt>Resume</dt><dd>${cv}</dd></div>
       </dl>
     </div>
-    <div class="contact__side"><div class="stamp-card"><span>Lynn Kim</span><b>Archive ${site.year}</b><i>Content / Events / Live Commerce / Brand Marketing / Photography</i></div>${polaroid({ img: { src: null }, tone: 'blue', tilt: -2, clipped: true, lace: true, bow: true, caption: `${stamp()}<span>Photo to be added</span>`, ph: 'Photo' })}</div>
+    <div class="contact__side"><div class="stamp-card"><span>Lynn Kim</span><b>Portfolio ${site.year}</b><i>${esc(site.headline)}</i></div>${polaroid({ img: about.portrait, tone: 'blue', tilt: -2, clipped: true, lace: true, bow: true, caption: `${stamp()}<span>Portrait of Lynn</span>`, ph: 'Portrait pending' })}</div>
   </section>`;
-  return shell(plainStage('Archive / 05', 'Contact', 'Write, follow along or take the resume.'), body, 'contact');
+  return shell(plainStage('Contact', "Let's Connect", 'For professional opportunities, brand collaborations, content projects, and photography inquiries, feel free to reach out.'), body, 'contact');
 }
 
 /* ---------- mount ---------- */
@@ -999,9 +1477,8 @@ const out = pages[page]();
 const html = typeof out === 'string' ? out : out.html;
 document.getElementById('root').outerHTML = html;
 if (out.after) out.after();
-if (page === 'home') document.title = 'Lynn Kim, portfolio archive';
-const titles = { work: 'Work', photography: 'Photography', about: 'About', contact: 'Contact' };
-if (titles[page]) document.title = `${titles[page]}, Lynn Kim`;
+const titles = { home: 'Lynn Kim, Content Creator, Marketer, Event Organizer', work: 'Work', photography: 'Through My Lens', about: 'About Lynn', contact: "Let's Connect" };
+if (titles[page]) document.title = page === 'home' ? titles[page] : `${titles[page]}, Lynn Kim`;
 document.documentElement.classList.toggle('reduce-motion', reduceMotion.matches);
 
 </script>

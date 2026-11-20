@@ -1,10 +1,12 @@
 import re
 root='/home/user/portfolio/'
 css=open(root+'css/styles.css').read()
-data=open(root+'js/data.js').read().replace('export const','const').replace("href: 'photography.html'","href: '?page=photography'").replace('const categories =','const allCategories =').replace('const featured =','const featuredSlugs =').replace('featured.includes(p.slug)','featuredSlugs.includes(p.slug)')
+data=open(root+'js/data.js').read().replace('export const','const')
 app=open(root+'js/app.js').read()
+app=app.replace('featuredOrder','featured') if False else app
 app=re.sub(r"^import .*\n",'',app,count=1)
 app=app.replace("document.body.dataset.page","(new URLSearchParams(location.search).get('page') || 'home')")
+app=app.replace('featuredOrder','featured')
 for a,b in [('project.html?slug=','?page=project&slug='),('index.html','?page=home'),('work.html','?page=work'),('photography.html','?page=photography'),('about.html','?page=about'),('contact.html','?page=contact')]:
     app=app.replace(a,b)
 app=app.replace("new URLSearchParams(location.search).get('slug')","new URLSearchParams(location.search).get('slug')")

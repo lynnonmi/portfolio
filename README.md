@@ -2,17 +2,15 @@
 
 Static site, no build step. Run locally with `python3 -m http.server` and open `index.html`.
 
-## Adding real content
+## Content
 
-All content is in `js/data.js`. Empty fields (null or empty lists) show as marked placeholders.
-Only add information that is real and verified.
+All content is in `js/data.js`, taken from the master portfolio brief. Add only verified facts.
+`MEDIA-NEEDED.md` lists every photograph, screenshot and document still missing.
 
-- `site`: email, Instagram, resume path. Links appear once the value is set.
-- `projects`: title, year, client, role, summary, objective, responsibilities, process, results, evidence.
-  A result shows only when `verified: true`.
+- Each project has its own page at `project.html?slug=<slug>`, for example `project.html?slug=solo-party`.
+- `site`: email, Instagram, resume path. Setting `site.resume` turns on the resume download.
+- `projects`: written content for the six projects. Add `cover` and `evidence` images when supplied.
 - `photos`: set `src`, `width`, `height`, `alt` and `caption` for each photograph.
-- `about`: intro, portrait, experience, education, skills.
+- `share/build.py` builds the single-file `share/portfolio-single.html`.
 
-Put images in an `assets/` folder and use compressed JPEG or WebP, ideally under 300 KB each, with width and height set.
-
-`references/` holds the design reference images and is not served by any page.
+Use compressed JPEG or WebP, ideally under 300 KB each, with width and height set.
