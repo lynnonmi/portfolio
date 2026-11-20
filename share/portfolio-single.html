@@ -499,6 +499,116 @@ main:focus { outline: none; }
 }
 .timeline, .skills { margin-top: 24px; }
 
+/* ======== revision: text-led layouts, per-project sections, quieter decoration ======== */
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.display--xs { font-size: clamp(1.6rem, 2.6vw, 2.2rem); }
+
+/* monogram frame used when no portrait is supplied */
+.mono { width: 100%; height: 100%; min-height: 100%; display: grid; place-items: center; background-color: var(--pink); background-image: var(--grain); }
+.mono span { font: 400 clamp(3rem, 8vw, 5.5rem)/1 var(--serif); font-style: italic; color: var(--rose-deep); letter-spacing: .02em; }
+.mono--blue { background-color: var(--blue); } .mono--rose { background-color: #cf9aa2; } .mono--cream { background-color: #e6dac4; }
+.polaroid__img .mono { aspect-ratio: 1 / 1.05; }
+
+/* project cards without images: a coloured folder band instead of an empty frame */
+.card__band { display: block; margin: -18px -18px 16px; padding: 9px 18px; font: 600 .64rem/1.2 var(--sans); letter-spacing: .16em; text-transform: uppercase; background: var(--pink); background-image: var(--grain); color: var(--ink); }
+.card__band--blue { background-color: var(--blue); } .card__band--cream { background-color: #e9dcc3; } .card__band--rose { background-color: #cf9aa2; } .card__band--char { background-color: var(--char-2); color: var(--cream); }
+.card .label { display: none; }
+.card__img + .card__band { margin-top: 0; }
+.card__title { font-size: 1.9rem; }
+.card__facts dd { overflow-wrap: anywhere; }
+
+/* home */
+.figs { grid-template-columns: repeat(4, 1fr); }
+.index { margin-top: clamp(28px, 4vw, 48px); border-top: 1px solid var(--ink); }
+.index li { border-bottom: 1px solid #0003; }
+.index a { display: grid; grid-template-columns: 3rem 1.3fr 1.2fr 1.6fr; gap: 16px; align-items: baseline; padding: 14px 4px; text-decoration: none; transition: background .25s; }
+.index a:hover, .index a:focus-visible { background: #fff6; }
+.index__no { font: 600 .7rem var(--sans); letter-spacing: .14em; color: var(--rose-deep); }
+.index__title { font: 500 1.5rem/1.1 var(--serif); }
+.index__org, .index__role { font-size: .85rem; color: #5a544c; }
+.contact-strip { background: var(--paper); background-image: var(--grain); padding: clamp(24px, 4vw, 48px); box-shadow: 0 12px 22px -12px #0006; transform: rotate(-.4deg); display: grid; gap: 14px; max-width: 880px; }
+.contact-strip p { max-width: 56ch; }
+.contact-strip__links { display: flex; flex-wrap: wrap; gap: 8px 32px; }
+.mini-photo__copy p { max-width: 38ch; }
+.block--contact { margin-bottom: 0; }
+
+/* project detail */
+.facts { grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); }
+.psec { margin-bottom: clamp(36px, 5vw, 64px); }
+.cmp-wrap { overflow-x: auto; }
+.cmp { border-collapse: collapse; width: 100%; min-width: 440px; }
+.cmp th, .cmp td { text-align: left; padding: 12px 16px 12px 0; border-bottom: 1px solid #0003; vertical-align: top; }
+.cmp thead th { font: 600 .66rem var(--sans); letter-spacing: .16em; text-transform: uppercase; color: var(--rose-deep); border-bottom: 1px solid var(--ink); }
+.cmp tbody th { font: 600 .66rem var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--mute); width: 22%; }
+.cmp td { font: 400 1.35rem/1.2 var(--serif); }
+.events { grid-template-columns: 1fr 1fr; }
+.event { transform: none; box-shadow: 0 1px 0 #0002, 0 10px 18px -12px #0006; }
+.dcols { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 0; border-top: 1px solid var(--ink); }
+.dcols > div { padding: 18px 22px 20px 0; border-bottom: 1px solid #0003; }
+.dcols dt { font: 500 1.55rem/1.1 var(--serif); margin-bottom: 6px; }
+.dcols dd { font-size: .95rem; max-width: 40ch; }
+.periods-list { display: grid; gap: 0; border-top: 1px solid var(--ink); max-width: 460px; }
+.periods-list li { display: flex; gap: 18px; align-items: baseline; padding: 12px 0; border-bottom: 1px solid #0003; font: 500 1.35rem var(--serif); }
+.periods-list b { font: 600 .66rem var(--sans); letter-spacing: .16em; color: var(--rose-deep); }
+.callout { border-left: 3px solid var(--rose); padding: 6px 0 6px 20px; max-width: 62ch; }
+.callout > p { font: 400 1.35rem/1.35 var(--serif); }
+.callout .ticks { margin-top: 12px; }
+.split { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: stretch; }
+.split__side { padding: 22px 24px 24px; background-image: var(--grain); box-shadow: 0 10px 18px -12px #0006; }
+.split__side--me { background-color: var(--pink); }
+.split__side--them { background-color: var(--paper); border: 1px dashed #0005; box-shadow: none; }
+.split__side h3 { font: 600 .68rem var(--sans); letter-spacing: .16em; text-transform: uppercase; margin-bottom: 8px; }
+.split__stat { display: flex; flex-direction: column; margin-bottom: 8px; }
+.split__stat b { font: 400 clamp(2.6rem, 5vw, 3.8rem)/1 var(--serif); }
+.split__stat span { font-size: .85rem; color: #4d4740; }
+.reels { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 0; border-top: 1px solid var(--ink); }
+.reel { padding: 18px 18px 20px 0; border-bottom: 1px solid #0003; display: flex; flex-direction: column; gap: 4px; transform: none !important; background: none; box-shadow: none; }
+.reel__views { font: 400 clamp(2.4rem, 4vw, 3.2rem)/1 var(--serif); }
+.reel__views i { font: 600 .62rem var(--sans); letter-spacing: .14em; text-transform: uppercase; margin-left: 8px; color: var(--mute); font-style: normal; }
+.reel__rank { font-size: .88rem; }
+.metric { transform: none; box-shadow: 0 1px 0 #0002, 0 10px 18px -12px #0006; }
+.metric:nth-child(2) { transform: none; }
+.quiet { border-top: 1px solid var(--ink); padding-top: 18px; margin-bottom: 56px; max-width: 70ch; }
+.quiet__h { font: 600 .68rem var(--sans); letter-spacing: .16em; text-transform: uppercase; margin-bottom: 6px; }
+.quiet p { font-size: .92rem; color: #5a544c; }
+.gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 18px; }
+.gallery figure { margin: 0; } .gallery img { width: 100%; height: auto; }
+.gallery figcaption { font-size: .8rem; margin-top: 6px; }
+.links { margin: -24px 0 36px; }
+
+/* about and contact: calmer */
+.addl { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0 28px; border-top: 1px solid var(--ink); margin-top: 18px; }
+.addl li { padding: 14px 0 16px; border-bottom: 1px solid #0003; }
+.addl h3 { font: 500 1.35rem var(--serif); }
+.addl p { font-size: .9rem; }
+.addl .small { margin-top: 2px; }
+.rings { display: none !important; }
+.contact { grid-template-columns: 1fr; max-width: 820px; }
+.note-pad { transform: none; }
+.quiet-wide { max-width: 760px !important; }
+
+@media (max-width: 960px) {
+  .figs { grid-template-columns: repeat(2, 1fr); }
+  .index a { grid-template-columns: 2.4rem 1fr; }
+  .index__org, .index__role { grid-column: 2; }
+  .split { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .figs { grid-template-columns: 1fr; }
+  .events { grid-template-columns: 1fr; }
+}
+.mini-photo { margin-bottom: clamp(48px, 6vw, 90px); }
+.mini-photo:not(:has(.mini-photo__row)) { grid-template-columns: 1fr; }
+.mini-photo__copy .textlink { align-self: flex-start; }
+.about-note .ribbon { top: 74%; left: -16%; width: 66%; transform: rotate(-10deg); }
+.links { max-width: var(--max); margin: -24px auto 36px; }
+.quiet { max-width: var(--max); margin: 0 auto 56px; padding-right: 35%; }
+.figs-wrap { padding-bottom: clamp(20px, 3vw, 36px); }
+.figs a { padding-bottom: 6px; }
+.links--flow { margin: 18px auto 0; }
+.about-grid .polaroid { max-width: 320px; }
+@media (max-width: 640px) { .about-grid .polaroid { max-width: 290px; } .about-grid__photo { display: flex; justify-content: center; } }
+
 </style>
 </head>
 <body>
@@ -509,9 +619,12 @@ main:focus { outline: none; }
   All site content lives here, taken from Lynn Kim's master portfolio brief
   (November 2026). Only verified facts are written in this file.
 
-  Pending media (photographs, videos, screenshots) is listed under `evidence`
-  or `photos` and shows as a labelled placeholder until a real file is set.
-  Items not yet confirmed stay out of the site; see `pendingConfirmation`.
+  Each project has its own `sections`, so each story can use a different layout.
+  Section types: prose, compare, events, columns, steps, metrics, reels, split,
+  periods, list, chips, callout. See renderSection() in app.js.
+
+  Media is optional. A project with no `media` shows a text layout.
+  Add { src, alt, width, height, caption } items to `media` when files exist.
 */
 
 const site = {
@@ -520,14 +633,11 @@ const site = {
   headline: 'Content Creator · Marketer · Event Organizer',
   secondary: 'Live Commerce · Photography',
   tagline: 'I create content, build communities, and bring ideas to life through marketing and events.',
-  intro: [
-    'I create content, build communities, and bring ideas to life through marketing and events.',
-    'My experience spans social media content, brand campaigns, live commerce, and event operations. I have worked with brands, developed my own projects, and managed the process from planning to execution.',
-  ],
   email: 'eggielikestaco@gmail.com',
   instagram: { handle: '@lynnonmi', url: 'https://www.instagram.com/lynnonmi/' },
   resume: null, // set to a PDF path such as 'assets/Lynn-Kim-Resume.pdf' when the file is supplied
-  asOf: 'November 20, 2026',
+  asOf: 'November 20, 2026', // verification date for Instagram figures only. It is never an employment date.
+  ogImage: 'assets/og-image.png',
 };
 
 /* Work archive folders. `all` shows every project. */
@@ -539,24 +649,6 @@ const categories = [
   { id: 'brand-marketing', label: 'Brand Marketing', tone: 'rose', note: 'Campaigns, activations and brand accounts.' },
 ];
 
-/*
-  Project fields
-  slug, categories[]           folders the project appears in (besides All Work)
-  title, subtitle, org, role   identity
-  period / periods[]           one period, or several separate ones
-  summary, metric              card text; metric is { value, label } or null
-  heading                      pull-quote shown on the detail page
-  overview[]                   paragraphs
-  events[]                     optional, { name, date, role, responsibilities[], results[] }
-  responsibilities[]           what Lynn did
-  themes[], reels[], extras[]  optional extra blocks
-  process[]                    { step, text }
-  results[]                    { value, label }
-  notes[]                      clarifications shown with the results
-  skills[]                     skills demonstrated
-  evidence[]                   names of media still to be supplied
-  links[]                      { text, href }
-*/
 const projects = [
   {
     slug: 'solo-party',
@@ -569,65 +661,94 @@ const projects = [
     summary: 'Co-organized the first Solo Party with Hogamdo, then planned and ran the second edition on my own.',
     metric: { value: '66 → 84', label: 'attendees, first to second event' },
     heading: '66 attendees. Then 84. Two editions of Solo Party.',
-    overview: [
-      'Solo Party is an offline social event designed to help participants meet and interact through structured activities.',
-      'I co-organized the first event with Hogamdo and independently planned and operated the second edition. My responsibilities covered promotion, participant recruitment, communication, program development, and event-day operations.',
-    ],
-    events: [
+    sections: [
       {
-        name: 'Event 01',
-        date: 'May 27, 2026',
-        role: 'Co-organizer with Hogamdo',
-        responsibilities: [
-          'Created promotional Instagram Reels and Stories',
-          'Supported participant recruitment',
-          'Managed participant communication',
-          'Secured five event sponsors',
-          'Helped host and operate the event',
+        type: 'prose',
+        title: 'Overview',
+        paragraphs: [
+          'Solo Party is an offline social event designed to help participants meet and interact through structured activities.',
+          'I co-organized the first event with Hogamdo and independently planned and operated the second edition. My responsibilities covered promotion, participant recruitment, communication, program development, and event-day operations.',
         ],
-        results: ['150 applicants', '66 attendees', 'Five sponsors secured'],
       },
       {
-        name: 'Event 02',
-        date: 'August 9, 2026',
-        role: 'Independent Organizer',
-        responsibilities: [
-          'Planned the event concept and structure',
-          'Managed recruitment and application screening',
-          'Designed the GUESS ME, FIND ME, and MATCH ME activities',
-          'Coordinated the development of a web application using AI tools',
-          'Managed participant approvals, voting, and matching processes',
-          'Coordinated staff and participant communication',
-          'Managed on-site operations',
+        type: 'compare',
+        title: 'Two editions compared',
+        columns: ['Event 01', 'Event 02'],
+        rows: [
+          ['Date', 'May 27, 2026', 'August 9, 2026'],
+          ['Structure', 'Co-organized with Hogamdo', 'Independently organized'],
+          ['My role', 'Co-organizer', 'Project lead'],
+          ['Applicants', '150', '180 unique'],
+          ['Attendees', '66', '84'],
         ],
-        results: ['180 unique applicants', '84 attendees'],
+        notes: [
+          'Applicants rose from 150 to 180 and attendance from 66 to 84. No single marketing activity is credited with that increase.',
+          'Event 01 was shared work with Hogamdo. Event 02 was independently organized.',
+        ],
+      },
+      {
+        type: 'events',
+        title: 'What I did at each event',
+        events: [
+          {
+            name: 'Event 01',
+            date: 'May 27, 2026',
+            role: 'Co-organizer with Hogamdo',
+            items: [
+              'Created promotional Instagram Reels and Stories',
+              'Supported participant recruitment',
+              'Managed participant communication',
+              'Secured five event sponsors',
+              'Helped host and operate the event',
+            ],
+          },
+          {
+            name: 'Event 02',
+            date: 'August 9, 2026',
+            role: 'Independent Organizer',
+            items: [
+              'Planned the event concept and structure',
+              'Managed recruitment and application screening',
+              'Designed the GUESS ME, FIND ME, and MATCH ME activities',
+              'Coordinated the development of a web application using AI tools',
+              'Managed participant approvals, voting, and matching processes',
+              'Coordinated staff and participant communication',
+              'Managed on-site operations',
+            ],
+          },
+        ],
+      },
+      {
+        type: 'columns',
+        title: 'Recruitment and the web application',
+        items: [
+          { title: 'Recruitment', text: 'Managed promotion, applications, participant screening, and communication. The second event drew 180 unique applicants.' },
+          { title: 'Web application', text: 'Coordinated the development of a web application using AI tools. It supported participant approvals, voting, and matching.' },
+        ],
+      },
+      {
+        type: 'steps',
+        title: 'Process',
+        steps: [
+          { step: 'Planning', text: 'Developed the event structure and designed activities that encouraged participants to interact.' },
+          { step: 'Recruitment', text: 'Managed promotion, applications, participant screening, and communication.' },
+          { step: 'Digital operations', text: 'Coordinated an application and matching workflow supported by a web application built with AI tools.' },
+          { step: 'Event execution', text: 'Managed staffing, participant experience, and on-site operations.' },
+        ],
+      },
+      {
+        type: 'metrics',
+        title: 'Results',
+        items: [
+          { value: '150', label: 'applicants, first event' },
+          { value: '66', label: 'attendees, first event' },
+          { value: '180', label: 'unique applicants, second event' },
+          { value: '84', label: 'attendees, second event' },
+        ],
       },
     ],
-    process: [
-      { step: 'Planning', text: 'Developed the event structure and designed activities that encouraged participants to interact.' },
-      { step: 'Recruitment', text: 'Managed promotion, applications, participant screening, and communication.' },
-      { step: 'Digital operations', text: 'Coordinated an application and matching workflow supported by a web application built with AI tools.' },
-      { step: 'Event execution', text: 'Managed staffing, participant experience, and on-site operations.' },
-    ],
-    results: [
-      { value: '150', label: 'applicants, first event' },
-      { value: '66', label: 'attendees, first event' },
-      { value: '180', label: 'unique applicants, second event' },
-      { value: '84', label: 'attendees, second event' },
-    ],
-    notes: [
-      'Applicants rose from 150 to 180 and attendance from 66 to 84. No single marketing activity is credited with that increase.',
-      'The first event was co-organized with Hogamdo. The second was independently organized.',
-    ],
-    skills: [],
-    evidence: [
-      'Promotional Reels',
-      'Event posters',
-      'Event photographs',
-      'Application website screenshots',
-      'GUESS ME / FIND ME / MATCH ME materials',
-      'Participant communication examples, private information removed',
-    ],
+    media: [],
+    wanted: ['Promotional Reels', 'Event posters', 'Event photographs', 'Application website screenshots', 'GUESS ME / FIND ME / MATCH ME materials', 'Participant communication examples, private information removed'],
     links: [],
   },
   {
@@ -639,54 +760,78 @@ const projects = [
     role: 'Independent Content Creator',
     period: null,
     platform: 'Instagram and YouTube',
+    asOf: true,
     summary: 'Plans, films, edits and publishes content on student life, beauty, lifestyle and life in different cities.',
-    metric: { value: '23,400', label: 'Instagram followers' },
+    metric: { value: '23,400', label: 'Instagram followers, as of November 20, 2026' },
     heading: 'Creating content for an audience of 23.4K.',
-    overview: [
-      'I plan, film, edit, and publish content for my personal channels, covering student life, beauty, lifestyle, and experiences in different cities.',
-      'I manage the creative process from topic selection and content planning to filming, editing, publishing, and reviewing performance.',
+    sections: [
+      {
+        type: 'prose',
+        title: 'Overview',
+        paragraphs: [
+          'I plan, film, edit, and publish content for my personal channels, covering student life, beauty, lifestyle, and experiences in different cities.',
+          'I manage the creative process from topic selection and content planning to filming, editing, publishing, and reviewing performance.',
+        ],
+      },
+      {
+        type: 'metrics',
+        title: 'Verified performance',
+        items: [
+          { value: '23,400', label: 'Instagram followers' },
+          { value: '3.18M', label: 'views on the highest-performing Reel' },
+        ],
+        notes: [
+          'Instagram figures are as of November 20, 2026.',
+          'Reel numbers are views on individual videos, not total account views.',
+        ],
+      },
+      {
+        type: 'reels',
+        title: 'Content that performed',
+        items: [
+          { rank: 'Highest-performing Reel', views: '3.18M' },
+          { rank: 'High-performing Reel', views: '1.92M' },
+          { rank: 'High-performing Reel', views: '1.39M' },
+          { rank: 'High-performing Reel', views: '1.30M' },
+        ],
+        note: 'Each Reel will get its link, concept and production notes as Lynn supplies them.',
+      },
+      {
+        type: 'columns',
+        title: 'Content themes',
+        items: [
+          { title: 'Student life', text: 'University experiences, academic life, and personal routines.' },
+          { title: 'Lifestyle', text: 'Everyday experiences, places, and activities.' },
+          { title: 'Beauty', text: 'Beauty-related content and product experiences.' },
+          { title: 'Personal experiences', text: 'Content built around real experiences and personal storytelling.' },
+        ],
+      },
+      {
+        type: 'steps',
+        title: 'Production process',
+        steps: [
+          { step: 'Idea', text: 'Identify a topic based on personal experience and audience interest.' },
+          { step: 'Production', text: 'Plan the format, film the content, and edit for the selected platform.' },
+          { step: 'Publishing', text: 'Prepare the final video and accompanying copy.' },
+          { step: 'Review', text: 'Compare views and other available performance indicators across posts.' },
+        ],
+      },
+      {
+        type: 'list',
+        title: 'What I do on the channels',
+        items: [
+          'Develop content ideas and formats',
+          'Plan short-form videos',
+          'Film and edit content',
+          'Write captions and prepare posts',
+          'Manage the publishing process',
+          'Review content performance',
+          'Work on branded content when applicable',
+        ],
+      },
     ],
-    responsibilities: [
-      'Develop content ideas and formats',
-      'Plan short-form videos',
-      'Film and edit content',
-      'Write captions and prepare posts',
-      'Manage the publishing process',
-      'Review content performance',
-      'Work on branded content when applicable',
-    ],
-    themes: [
-      { name: 'Student life', text: 'University experiences, academic life, and personal routines.' },
-      { name: 'Lifestyle', text: 'Everyday experiences, places, and activities.' },
-      { name: 'Beauty', text: 'Beauty-related content and product experiences.' },
-      { name: 'Personal experiences', text: 'Content built around real experiences and personal storytelling.' },
-    ],
-    process: [
-      { step: 'Idea', text: 'Identify a topic based on personal experience and audience interest.' },
-      { step: 'Production', text: 'Plan the format, film the content, and edit for the selected platform.' },
-      { step: 'Publishing', text: 'Prepare the final video and accompanying copy.' },
-      { step: 'Review', text: 'Compare views and other available performance indicators across posts.' },
-    ],
-    results: [
-      { value: '23,400', label: 'Instagram followers' },
-      { value: '3.18M', label: 'views on the highest-performing Reel' },
-    ],
-    notes: [
-      'Instagram figures are as of November 20, 2026.',
-      'Reel numbers are views on individual videos, not total account views.',
-    ],
-    reels: [
-      { rank: 'Highest-performing Reel', views: '3.18M' },
-      { rank: 'High-performing Reel', views: '1.92M' },
-      { rank: 'High-performing Reel', views: '1.39M' },
-      { rank: 'High-performing Reel', views: '1.30M' },
-    ],
-    skills: [],
-    evidence: [
-      'Thumbnails for the four Reels',
-      'Links to the four Reels',
-      'Short notes on the creative decisions behind each Reel',
-    ],
+    media: [],
+    wanted: ['Thumbnails for the four Reels', 'Links to the four Reels', 'Short notes on the creative decisions behind each Reel'],
     links: [{ text: 'Open @lynnonmi on Instagram', href: 'https://www.instagram.com/lynnonmi/' }],
   },
   {
@@ -698,37 +843,47 @@ const projects = [
     role: 'English Shopping Host',
     period: null,
     periods: ['July–September 2024', 'March–July 2025', 'July–August 2026'],
-    periodShort: 'Three periods, 2024 to 2026',
+    periodShort: 'Three engagements, 2024 to 2026',
     summary: 'Hosted English TikTok LIVE shopping broadcasts featuring Korean beauty products for viewers in Southeast Asia.',
     metric: null,
     heading: 'Presenting Korean beauty products to Southeast Asian audiences through TikTok LIVE.',
-    overview: [
-      'I hosted English-language TikTok LIVE shopping broadcasts featuring Korean beauty products for viewers in Southeast Asia.',
-      'The role required presenting products, explaining their features, responding to live questions, and maintaining the flow of a shopping broadcast.',
+    sections: [
+      {
+        type: 'prose',
+        title: 'Overview',
+        paragraphs: [
+          'I hosted English-language TikTok LIVE shopping broadcasts featuring Korean beauty products for viewers in Southeast Asia.',
+          'The role required presenting products, explaining their features, responding to live questions, and maintaining the flow of a shopping broadcast.',
+        ],
+      },
+      {
+        type: 'columns',
+        title: 'On air',
+        items: [
+          { title: 'Presenting', text: 'Presented K-beauty products in English and explained product features and usage.' },
+          { title: 'Demonstrating', text: 'Demonstrated products during livestreams.' },
+          { title: 'Engaging the audience', text: 'Responded to viewer questions in real time, adapted explanations to the live audience, and kept interaction going throughout each broadcast.' },
+        ],
+      },
+      {
+        type: 'periods',
+        title: 'Three engagements',
+        periods: ['July–September 2024', 'March–July 2025', 'July–August 2026'],
+        note: 'These are separate engagements, not one continuous appointment. During active periods I hosted approximately two to three broadcasts per week.',
+      },
+      {
+        type: 'chips',
+        title: 'Skills demonstrated',
+        items: ['Live presentation', 'English-language communication', 'Product storytelling', 'Real-time audience engagement', 'Adaptation during live broadcasts'],
+      },
+      {
+        type: 'callout',
+        title: 'About the numbers',
+        text: 'No verified sales, conversion, or viewership figures are available for this role, so none are shown.',
+      },
     ],
-    responsibilities: [
-      'Present K-beauty products in English',
-      'Demonstrate products during livestreams',
-      'Explain product features and usage',
-      'Respond to viewer questions in real time',
-      'Adapt explanations to the live audience',
-      'Maintain audience interaction throughout broadcasts',
-    ],
-    process: [
-      { step: 'Present', text: 'Introduce each product in English.' },
-      { step: 'Explain', text: 'Cover features and usage, with product demonstrations on stream.' },
-      { step: 'Respond', text: 'Answer viewer questions in real time and adapt the explanation to the audience.' },
-      { step: 'Keep the flow', text: 'Maintain interaction so the broadcast keeps moving.' },
-    ],
-    processTitle: 'What a broadcast involves',
-    results: [],
-    resultsNote: 'No verified sales, conversion, or viewership figures are available for this role, so none are shown.',
-    notes: [
-      'Broadcast frequency: approximately two to three broadcasts per week during active engagement periods.',
-      'The three periods are separate engagements, not one continuous appointment.',
-    ],
-    skills: ['Live presentation', 'English-language communication', 'Product storytelling', 'Real-time audience engagement', 'Adaptation during live broadcasts'],
-    evidence: ['Broadcast screenshots', 'Short video clips', 'Product demonstration examples', 'Examples of live presentation'],
+    media: [],
+    wanted: ['Broadcast screenshots', 'Short video clips', 'Product demonstration examples', 'Examples of live presentation'],
     links: [],
   },
   {
@@ -742,24 +897,46 @@ const projects = [
     summary: 'Supported campus marketing and brand activations, including 14 university festivals, product sampling, and sports and music promotions.',
     metric: { value: '14', label: 'university festivals supported' },
     heading: 'Bringing Red Bull activations to 14 university festivals.',
-    overview: [
-      'I worked as a Student Marketeer at Red Bull Korea, supporting campus marketing activities and brand activations.',
-      'My work included university festivals, product sampling, and sports and music promotions.',
+    sections: [
+      {
+        type: 'prose',
+        title: 'Overview',
+        paragraphs: [
+          'I worked as a Student Marketeer at Red Bull Korea, supporting campus marketing activities and brand activations.',
+          'My work included university festivals, product sampling, and sports and music promotions.',
+        ],
+      },
+      {
+        type: 'columns',
+        title: 'Field marketing activities',
+        items: [
+          { title: 'University festivals', text: 'Supported brand activations at university festivals.' },
+          { title: 'Product sampling', text: 'Participated in product sampling activities.' },
+          { title: 'Sports and music promotions', text: 'Supported sports and music promotions.' },
+        ],
+      },
+      {
+        type: 'callout',
+        title: 'Scope of my participation',
+        text: 'I supported activations at 14 university festivals. Fourteen is the number of festivals I was involved in, not the number I organized independently.',
+        items: [
+          'Coordinated with event staff and university partners',
+          'Assisted with on-site execution',
+        ],
+      },
+      {
+        type: 'columns',
+        title: 'Wings for Life World Run 2025',
+        items: [{ title: 'Camera operator', text: 'Operated a camera for the Korean livestream of the event.' }],
+      },
+      {
+        type: 'chips',
+        title: 'Skills demonstrated',
+        items: ['Field marketing', 'Brand activation', 'Event operations', 'Coordination', 'On-site communication'],
+      },
     ],
-    responsibilities: [
-      'Supported brand activations at university festivals',
-      'Participated in product sampling activities',
-      'Supported sports and music promotions',
-      'Coordinated with event staff and university partners',
-      'Assisted with on-site execution',
-    ],
-    results: [{ value: '14', label: 'university festivals with supported activations' }],
-    notes: ['Fourteen is the number of festivals I was involved in, not the number I organized independently.'],
-    extras: [
-      { title: 'Wings for Life World Run 2025', text: 'Operated a camera for the Korean livestream of the event.' },
-    ],
-    skills: ['Field marketing', 'Brand activation', 'Event operations', 'Coordination', 'On-site communication'],
-    evidence: ['Festival activation photographs', 'Sampling photographs', 'Event materials', 'Wings for Life World Run production images'],
+    media: [],
+    wanted: ['Festival activation photographs', 'Sampling photographs', 'Event materials', 'Wings for Life World Run production images'],
     links: [],
   },
   {
@@ -773,29 +950,49 @@ const projects = [
     summary: 'Launched and managed the brand\'s X account, supported community engagement, and ran a product supporter program.',
     metric: { value: '3,000', label: 'X followers gained in four months' },
     heading: 'From zero to 3,000 followers in four months.',
-    overview: [
-      'I launched and managed Pimadaziwin\'s X account, developing its social media presence and supporting community engagement.',
-      'I also organized a product supporter program involving participant recruitment, shipping, and communication.',
+    sections: [
+      {
+        type: 'prose',
+        title: 'Overview',
+        paragraphs: [
+          'I launched and managed Pimadaziwin\'s X account, developing its social media presence and supporting community engagement.',
+          'I also organized a product supporter program involving participant recruitment, shipping, and communication.',
+        ],
+      },
+      {
+        type: 'metrics',
+        title: 'Verified growth',
+        items: [{ value: '0 → 3,000', label: 'followers on the brand\'s X account in four months' }],
+        notes: [
+          'I launched the account and managed its content and community activity during those four months. The growth figure belongs to the account. This record does not credit it to any single post.',
+        ],
+      },
+      {
+        type: 'steps',
+        title: 'From launch to growth',
+        steps: [
+          { step: 'Launch', text: 'Established the brand\'s presence on X.' },
+          { step: 'Content management', text: 'Managed content and account activity.' },
+          { step: 'Community', text: 'Supported engagement and audience growth.' },
+          { step: 'Supporter program', text: 'Coordinated recruitment, product distribution, and communication.' },
+        ],
+      },
+      {
+        type: 'list',
+        title: 'What I did',
+        items: [
+          'Launched the brand\'s X account',
+          'Managed account content and publishing',
+          'Supported community growth',
+          'Organized supporter recruitment',
+          'Coordinated product shipments',
+          'Prepared participant instructions',
+          'Managed supporter communication',
+        ],
+      },
     ],
-    responsibilities: [
-      'Launched the brand\'s X account',
-      'Managed account content and publishing',
-      'Supported community growth',
-      'Organized supporter recruitment',
-      'Coordinated product shipments',
-      'Prepared participant instructions',
-      'Managed supporter communication',
-    ],
-    process: [
-      { step: 'Launch', text: 'Established the brand\'s presence on X.' },
-      { step: 'Content management', text: 'Managed content and account activity.' },
-      { step: 'Community', text: 'Supported engagement and audience growth.' },
-      { step: 'Supporter program', text: 'Coordinated recruitment, product distribution, and communication.' },
-    ],
-    results: [{ value: '0 → 3,000', label: 'followers on the brand\'s X account in four months' }],
-    notes: [],
-    skills: [],
-    evidence: ['Account screenshots', 'Follower growth evidence', 'Content examples', 'Supporter program materials'],
+    media: [],
+    wanted: ['Account screenshots', 'Follower growth evidence', 'Content examples', 'Supporter program materials'],
     links: [],
   },
   {
@@ -807,60 +1004,57 @@ const projects = [
     role: 'Beauty Brand Marketer',
     period: 'July–September 2025',
     summary: 'Supported X, Instagram and influencer marketing for two beauty brands and recruited participants for an offline beauty activation.',
-    metric: { value: '~100', label: 'organic posts from about 20 recruited X users' },
+    metric: { value: '~20', label: 'X users I recruited for the Musinsa Beauty Festa activation' },
     heading: 'Connecting beauty brands with online communities and offline experiences.',
-    overview: [
-      'I supported social media marketing and influencer activities for the beauty brands Constant and Refilled.',
-      'My work included X account management, influencer seeding, Instagram content, and participant recruitment for an offline beauty activation.',
-    ],
-    responsibilities: [
-      'Launched and managed brand activity on X',
-      'Supported influencer seeding',
-      'Worked on Instagram content',
-      'Recruited X users for a beauty event activation',
-      'Supported participant coordination',
-    ],
-    extras: [
+    sections: [
       {
+        type: 'prose',
+        title: 'Overview',
+        paragraphs: [
+          'I supported social media marketing and influencer activities for the beauty brands Constant and Refilled.',
+          'My work included X account management, influencer seeding, Instagram content, and participant recruitment for an offline beauty activation.',
+        ],
+      },
+      {
+        type: 'split',
         title: 'Musinsa Beauty Festa activation',
-        text: 'Recruited approximately 20 X users to take part in the activation. Participants generated approximately 100 organic posts.',
+        left: {
+          heading: 'What I did',
+          items: ['Recruited approximately 20 X users to take part in the activation', 'Supported participant coordination'],
+          stat: { value: '~20', label: 'X users recruited' },
+        },
+        right: {
+          heading: 'What participants did',
+          items: ['Created approximately 100 organic posts about the activation'],
+          stat: { value: '~100', label: 'organic posts, written by participants' },
+        },
+        note: 'I did not write those posts. They were created by the participants I recruited.',
+      },
+      {
+        type: 'list',
+        title: 'Brand marketing work',
+        items: ['Launched and managed brand activity on X', 'Supported influencer seeding', 'Worked on Instagram content'],
+      },
+      {
+        type: 'chips',
+        title: 'Skills demonstrated',
+        items: ['Beauty marketing', 'Social media management', 'Influencer coordination', 'Community recruitment', 'Offline activation support'],
       },
     ],
-    results: [
-      { value: '~20', label: 'X users recruited for the activation' },
-      { value: '~100', label: 'organic posts created by participants' },
-    ],
-    notes: ['The roughly 100 posts were written by the participants, not by me.'],
-    skills: ['Beauty marketing', 'Social media management', 'Influencer coordination', 'Community recruitment', 'Offline activation support'],
-    evidence: ['X content examples', 'Instagram content', 'Musinsa Beauty Festa photographs', 'Participant-generated posts', 'Campaign materials'],
+    media: [],
+    wanted: ['X content examples', 'Instagram content', 'Musinsa Beauty Festa photographs', 'Participant-generated posts', 'Campaign materials'],
     links: [],
   },
 ];
 
 /*
-  Photographs taken by Lynn. type is 'portrait' or 'snap'.
-  Add real files by setting src, width, height, alt and caption.
-  Only add location, date or camera details that are verified.
+  Photographs taken by Lynn. Leave empty until real files exist.
+  Add items like:
+  { id: 'portrait-01', type: 'portrait', src: 'assets/photos/portrait-01.jpg', width: 1600, height: 2000,
+    alt: 'Describe the photograph', caption: 'Verified caption' }
+  type is 'portrait' or 'snap'. Add location, date or camera details only when verified.
 */
-const photo = (type, n, shape) => ({
-  id: `${type}-${String(n).padStart(2, '0')}`,
-  type,
-  no: String(n).padStart(2, '0'),
-  shape,
-  src: null,
-  width: null,
-  height: null,
-  alt: '',
-  caption: null,
-});
-
-const photos = [
-  photo('portrait', 1, 'tall'),
-  photo('portrait', 2, 'wide'),
-  photo('snap', 1, 'square'),
-  photo('snap', 2, 'square'),
-  photo('snap', 3, 'square'),
-];
+const photos = [];
 
 const about = {
   intro: [
@@ -879,6 +1073,13 @@ const about = {
     { role: 'Beauty Brand Marketer', org: 'Constant / Refilled', period: 'July–September 2025', slug: 'constant-refilled' },
     { role: 'English Shopping Host', org: 'WitU / TikTok LIVE', period: null, periods: ['July–September 2024', 'March–July 2025', 'July–August 2026'], slug: 'witu-tiktok-live' },
   ],
+  /* Smaller entries. Each shows only what is verified. Add dates, roles and scope once confirmed. */
+  additional: [
+    { name: 'Team 1llusion', text: 'Participation in a YouTube channel with approximately 1.1 million subscribers.', note: 'The subscriber count belongs to the channel. My role and dates are to be confirmed.' },
+    { name: 'Samsung Electronics', text: 'Advertising model experience.', note: 'Dates and scope to be confirmed.' },
+    { name: 'Interpretation', text: 'Interpretation experience.', note: 'Settings and dates to be confirmed.' },
+    { name: 'Other roles', text: 'Additional internships and professional roles.', note: 'Organizations, roles and dates to be confirmed.' },
+  ],
   skills: [
     { group: 'Content & media', items: ['Content planning', 'Short-form video production', 'Filming', 'Video editing', 'Social media management', 'Photography'] },
     { group: 'Marketing & operations', items: ['Brand activation', 'Event planning and operations', 'Community management', 'Influencer coordination', 'Live commerce', 'Audience communication'] },
@@ -887,50 +1088,62 @@ const about = {
   ],
 };
 
-/* Home page figures. Each belongs to the project beside it, not to a combined total. */
-const keyFigures = [
-  { value: '23,400', label: 'Instagram followers on @lynnonmi', note: `As of ${site.asOf}`, slug: 'lynnonmi' },
-  { value: '3.18M', label: 'views on the highest-performing @lynnonmi Reel', note: 'One video, not account total', slug: 'lynnonmi' },
-  { value: '180', label: 'applicants for the second Solo Party', note: 'Unique applicants', slug: 'solo-party' },
-  { value: '84', label: 'attendees at the second Solo Party', note: 'August 9, 2026', slug: 'solo-party' },
-  { value: '14', label: 'university festivals supported through Red Bull Korea', note: 'Festivals involved in', slug: 'red-bull-korea' },
-  { value: '3,000', label: 'followers gained on Pimadaziwin\'s X account in four months', note: 'Account launched from zero', slug: 'pimadaziwin' },
+/* Four figures for the home page. Each belongs to the project named beside it. */
+const homeFigures = [
+  { value: '23,400', label: 'Instagram followers on @lynnonmi', note: 'As of November 20, 2026', slug: 'lynnonmi' },
+  { value: '3.18M', label: 'views on the highest-performing @lynnonmi Reel', note: 'One video. As of November 20, 2026', slug: 'lynnonmi' },
+  { value: '84', label: 'attendees at the second Solo Party', note: 'Up from 66 at the first event', slug: 'solo-party' },
+  { value: '3,000', label: 'followers gained on Pimadaziwin\'s X account', note: 'In four months, from zero', slug: 'pimadaziwin' },
 ];
 
-const featured = ['solo-party', 'lynnonmi', 'witu-tiktok-live', 'red-bull-korea', 'pimadaziwin', 'constant-refilled'];
+/* Home page features these three projects, in this order. */
+const homeFeatured = ['solo-party', 'lynnonmi', 'witu-tiktok-live'];
 
-/*
-  Not shown on the site until Lynn confirms exact dates, scope and wording:
-  Team 1llusion (YouTube channel, about 1.1 million subscribers), Samsung
-  Electronics advertising model experience, additional internships and
-  professional roles, interpretation experience.
-*/
-const pendingConfirmation = ['Team 1llusion', 'Samsung Electronics', 'Additional internships and roles', 'Interpretation experience'];
+/* Project order used on the Work page and in previous/next links. */
+const order = ['solo-party', 'lynnonmi', 'witu-tiktok-live', 'red-bull-korea', 'pimadaziwin', 'constant-refilled'];
 
 
 const page = (new URLSearchParams(location.search).get('page') || 'home');
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const cat = (id) => categories.find((c) => c.id === id);
-const byOrder = featured.map((s) => projects.find((p) => p.slug === s)).filter(Boolean);
+const byOrder = order.map((s) => projects.find((p) => p.slug === s)).filter(Boolean);
+const featuredProjects = homeFeatured.map((s) => projects.find((p) => p.slug === s)).filter(Boolean);
 const inFolder = (id) => (id === 'all' ? byOrder : byOrder.filter((p) => p.categories.includes(id)));
 const firstCat = (p) => cat(p.categories[0]);
 const projectUrl = (p) => `?page=project&slug=${p.slug}`;
+const realPhotos = photos.filter((p) => p.src);
 
 /* ---------- small building blocks ---------- */
 
 const pending = (text) => `<span class="pending">${esc(text)}</span>`;
 const clip = (cls = '') => `<svg class="clip ${cls}" aria-hidden="true" focusable="false"><use href="#clip"/></svg>`;
-const stamp = (text = 'Pending') => `<span class="stamp">${esc(text)}</span>`;
 
-/* Real image when src exists, labelled placeholder frame otherwise. */
-function media({ src, alt, width, height }, tone, label) {
+/* Real image when src exists. Without one, a quiet monogram frame, never a crossed placeholder. */
+function media({ src, alt, width, height }, tone = 'pink', mono = 'LK') {
   if (src) {
     const size = width && height ? ` width="${width}" height="${height}"` : '';
-    return `<img class="media" src="${esc(src)}" alt="${esc(alt || '')}"${size} loading="lazy" decoding="async">`;
+    return `<img class="media" src="${esc(src)}" alt="${esc(alt || '')}"${size} loading="lazy" decoding="async" data-tone="${tone}">`;
   }
-  return `<div class="ph ph--${tone}" role="img" aria-label="Pending: ${esc(label)}"><span>${esc(label)}</span></div>`;
+  return `<div class="mono mono--${tone}" role="img" aria-label="Portrait to be added"><span>${esc(mono)}</span></div>`;
 }
+
+/* A photograph that fails to load is replaced by the monogram frame. */
+document.addEventListener(
+  'error',
+  (e) => {
+    const t = e.target;
+    if (t && t.tagName === 'IMG' && t.classList.contains('media')) {
+      const d = document.createElement('div');
+      d.className = `mono mono--${t.dataset.tone || 'pink'}`;
+      d.setAttribute('role', 'img');
+      d.setAttribute('aria-label', 'Image unavailable');
+      d.innerHTML = '<span>LK</span>';
+      t.replaceWith(d);
+    }
+  },
+  true
+);
 
 /* Lace doily, drawn once as a scalloped disc with punched rings. */
 let doilyN = 0;
@@ -964,10 +1177,10 @@ function ribbon(cls = '') {
 
 const label = (text) => `<span class="label">${esc(text)}</span>`;
 
-function polaroid({ img, caption, tone, tilt = 0, clipped = false, taped = false, lace = false, bow = false, ph = 'Photo pending' }) {
+function polaroid({ img, caption, tone, tilt = 0, clipped = false, lace = false, bow = false }) {
   const fig = `<figure class="polaroid" style="--tilt:${tilt}deg">
-    ${clipped ? clip() : ''}${taped ? '<span class="tape" aria-hidden="true"></span>' : ''}
-    <div class="polaroid__img">${media(img, tone, ph)}</div>
+    ${clipped ? clip() : ''}
+    <div class="polaroid__img">${media(img, tone)}</div>
     <figcaption>${caption}</figcaption>
   </figure>`;
   if (!lace && !bow) return fig;
@@ -1019,22 +1232,23 @@ const plainStage = (eyebrow, title, lede) => `<div class="stage">
 
 /* ---------- pieces used on several pages ---------- */
 
-function periodRow(p) {
-  const v = p.periodShort || p.period;
-  return v ? ['Period', esc(v)] : ['Data as of', esc(site.asOf)];
+/* Employment period only. Verification dates for metrics are never shown as a period. */
+function periodText(p) {
+  return p.periodShort || p.period || null;
 }
 
 function projectCard(p, i) {
   const c = firstCat(p);
   const tilt = [-1.3, 1.1, -0.8][i % 3];
-  const [pk, pv] = periodRow(p);
+  const per = periodText(p);
+  const hasImg = p.media && p.media[0] && p.media[0].src;
   return `<a class="card" href="${projectUrl(p)}" style="--tilt:${tilt}deg">
     ${i % 2 === 0 ? clip() : ''}
-    ${label(c.label)}
-    <div class="card__img">${media({ src: null }, c.tone, 'Cover image pending')}</div>
+    ${hasImg ? `<div class="card__img">${media(p.media[0], c.tone)}</div>` : ''}
+    <p class="card__band card__band--${c.tone}">${esc(c.label)}</p>
     <h3 class="card__title">${esc(p.title)}</h3>
     <p class="card__org">${esc(p.org)}</p>
-    <dl class="card__facts"><div><dt>Role</dt><dd>${esc(p.role)}</dd></div><div><dt>${pk}</dt><dd>${pv}</dd></div></dl>
+    <dl class="card__facts"><div><dt>Role</dt><dd>${esc(p.role)}</dd></div>${per ? `<div><dt>Period</dt><dd>${esc(per)}</dd></div>` : ''}</dl>
     <p class="card__summary">${esc(p.summary)}</p>
     ${p.metric ? `<p class="card__metric"><b>${esc(p.metric.value)}</b><span>${esc(p.metric.label)}</span></p>` : ''}
     <span class="card__more">View project</span>
@@ -1051,6 +1265,14 @@ function spines() {
         <a href="?page=work#${c.id}"><span class="spine__label">${esc(c.label)}</span><span class="spine__count">${n} ${n === 1 ? 'project' : 'projects'}</span></a>
       </li>`;
       })
+      .join('')}
+  </ol>`;
+}
+
+function archiveIndex() {
+  return `<ol class="index" aria-label="All projects">
+    ${byOrder
+      .map((p, i) => `<li><a href="${projectUrl(p)}"><span class="index__no">${String(i + 1).padStart(2, '0')}</span><span class="index__title">${esc(p.title)}</span><span class="index__org">${esc(p.org)}</span><span class="index__role">${esc(p.role)}</span></a></li>`)
       .join('')}
   </ol>`;
 }
@@ -1075,7 +1297,7 @@ function home() {
         <div class="paper paper--3"></div>
         <div class="paper paper--2"></div>
         <div class="paper paper--1">
-          ${polaroid({ img: about.portrait, tone: 'pink', caption: `${stamp()}<span>Portrait of Lynn</span>`, clipped: true, ph: 'Portrait pending' })}
+          ${polaroid({ img: about.portrait, tone: 'pink', caption: '<span>Lynn Kim</span>', clipped: true })}
           <p class="typed">${esc(site.secondary)}</p>
         </div>
         <span class="script-mark" aria-hidden="true">portfolio</span>
@@ -1084,37 +1306,43 @@ function home() {
     </div>
   </div>`;
 
+  const photoPreview = realPhotos.length
+    ? `<div class="mini-photo__row">${realPhotos.slice(0, 3).map((p, i) => `<figure class="mini" style="--tilt:${[-2.5, 1.5, -1][i]}deg">${media(p, ['pink', 'blue', 'cream'][i])}</figure>`).join('')}</div>`
+    : '';
+
   const body = `
-  <section class="block" aria-labelledby="sel">
+  <section class="block" aria-labelledby="feat">
     <div class="block__head">
-      <h2 id="sel" class="display">Selected <em>work</em></h2>
+      <h2 id="feat" class="display">Featured <em>work</em></h2>
       <a class="textlink" href="?page=work">Open the archive</a>
     </div>
-    <div class="works">${byOrder.map((p, i) => projectCard(p, i)).join('')}</div>
-  </section>
-
-  <section class="block block--spines" aria-labelledby="drawer">
-    <h2 id="drawer" class="display display--s">Browse by <em>folder</em></h2>
-    ${spines()}
+    <div class="works">${featuredProjects.map((p, i) => projectCard(p, i)).join('')}</div>
   </section>
 
   <section class="block" aria-labelledby="kf">
     <div class="figs-wrap">
       <div class="block__head">
-        <h2 id="kf" class="display display--s">Key <em>figures</em></h2>
-        <p class="small">Each figure belongs to the project beside it. They are not combined totals. Instagram figures are as of ${esc(site.asOf)}.</p>
+        <h2 id="kf" class="display display--s">Selected <em>figures</em></h2>
+        <p class="small">Each figure belongs to the project beside it. They are not combined totals.</p>
       </div>
       <ul class="figs">
-        ${keyFigures
-          .map((f) => `<li><a href="?page=project&slug=${f.slug}"><span class="fig__v">${esc(f.value)}</span><span class="fig__l">${esc(f.label)}</span><span class="fig__n">${esc(f.note)}</span></a></li>`)
-          .join('')}
+        ${homeFigures.map((f) => `<li><a href="?page=project&slug=${f.slug}"><span class="fig__v">${esc(f.value)}</span><span class="fig__l">${esc(f.label)}</span><span class="fig__n">${esc(f.note)}</span></a></li>`).join('')}
       </ul>
     </div>
   </section>
 
+  <section class="block block--spines" aria-labelledby="drawer">
+    <div class="block__head">
+      <h2 id="drawer" class="display display--s">The <em>archive</em></h2>
+      <a class="textlink" href="?page=work#all">All work</a>
+    </div>
+    ${spines()}
+    ${archiveIndex()}
+  </section>
+
   <section class="block block--about" aria-labelledby="ab">
     <div class="about-note">
-      ${polaroid({ img: about.portrait, tone: 'rose', caption: `${stamp()}<span>Portrait of Lynn</span>`, tilt: -3, clipped: true, lace: true, bow: true, ph: 'Portrait pending' })}
+      ${polaroid({ img: about.portrait, tone: 'rose', caption: '<span>Lynn Kim</span>', tilt: -3, clipped: true, lace: true, bow: true })}
       <div class="note">
         <h2 id="ab" class="display display--s">A little <em>about me</em></h2>
         <p>I'm a creator and marketer studying at Minerva University.</p>
@@ -1132,8 +1360,17 @@ function home() {
       <p>Portraits, snap sessions, and everyday moments photographed by me.</p>
       <a class="textlink" href="?page=photography">View Photography</a>
     </div>
-    <div class="mini-photo__row">
-      ${photos.slice(0, 3).map((p, i) => `<figure class="mini" style="--tilt:${[-2.5, 1.5, -1][i]}deg">${media(p, ['pink', 'blue', 'cream'][i], `Photo ${i + 1} pending`)}</figure>`).join('')}
+    ${photoPreview}
+  </section>
+
+  <section class="block block--contact" aria-labelledby="ct">
+    <div class="contact-strip">
+      <h2 id="ct" class="display display--s">Let's <em class="script-em">connect</em></h2>
+      <p>For professional opportunities, brand collaborations, content projects, and photography inquiries.</p>
+      <p class="contact-strip__links">
+        <a class="big-link" href="mailto:${esc(site.email)}">${esc(site.email)}</a>
+        <a class="big-link" href="${esc(site.instagram.url)}" target="_blank" rel="noopener">${esc(site.instagram.handle)}</a>
+      </p>
     </div>
   </section>`;
   return shell(stage, body, 'home');
@@ -1176,6 +1413,7 @@ function initCabinet() {
   const panels = [...document.querySelectorAll('.folder')];
   const n = tabs.length;
   let active = 0;
+  let focusAfter = false;
 
   function paint() {
     panels.forEach((p, i) => {
@@ -1189,111 +1427,107 @@ function initCabinet() {
       t.setAttribute('aria-selected', i === active ? 'true' : 'false');
       t.tabIndex = i === active ? 0 : -1;
     });
+    tabs[active].scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: reduceMotion.matches ? 'auto' : 'smooth' });
+    if (focusAfter) { tabs[active].focus(); focusAfter = false; }
   }
 
-  function select(i, { focus = false, push = true } = {}) {
+  /* The URL hash is the single source of truth, so Back and Forward step through folders. */
+  function fromHash() {
+    const j = categories.findIndex((c) => `#${c.id}` === location.hash);
+    active = j >= 0 ? j : 0;
+    paint();
+  }
+  function go(i, focus = false) {
+    focusAfter = focus;
     active = (i + n) % n;
     paint();
-    if (focus) tabs[active].focus();
-    tabs[active].scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: reduceMotion.matches ? 'auto' : 'smooth' });
-    if (push) history.replaceState(null, '', `#${categories[active].id}`);
+    const id = categories[active].id;
+    if (location.hash !== `#${id}`) location.hash = id;
   }
 
   tabs.forEach((t, i) => {
-    t.addEventListener('click', () => select(i));
+    t.addEventListener('click', () => go(i));
     t.addEventListener('keydown', (e) => {
       const k = e.key;
-      if (k === 'ArrowRight') { e.preventDefault(); select(i + 1, { focus: true }); }
-      else if (k === 'ArrowLeft') { e.preventDefault(); select(i - 1, { focus: true }); }
-      else if (k === 'Home') { e.preventDefault(); select(0, { focus: true }); }
-      else if (k === 'End') { e.preventDefault(); select(n - 1, { focus: true }); }
+      if (k === 'ArrowRight') { e.preventDefault(); go(i + 1, true); }
+      else if (k === 'ArrowLeft') { e.preventDefault(); go(i - 1, true); }
+      else if (k === 'Home') { e.preventDefault(); go(0, true); }
+      else if (k === 'End') { e.preventDefault(); go(n - 1, true); }
     });
   });
-
-  const fromHash = categories.findIndex((c) => `#${c.id}` === location.hash);
-  select(fromHash >= 0 ? fromHash : 0, { push: false });
-  window.addEventListener('hashchange', () => {
-    const j = categories.findIndex((c) => `#${c.id}` === location.hash);
-    if (j >= 0) select(j, { push: false });
-  });
+  window.addEventListener('hashchange', fromHash);
+  fromHash();
 }
 
 /* ----- Project detail ----- */
 
-function projectPage() {
-  const slug = new URLSearchParams(location.search).get('slug');
-  const p = byOrder.find((x) => x.slug === slug);
-  if (!p) {
-    return shell(
-      plainStage('Work', 'Project not found', 'This project is not in the archive.'),
-      `<div class="block"><p>Return to <a class="textlink" href="?page=work">the Work archive</a>.</p></div>`,
-      'work'
-    );
+function renderSection(s, n) {
+  const list = (items) => `<ul class="ticks">${items.map((r) => `<li>${esc(r)}</li>`).join('')}</ul>`;
+  switch (s.type) {
+    case 'prose':
+      return `<div class="prose">${s.paragraphs.map((t) => `<p>${esc(t)}</p>`).join('')}</div>`;
+    case 'compare':
+      return `<div class="cmp-wrap"><table class="cmp"><thead><tr><th scope="col"><span class="sr-only">Detail</span></th>${s.columns.map((c) => `<th scope="col">${esc(c)}</th>`).join('')}</tr></thead><tbody>${s.rows
+        .map(([k, ...vals]) => `<tr><th scope="row">${esc(k)}</th>${vals.map((v) => `<td>${esc(v)}</td>`).join('')}</tr>`)
+        .join('')}</tbody></table></div>${s.notes ? `<ul class="notes">${s.notes.map((t) => `<li>${esc(t)}</li>`).join('')}</ul>` : ''}`;
+    case 'events':
+      return `<div class="events">${s.events
+        .map((e) => `<article class="event"><p class="event__date">${esc(e.date)}</p><h3>${esc(e.name)}</h3><p class="event__role">${esc(e.role)}</p>${list(e.items)}</article>`)
+        .join('')}</div>`;
+    case 'columns':
+      return `<dl class="dcols dcols--${s.items.length}">${s.items.map((c) => `<div><dt>${esc(c.title)}</dt><dd>${esc(c.text)}</dd></div>`).join('')}</dl>`;
+    case 'steps':
+      return `<ol class="steps">${s.steps.map((x, i) => `<li><b>${String(i + 1).padStart(2, '0')}</b><div><h3>${esc(x.step)}</h3><p>${esc(x.text)}</p></div></li>`).join('')}</ol>`;
+    case 'metrics':
+      return `<div class="metrics">${s.items.map((r) => `<div class="metric"><span class="metric__v">${esc(r.value)}</span><span class="metric__l">${esc(r.label)}</span></div>`).join('')}</div>${s.notes ? `<ul class="notes">${s.notes.map((t) => `<li>${esc(t)}</li>`).join('')}</ul>` : ''}`;
+    case 'reels':
+      return `<ol class="reels">${s.items
+        .map((r) => `<li class="reel"><span class="reel__views">${esc(r.views)}<i>views</i></span><span class="reel__rank">${esc(r.rank)}</span>${r.href ? `<a class="textlink" href="${esc(r.href)}" target="_blank" rel="noopener">Watch the Reel</a>` : ''}</li>`)
+        .join('')}</ol>${s.note ? `<p class="note-line">${esc(s.note)}</p>` : ''}`;
+    case 'split': {
+      const side = (x, cls) => `<div class="split__side ${cls}"><h3>${esc(x.heading)}</h3><p class="split__stat"><b>${esc(x.stat.value)}</b><span>${esc(x.stat.label)}</span></p>${list(x.items)}</div>`;
+      return `<div class="split">${side(s.left, 'split__side--me')}${side(s.right, 'split__side--them')}</div>${s.note ? `<p class="note-line">${esc(s.note)}</p>` : ''}`;
+    }
+    case 'periods':
+      return `<ol class="periods-list">${s.periods.map((x, i) => `<li><b>${String(i + 1).padStart(2, '0')}</b>${esc(x)}</li>`).join('')}</ol>${s.note ? `<p class="note-line">${esc(s.note)}</p>` : ''}`;
+    case 'list':
+      return list(s.items);
+    case 'chips':
+      return `<p class="chips">${s.items.map((x) => `<span>${esc(x)}</span>`).join('')}</p>`;
+    case 'callout':
+      return `<aside class="callout"><p>${esc(s.text)}</p>${s.items ? list(s.items) : ''}</aside>`;
+    default:
+      return '';
   }
+}
+
+function projectPage() {
+  const slug = document.body.dataset.slug || new URLSearchParams(location.search).get('slug');
+  const p = byOrder.find((x) => x.slug === slug);
+  if (!p) return notFound('Project not found', 'This project is not in the archive.');
   const idx = byOrder.indexOf(p);
   const c = firstCat(p);
   document.title = `${p.title}, Lynn Kim`;
   const folders = p.categories.map((id) => cat(id));
-  const list = (items) => `<ul class="ticks">${items.map((r) => `<li>${esc(r)}</li>`).join('')}</ul>`;
   let n = 0;
-  const section = (title, inner, cls = '') => {
+  const section = (title, inner) => {
     n += 1;
     const id = `s${n}`;
-    return `<section class="psec ${cls}" aria-labelledby="${id}"><header class="psec__head"><span class="num">${String(n).padStart(2, '0')}</span><h2 id="${id}" class="display display--s">${title}</h2></header><div class="psec__body">${inner}</div></section>`;
+    return `<section class="psec" aria-labelledby="${id}"><header class="psec__head"><span class="num">${String(n).padStart(2, '0')}</span><h2 id="${id}" class="display display--s">${esc(title)}</h2></header><div class="psec__body">${inner}</div></section>`;
   };
 
-  const facts = [
-    ['Organization', esc(p.org)],
-    ['Role', esc(p.role)],
-    p.periods
-      ? ['Periods', `<span class="periods">${p.periods.map((x) => `<span>${esc(x)}</span>`).join('')}</span>`]
-      : p.period
-        ? ['Period', esc(p.period)]
-        : ['Data as of', esc(site.asOf)],
-    p.platform ? ['Platform', esc(p.platform)] : ['Folder', folders.map((f) => esc(f.label)).join(', ')],
-  ];
+  const facts = [['Organization', esc(p.org)], ['Role', esc(p.role)]];
+  if (p.periods) facts.push(['Periods', `<span class="periods">${p.periods.map((x) => `<span>${esc(x)}</span>`).join('')}</span>`]);
+  else if (p.period) facts.push(['Period', esc(p.period)]);
+  if (p.platform) facts.push(['Platform', esc(p.platform)]);
+  if (p.asOf) facts.push(['Figures as of', esc(site.asOf)]);
+  if (!p.platform && !p.asOf) facts.push(['Folder', folders.map((f) => esc(f.label)).join(', ')]);
 
-  const overview = `<div class="prose">${p.overview.map((t) => `<p>${esc(t)}</p>`).join('')}</div>${
-    p.links.length ? `<p class="links">${p.links.map((l) => `<a class="textlink" href="${esc(l.href)}"${l.href.startsWith('http') ? ' target="_blank" rel="noopener"' : ''}>${esc(l.text)}</a>`).join('')}</p>` : ''
-  }`;
+  const links = p.links.length ? `<p class="links">${p.links.map((l) => `<a class="textlink" href="${esc(l.href)}"${l.href.startsWith('http') ? ' target="_blank" rel="noopener"' : ''}>${esc(l.text)}</a>`).join('')}</p>` : '';
 
-  let role = '';
-  if (p.events) {
-    role += `<div class="events">${p.events
-      .map(
-        (e, i) => `<article class="event" style="--tilt:${i ? 0.8 : -0.8}deg">
-        <p class="event__date">${esc(e.date)}</p>
-        <h3>${esc(e.name)}</h3>
-        <p class="event__role">${esc(e.role)}</p>
-        ${list(e.responsibilities)}
-        <p class="chips chips--solid">${e.results.map((r) => `<span>${esc(r)}</span>`).join('')}</p>
-      </article>`
-      )
-      .join('')}</div>`;
-  } else if (p.responsibilities) {
-    role += list(p.responsibilities);
-  }
-  if (p.themes) role += `<h3 class="sub">Content themes</h3><dl class="themes">${p.themes.map((t) => `<div><dt>${esc(t.name)}</dt><dd>${esc(t.text)}</dd></div>`).join('')}</dl>`;
-  if (p.extras) role += p.extras.map((x) => `<aside class="extra"><h3>${esc(x.title)}</h3><p>${esc(x.text)}</p></aside>`).join('');
-  if (p.skills && p.skills.length) role += `<h3 class="sub">Skills demonstrated</h3><p class="chips">${p.skills.map((s) => `<span>${esc(s)}</span>`).join('')}</p>`;
-
-  const proc = p.process
-    ? `<ol class="steps">${p.process.map((s, i) => `<li><b>${String(i + 1).padStart(2, '0')}</b><div><h3>${esc(s.step)}</h3><p>${esc(s.text)}</p></div></li>`).join('')}</ol>`
-    : '';
-
-  let res = '';
-  if (p.results.length) res += `<div class="metrics">${p.results.map((r) => `<div class="metric"><span class="metric__v">${esc(r.value)}</span><span class="metric__l">${esc(r.label)}</span></div>`).join('')}</div>`;
-  if (p.resultsNote) res += `<p class="note-line">${esc(p.resultsNote)}</p>`;
-  if (p.notes && p.notes.length) res += `<ul class="notes">${p.notes.map((t) => `<li>${esc(t)}</li>`).join('')}</ul>`;
-  if (p.reels) {
-    res += `<h3 class="sub">Representative Reels</h3><div class="reels">${p.reels
-      .map((r, i) => `<article class="reel"><div class="reel__thumb">${media({ src: null }, ['pink', 'blue', 'rose', 'cream'][i], 'Thumbnail pending')}</div><p class="reel__views">${esc(r.views)}<span>views</span></p><p class="reel__rank">${esc(r.rank)}</p><p class="reel__todo">${pending('Reel link and creative note to be added')}</p></article>`)
-      .join('')}</div>`;
-  }
-
-  const ev = `<p class="small">These materials are not yet uploaded. Each frame names what will go there.</p><div class="evi-grid">${p.evidence
-    .map((e, i) => `<figure class="evi"><div class="evi__img">${media({ src: null }, ['pink', 'blue', 'cream', 'rose'][i % 4], 'Pending')}</div><figcaption>${stamp()} ${esc(e)}</figcaption></figure>`)
-    .join('')}</div>`;
+  const gallery = p.media.length
+    ? section('Visual evidence', `<div class="gallery">${p.media.map((m) => `<figure>${media(m, c.tone)}${m.caption ? `<figcaption>${esc(m.caption)}</figcaption>` : ''}</figure>`).join('')}</div>`)
+    : `<aside class="quiet"><h2 class="quiet__h">Supporting materials</h2><p>Not yet added: ${p.wanted.map((w) => esc(w.toLowerCase())).join(', ')}.</p></aside>`;
 
   const prev = byOrder[(idx - 1 + byOrder.length) % byOrder.length];
   const next = byOrder[(idx + 1) % byOrder.length];
@@ -1308,60 +1542,63 @@ function projectPage() {
   <p class="crumb"><a href="?page=work#${c.id}">Work</a> / <a href="?page=work#${c.id}">${esc(c.label)}</a> / ${esc(p.title)}</p>
   <dl class="facts">${facts.map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join('')}</dl>
   <p class="pull">${esc(p.heading)}</p>
-  ${section('Overview', overview)}
-  ${section(p.events ? 'My role' : 'What I did', role)}
-  ${proc ? section(p.processTitle || 'Process', proc) : ''}
-  ${section('Results', res)}
-  ${section('Visual evidence', ev, 'psec--evi')}
+  ${links}
+  ${p.sections.map((s) => section(s.title, renderSection(s))).join('')}
+  ${gallery}
   <nav class="pager" aria-label="Other projects">
-    <a href="${projectUrl(prev)}"><span>Previous</span>${esc(prev.title)}</a>
-    <a href="${projectUrl(next)}"><span>Next</span>${esc(next.title)}</a>
+    <a href="${projectUrl(prev)}" rel="prev"><span>Previous</span>${esc(prev.title)}</a>
+    <a href="${projectUrl(next)}" rel="next"><span>Next</span>${esc(next.title)}</a>
   </nav>`;
   return shell(stage, body, 'work');
+}
+
+function notFound(title = 'Page not found', text = 'That page does not exist.') {
+  return shell(
+    plainStage('404', title, text),
+    `<div class="block"><p>Go to <a class="textlink" href="?page=home">the home page</a> or <a class="textlink" href="?page=work">the work archive</a>.</p></div>`,
+    ''
+  );
 }
 
 /* ----- Photography ----- */
 
 function photographyPage() {
-  const portraits = photos.filter((p) => p.type === 'portrait');
-  const snaps = photos.filter((p) => p.type === 'snap');
+  const portraits = photos.filter((p) => p.type === 'portrait' && p.src);
+  const snaps = photos.filter((p) => p.type === 'snap' && p.src);
   const idxOf = (p) => photos.indexOf(p);
   const tones = ['pink', 'blue', 'rose', 'cream'];
-  const real = photos.filter((p) => p.src);
+  const credit = (p) => `${p.caption ? esc(p.caption) + ' ' : ''}Photograph by Lynn Kim.`;
 
-  const frame = (p, i) => `<button class="shot shot--${p.shape}" data-open="${idxOf(p)}" aria-label="Open portrait ${p.no} in viewer">
-      ${media(p, tones[i % 4], `Portrait ${p.no} pending`)}
-      <span class="shot__no">${p.no}</span>
-    </button>`;
-  const credit = (p) => (p.src ? `${esc(p.caption || '')} Photograph by Lynn Kim.` : pending('Photograph, caption and credit to be added'));
+  const empty = `<section class="block block--intro quiet-wide" aria-labelledby="soon">
+    <h2 id="soon" class="display display--s">Photographs <em>coming soon</em></h2>
+    <p class="lead">Portraits and snap sessions I have taken will be shown here, with large images that open full size.</p>
+    <p class="links links--flow"><a class="textlink" href="${esc(site.instagram.url)}" target="_blank" rel="noopener">See my work on Instagram</a></p>
+  </section>`;
 
   const body = `
   <section class="block block--intro" aria-labelledby="po">
     <h2 id="po" class="display display--s">Photography is an <em>additional</em> part of my creative work</h2>
     <p class="lead">This page features photographs I have personally taken, including portraits, snap sessions, and other selected images.</p>
-    <p class="small">The photographs are still being added. Placeholder frames show where they will go.</p>
   </section>
 
-  <section class="block" aria-labelledby="pp">
+  ${
+    photos.length === 0
+      ? empty
+      : `${portraits.length ? `<section class="block" aria-labelledby="pp">
     <div class="block__head"><h2 id="pp" class="display display--s">Portra<em>its</em></h2></div>
-    <div class="spread">
-      ${portraits.map((p, i) => `<div class="spread__item spread__item--${i + 1}">${frame(p, i)}<p class="cap">${credit(p)}</p></div>`).join('')}
-    </div>
-  </section>
-
-  <section class="block block--blue" aria-labelledby="sn">
-    <div class="block__head"><h2 id="sn" class="display display--s">Snap <em>sessions</em></h2></div>
-    <div class="snaps">
-      ${snaps.map((p, i) => `<button class="snap" data-open="${idxOf(p)}" style="--tilt:${[-2.5, 1.8, -1][i]}deg" aria-label="Open snap ${p.no} in viewer">${i % 2 ? '' : clip()}<span class="snap__img">${media(p, tones[(i + 1) % 4], `Snap ${p.no} pending`)}</span><span class="snap__cap">${p.src ? esc(p.caption || '') : stamp()}<i>${p.no}</i></span></button>`).join('')}
-    </div>
-  </section>
-
-  ${real.length >= 6 ? `<section class="block" aria-labelledby="cs">
-    <div class="block__head"><h2 id="cs" class="display display--s">Contact <em>sheet</em></h2></div>
-    <div class="sheetfilm">${photos.map((p, i) => `<button class="cs-frame" data-open="${i}" aria-label="Open frame ${i + 1} in viewer">${media(p, tones[i % 4], 'Pending')}<i>${String(i + 1).padStart(2, '0')}</i></button>`).join('')}</div>
+    <div class="spread">${portraits.map((p, i) => `<div class="spread__item spread__item--${(i % 4) + 1}"><button class="shot" style="${p.width && p.height ? `aspect-ratio:${p.width}/${p.height}` : ''}" data-open="${idxOf(p)}" aria-label="Open portrait ${i + 1} in viewer">${media(p, tones[i % 4])}</button><p class="cap">${credit(p)}</p></div>`).join('')}</div>
   </section>` : ''}
+  ${snaps.length ? `<section class="block block--blue" aria-labelledby="sn">
+    <div class="block__head"><h2 id="sn" class="display display--s">Snap <em>sessions</em></h2></div>
+    <div class="snaps">${snaps.map((p, i) => `<button class="snap" data-open="${idxOf(p)}" style="--tilt:${[-2.5, 1.8, -1][i % 3]}deg" aria-label="Open snap ${i + 1} in viewer"><span class="snap__img">${media(p, tones[(i + 1) % 4])}</span><span class="snap__cap">${esc(p.caption || '')}</span></button>`).join('')}</div>
+  </section>` : ''}
+  ${realPhotos.length >= 6 ? `<section class="block" aria-labelledby="cs">
+    <div class="block__head"><h2 id="cs" class="display display--s">Contact <em>sheet</em></h2></div>
+    <div class="sheetfilm">${photos.map((p, i) => `<button class="cs-frame" data-open="${i}" aria-label="Open frame ${i + 1} in viewer">${media(p, tones[i % 4])}<i>${String(i + 1).padStart(2, '0')}</i></button>`).join('')}</div>
+  </section>` : ''}`
+  }
 
-  <p class="small rules">Lifestyle, editorial and event series will be added when photographs are supplied. Every photograph is credited to Lynn Kim. Locations, dates and camera details appear only when verified.</p>
+  <p class="small rules">Every photograph is credited to Lynn Kim. Locations, dates and camera details appear only when verified.</p>
 
   <dialog class="viewer" id="viewer" aria-label="Photograph viewer">
     <div class="viewer__bar"><span id="viewer-count"></span><button class="vbtn" data-act="close">Close</button></div>
@@ -1370,7 +1607,7 @@ function photographyPage() {
   </dialog>`;
   return {
     html: shell(plainStage('Photography', 'Through My Lens', 'Portraits, snap sessions, and everyday moments photographed by me.'), body, 'photography'),
-    after: initViewer,
+    after: photos.length ? initViewer : null,
   };
 }
 
@@ -1379,13 +1616,12 @@ function initViewer() {
   const stageEl = document.getElementById('viewer-stage');
   const cap = document.getElementById('viewer-cap');
   const count = document.getElementById('viewer-count');
-  const tones = ['pink', 'blue', 'rose', 'cream'];
   let cur = 0;
   const show = (i) => {
     cur = (i + photos.length) % photos.length;
     const p = photos[cur];
-    stageEl.innerHTML = media({ ...p }, tones[cur % 4], `${p.type === 'portrait' ? 'Portrait' : 'Snap'} ${p.no}, photograph pending`);
-    cap.innerHTML = p.src ? `${esc(p.caption || '')} Photograph by Lynn Kim.` : pending('Photograph pending. Lynn\'s photograph will appear here.');
+    stageEl.innerHTML = media({ ...p }, 'pink');
+    cap.textContent = `${p.caption ? p.caption + ' ' : ''}Photograph by Lynn Kim.`;
     count.textContent = `${String(cur + 1).padStart(2, '0')} / ${String(photos.length).padStart(2, '0')}`;
   };
   document.querySelectorAll('[data-open]').forEach((b) =>
@@ -1408,9 +1644,8 @@ function initViewer() {
 function aboutPage() {
   const body = `
   <section class="about-grid">
-    <div class="about-grid__photo">${polaroid({ img: about.portrait, tone: 'pink', tilt: 2.5, clipped: true, lace: true, caption: `${stamp()}<span>Portrait of Lynn</span>`, ph: 'Portrait pending' })}</div>
+    <div class="about-grid__photo">${polaroid({ img: about.portrait, tone: 'pink', tilt: 2, clipped: true, caption: '<span>Lynn Kim</span>' })}</div>
     <div class="about-grid__text">
-      <span class="rings" aria-hidden="true"></span>
       <h2 class="display">Hello, I'm <em class="script-em">Lynn</em></h2>
       <div class="prose prose--lead">${about.intro.map((t) => `<p>${esc(t)}</p>`).join('')}</div>
     </div>
@@ -1437,6 +1672,13 @@ function aboutPage() {
     </ol>
   </section>
 
+  <section class="block block--small" aria-labelledby="ad">
+    <h2 id="ad" class="display display--xs">Additional <em>experience</em></h2>
+    <ul class="addl">
+      ${about.additional.map((a) => `<li><h3>${esc(a.name)}</h3><p>${esc(a.text)}</p><p class="small">${esc(a.note)}</p></li>`).join('')}
+    </ul>
+  </section>
+
   <section class="block" aria-labelledby="sk">
     <h2 id="sk" class="display display--s">Skills</h2>
     <div class="skills">
@@ -1449,8 +1691,6 @@ function aboutPage() {
 /* ----- Contact ----- */
 
 function contactPage() {
-  const email = `<a class="big-link" href="mailto:${esc(site.email)}">${esc(site.email)}</a>`;
-  const ig = `<a class="big-link" href="${esc(site.instagram.url)}" rel="noopener" target="_blank">${esc(site.instagram.handle)}</a>`;
   const cv = site.resume
     ? `<a class="btn" href="${esc(site.resume)}" download>Download resume (PDF)</a>`
     : `<span class="btn btn--off" aria-disabled="true">Resume PDF to be added</span>`;
@@ -1460,24 +1700,23 @@ function contactPage() {
       ${clip('clip--rose')}
       <h2 class="display">Write to <em class="script-em">Lynn</em></h2>
       <dl class="contact__list">
-        <div><dt>Email</dt><dd>${email}</dd></div>
-        <div><dt>Instagram</dt><dd>${ig}</dd></div>
+        <div><dt>Email</dt><dd><a class="big-link" href="mailto:${esc(site.email)}">${esc(site.email)}</a></dd></div>
+        <div><dt>Instagram</dt><dd><a class="big-link" href="${esc(site.instagram.url)}" rel="noopener" target="_blank">${esc(site.instagram.handle)}</a></dd></div>
         <div><dt>Resume</dt><dd>${cv}</dd></div>
       </dl>
     </div>
-    <div class="contact__side"><div class="stamp-card"><span>Lynn Kim</span><b>Portfolio ${site.year}</b><i>${esc(site.headline)}</i></div>${polaroid({ img: about.portrait, tone: 'blue', tilt: -2, clipped: true, lace: true, bow: true, caption: `${stamp()}<span>Portrait of Lynn</span>`, ph: 'Portrait pending' })}</div>
   </section>`;
   return shell(plainStage('Contact', "Let's Connect", 'For professional opportunities, brand collaborations, content projects, and photography inquiries, feel free to reach out.'), body, 'contact');
 }
 
 /* ---------- mount ---------- */
 
-const pages = { home, work, project: projectPage, photography: photographyPage, about: aboutPage, contact: contactPage };
-const out = pages[page]();
+const pages = { home, work, project: projectPage, photography: photographyPage, about: aboutPage, contact: contactPage, notfound: () => notFound() };
+const out = (pages[page] || pages.notfound)();
 const html = typeof out === 'string' ? out : out.html;
 document.getElementById('root').outerHTML = html;
 if (out.after) out.after();
-const titles = { home: 'Lynn Kim, Content Creator, Marketer, Event Organizer', work: 'Work', photography: 'Through My Lens', about: 'About Lynn', contact: "Let's Connect" };
+const titles = { home: 'Lynn Kim, Content Creator, Marketer, Event Organizer', work: 'Work', photography: 'Through My Lens', about: 'About Lynn', contact: "Let's Connect", notfound: 'Page not found' };
 if (titles[page]) document.title = page === 'home' ? titles[page] : `${titles[page]}, Lynn Kim`;
 document.documentElement.classList.toggle('reduce-motion', reduceMotion.matches);
 

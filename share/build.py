@@ -7,6 +7,8 @@ app=app.replace('featuredOrder','featured') if False else app
 app=re.sub(r"^import .*\n",'',app,count=1)
 app=app.replace("document.body.dataset.page","(new URLSearchParams(location.search).get('page') || 'home')")
 app=app.replace('featuredOrder','featured')
+import re
+app=re.sub(r'project-\$\{(\w+)\.slug\}\.html',r'?page=project&slug=${\1.slug}',app)
 for a,b in [('project.html?slug=','?page=project&slug='),('index.html','?page=home'),('work.html','?page=work'),('photography.html','?page=photography'),('about.html','?page=about'),('contact.html','?page=contact')]:
     app=app.replace(a,b)
 app=app.replace("new URLSearchParams(location.search).get('slug')","new URLSearchParams(location.search).get('slug')")

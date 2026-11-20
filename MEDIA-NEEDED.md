@@ -1,35 +1,19 @@
 # Media assets still needed
 
-The written portfolio is complete. These files are not yet supplied, and each shows as a labelled "Pending" frame on the site.
-Put images in `assets/` and set the path in `js/data.js`.
+The site is text-led. Projects without images show clean text layouts, and each project page lists its missing supporting materials in one quiet line. Nothing is generated or faked. Add files to `assets/` and set the path in `js/data.js`.
 
 ## Site-wide
-- Portrait of Lynn (home hero, home About preview, About page, Contact). Field: `about.portrait`.
+- Portrait of Lynn for the home hero, the home About preview and the About page. Field: `about.portrait`. Until then a "LK" monogram frame shows.
 - Resume PDF. Field: `site.resume`. The Contact page shows a disabled note until this is set.
-- Cover image for each of the six projects (card images). Field: add `cover: { src, alt }` to the project.
+- Share image. `assets/og-image.png` is a typographic card. Replace it with a designed image when available, and run `SITE_URL=https://your-domain node tools/build-pages.mjs` so share links are absolute.
 
-## Solo Party
-Promotional Reels, event posters, event photographs, application website screenshots, GUESS ME / FIND ME / MATCH ME materials, participant communication examples with private information removed.
+## Per project (field: `media`, items `{ src, alt, width, height, caption }`)
+- Solo Party: promotional Reels, event posters, event photographs, application website screenshots, GUESS ME / FIND ME / MATCH ME materials, participant communication examples with private information removed.
+- @lynnonmi: thumbnails and links for the four Reels (3.18M, 1.92M, 1.39M, 1.30M views), and a short note on the creative decisions behind each. Add `href` to each item in the `reels` section.
+- TikTok LIVE / WitU: broadcast screenshots, short video clips, product demonstration examples, examples of live presentation.
+- Red Bull Korea: festival activation photographs, sampling photographs, event materials, Wings for Life World Run production images.
+- Pimadaziwin: account screenshots, follower growth evidence, content examples, supporter program materials.
+- Constant / Refilled: X content examples, Instagram content, Musinsa Beauty Festa photographs, participant-generated posts, campaign materials.
 
-## @lynnonmi
-Thumbnails and links for the four Reels (3.18M, 1.92M, 1.39M and 1.30M views), plus a short note on the creative decisions behind each. Also the period of the channel, and a YouTube link if one should be shown.
-
-## TikTok LIVE / WitU
-Broadcast screenshots, short video clips, product demonstration examples, examples of live presentation.
-
-## Red Bull Korea
-Festival activation photographs, sampling photographs, event materials, Wings for Life World Run production images.
-
-## Pimadaziwin
-Account screenshots, follower growth evidence, content examples, supporter program materials.
-
-## Constant / Refilled
-X content examples, Instagram content, Musinsa Beauty Festa photographs, participant-generated posts, campaign materials.
-
-## Photography
-Original photographs by Lynn: portraits and snap sessions first. Lifestyle and editorial and Events series can be added when photographs exist. Set `src`, `width`, `height`, `alt` and `caption` in `photos`. Add location, date or camera details only if verified.
-
-## Content still to confirm with Lynn
-- Team 1llusion, Samsung Electronics advertising model experience, additional internships and roles, interpretation experience. Not shown until dates, scope and wording are confirmed.
-- Language proficiency levels, only if they appear on the final resume.
-- Process steps for Red Bull Korea and Constant / Refilled were not in the brief, so those pages have no Process section. The TikTok LIVE process is built only from the responsibilities in the brief.
+## Photography (field: `photos`)
+Original photographs by Lynn, portraits and snap sessions first. The gallery appears automatically when `photos` has items. Set `src`, `width`, `height`, `alt` and `caption`. Add location, date or camera details only if verified.
