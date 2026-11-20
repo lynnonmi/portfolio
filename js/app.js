@@ -1,9 +1,11 @@
-import { site, categories, projects, photos, about } from './data.js';
+import { site, categories as allCategories, projects, photos, about, featured as featuredSlugs } from './data.js';
 
 const page = document.body.dataset.page;
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-const cat = (id) => categories.find((c) => c.id === id);
+const categories = allCategories.filter((c) => projects.some((p) => p.category === c.id));
+const cat = (id) => allCategories.find((c) => c.id === id);
+const WORDS = ['No', 'One', 'Two', 'Three', 'Four', 'Five', 'Six'];
 
 /* ---------- small building blocks ---------- */
 
@@ -23,14 +25,47 @@ function media({ src, alt, width, height }, tone, label) {
   return `<div class="ph ph--${tone}" role="img" aria-label="Placeholder: ${esc(label)}"><span>${esc(label)}</span></div>`;
 }
 
+
+/* Lace doily, drawn once as a scalloped disc with punched rings. */
+let doilyN = 0;
+function doily(cls = '') {
+  const id = `dm${doilyN++}`;
+  const c = 100;
+  const pt = (r, a) => [c + r * Math.cos(a), c + r * Math.sin(a)];
+  const N = 46;
+  let edge = '';
+  for (let i = 0; i < N; i++) {
+    const a0 = (i / N) * Math.PI * 2, a1 = ((i + 1) / N) * Math.PI * 2;
+    const [x0, y0] = pt(90, a0), [x1, y1] = pt(90, a1);
+    edge += (i ? '' : `M${x0.toFixed(1)} ${y0.toFixed(1)}`) + `A6.6 6.6 0 0 1 ${x1.toFixed(1)} ${y1.toFixed(1)}`;
+  }
+  const ring = (r, n, rad) => Array.from({ length: n }, (_, i) => { const [x, y] = pt(r, (i / n) * Math.PI * 2 + (rad ? 0 : 0)); return `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${rad}" fill="#000"/>`; }).join('');
+  return `<svg class="doily ${cls}" viewBox="0 0 200 200" aria-hidden="true" focusable="false">
+    <defs><mask id="${id}"><rect width="200" height="200" fill="#fff"/>${ring(80, 46, 2.6)}${ring(70, 23, 4.2)}${ring(59, 34, 2.4)}${ring(47, 17, 4)}${ring(34, 24, 2.2)}${ring(20, 8, 3.6)}</mask></defs>
+    <path d="${edge}Z" fill="#f7f2e8" mask="url(#${id})"/>
+    <g fill="none" stroke="#c9bfae" stroke-width=".7" opacity=".8"><circle cx="100" cy="100" r="72"/><circle cx="100" cy="100" r="45"/><circle cx="100" cy="100" r="30"/></g>
+  </svg>`;
+}
+
+/* Ribbon strip with swallow-tail ends. */
+function ribbon(cls = '') {
+  return `<svg class="ribbon ${cls}" viewBox="0 0 260 44" aria-hidden="true" focusable="false">
+    <path d="M0 0H260L244 22L260 44H0L16 22Z" fill="#8f9fb3"/>
+    <path d="M16 6H244M16 38H244" stroke="#f3ebdc" stroke-opacity=".55" stroke-width="1" fill="none"/>
+    <path d="M0 0H260L244 22L260 44H0L16 22Z" fill="#1f1e20" fill-opacity=".06"/>
+  </svg>`;
+}
+
 const label = (text) => `<span class="label">${esc(text)}</span>`;
 
-function polaroid({ img, caption, tone, tilt = 0, clipped = false, taped = false, ph = 'Photo placeholder' }) {
-  return `<figure class="polaroid" style="--tilt:${tilt}deg">
+function polaroid({ img, caption, tone, tilt = 0, clipped = false, taped = false, lace = false, bow = false, ph = 'Photo placeholder' }) {
+  const fig = `<figure class="polaroid" style="--tilt:${tilt}deg">
     ${clipped ? clip() : ''}${taped ? '<span class="tape" aria-hidden="true"></span>' : ''}
     <div class="polaroid__img">${media(img, tone, ph)}</div>
     <figcaption>${caption}</figcaption>
   </figure>`;
+  if (!lace && !bow) return fig;
+  return `<div class="lace-wrap">${lace ? doily() : ''}${bow ? ribbon() : ''}${fig}</div>`;
 }
 
 /* ---------- layout ---------- */
@@ -96,7 +131,7 @@ function spines() {
     ${categories
       .map(
         (c, i) => `<li class="spine spine--${c.tone}" style="--i:${i}">
-        <a href="work.html#${c.id}"><span class="spine__label">${esc(c.label)}</span><span class="spine__count">${projects.filter((p) => p.category === c.id).length} files</span></a>
+        <a href="work.html#${c.id}"><span class="spine__label">${esc(c.label)}</span><span class="spine__count">${projects.filter((p) => p.category === c.id).length} ${projects.filter((p) => p.category === c.id).length === 1 ? 'file' : 'files'}</span></a>
       </li>`
       )
       .join('')}
@@ -106,7 +141,7 @@ function spines() {
 /* ---------- pages ---------- */
 
 function home() {
-  const featured = projects.filter((p) => p.featured).slice(0, 3);
+  const featured = featuredSlugs.map((s) => projects.find((p) => p.slug === s)).filter(Boolean);
   const stage = `<div class="stage stage--home">
     <h1 class="giant">${esc(site.name)}</h1>
     <div class="stack" aria-hidden="false">
@@ -131,7 +166,7 @@ function home() {
   </section>
 
   <section class="block block--spines" aria-labelledby="drawer">
-    <h2 id="drawer" class="display display--s">Five <em>folders</em></h2>
+    <h2 id="drawer" class="display display--s">${WORDS[categories.length]} <em>${categories.length === 1 ? 'folder' : 'folders'}</em></h2>
     ${spines()}
   </section>
 
@@ -151,7 +186,7 @@ function home() {
 
   <section class="block block--about" aria-labelledby="ab">
     <div class="about-note">
-      ${polaroid({ img: about.portrait, tone: 'rose', caption: `${stamp()}<span>Portrait to be added</span>`, tilt: -3, clipped: true, ph: 'Portrait of Lynn' })}
+      ${polaroid({ img: about.portrait, tone: 'rose', caption: `${stamp()}<span>Portrait to be added</span>`, tilt: -3, clipped: true, lace: true, bow: true, ph: 'Portrait of Lynn' })}
       <div class="note">
         <h2 id="ab" class="display display--s">About <em>Lynn</em></h2>
         <p>${about.intro ? esc(about.intro) : pending('Introduction in Lynn\'s own words to be added.')}</p>
@@ -177,7 +212,7 @@ function work() {
         <div class="folder__inner">
           <header class="folder__head">
             <h2 class="display display--s">${esc(c.label)}</h2>
-            <p>${esc(c.note)} <span class="count">${list.length} files</span></p>
+            <p>${esc(c.note)} <span class="count">${list.length} ${list.length === 1 ? 'file' : 'files'}</span></p>
           </header>
           <div class="folder__files">${list.map((p, i) => projectCard(p, i)).join('')}</div>
         </div>
@@ -189,7 +224,7 @@ function work() {
     <div class="cabinet__stack">${folders}</div>
   </div>
   <p class="hint">Select a tab, or use the left and right arrow keys, to bring a folder forward.</p>`;
-  const html = shell(plainStage('Archive / 02', 'Work', 'Five folders. Bring one forward to see the projects inside.'), body, 'work');
+  const html = shell(plainStage('Archive / 02', 'Work', `${WORDS[categories.length]} ${categories.length === 1 ? 'folder' : 'folders'}. Bring one forward to see the projects inside.`), body, 'work');
   return { html, after: initCabinet };
 }
 
@@ -305,6 +340,7 @@ function projectPage() {
       ${verified.length ? '' : '<p class="small">Only verified figures are shown here.</p>'}</section>
   </div>
 
+  ${p.links.length ? `<p class="links">${p.links.map((l) => `<a class="textlink" href="${esc(l.href)}"${l.href.startsWith('http') ? ' target="_blank" rel="noopener"' : ''}>${esc(l.text)}</a>`).join('')}</p>` : ''}
   <section class="evidence" aria-labelledby="d5"><h2 id="d5" class="display display--s">Visual <em>evidence</em></h2><div class="evidence__row">${ev}</div></section>
 
   <nav class="pager" aria-label="Other projects">
@@ -396,7 +432,7 @@ function aboutPage() {
     items.length ? `<ul class="plain">${items.map(render).join('')}</ul>` : `<ul class="plain plain--ph">${empty.map((e) => `<li>${pending(e)}</li>`).join('')}</ul>`;
   const body = `
   <section class="about-grid">
-    <div class="about-grid__photo">${polaroid({ img: about.portrait, tone: 'pink', tilt: 2.5, clipped: true, caption: `${stamp()}<span>Portrait to be added</span>`, ph: 'Portrait of Lynn' })}</div>
+    <div class="about-grid__photo">${polaroid({ img: about.portrait, tone: 'pink', tilt: 2.5, clipped: true, lace: true, caption: `${stamp()}<span>Portrait to be added</span>`, ph: 'Portrait of Lynn' })}</div>
     <div class="about-grid__text"><span class="rings" aria-hidden="true"></span>
       <h2 class="display">Hello, I'm <em class="script-em">Lynn</em></h2>
       <p class="lead">${about.intro ? esc(about.intro) : pending('Introduction in Lynn\'s own words to be added. Two to four sentences on who she is and what she makes.')}</p>
@@ -438,7 +474,7 @@ function contactPage() {
         <div><dt>Resume</dt><dd>${cv}</dd></div>
       </dl>
     </div>
-    <div class="contact__side"><div class="stamp-card"><span>Lynn Kim</span><b>Archive ${site.year}</b><i>Content / Events / Live Commerce / Brand Marketing / Photography</i></div>${polaroid({ img: { src: null }, tone: 'blue', tilt: -2, clipped: true, caption: `${stamp()}<span>Photo to be added</span>`, ph: 'Photo' })}</div>
+    <div class="contact__side"><div class="stamp-card"><span>Lynn Kim</span><b>Archive ${site.year}</b><i>Content / Events / Live Commerce / Brand Marketing / Photography</i></div>${polaroid({ img: { src: null }, tone: 'blue', tilt: -2, clipped: true, lace: true, bow: true, caption: `${stamp()}<span>Photo to be added</span>`, ph: 'Photo' })}</div>
   </section>`;
   return shell(plainStage('Archive / 05', 'Contact', 'Write, follow along or take the resume.'), body, 'contact');
 }

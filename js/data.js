@@ -11,8 +11,8 @@ export const site = {
   name: 'Lynn Kim',
   year: 2026,
   // Fill these in. Empty values render as "to be added", not as broken links.
-  email: null, // e.g. 'name@example.com'
-  instagram: null, // e.g. { handle: '@name', url: 'https://instagram.com/name' }
+  email: 'eggielikestaco@gmail.com',
+  instagram: { handle: '@lynnonmi', url: 'https://www.instagram.com/lynnonmi/' },
   resume: null, // e.g. 'assets/Lynn-Kim-Resume.pdf'
   statement: 'Content, events, live commerce, brand marketing and photography.',
 };
@@ -35,11 +35,7 @@ export const categories = [
   results                           list of { label, value, verified } (verified must be true to show as a result)
   evidence                          list of { src, alt, caption } (src null = placeholder frame)
 */
-const blank = (category, n) => ({
-  slug: `${category}-${String(n).padStart(2, '0')}`,
-  category,
-  no: String(n).padStart(2, '0'),
-  title: null,
+const base = {
   year: null,
   client: null,
   role: null,
@@ -48,16 +44,42 @@ const blank = (category, n) => ({
   responsibilities: [],
   process: [],
   results: [],
+  links: [], // [{ text, href }]
   cover: { src: null, alt: '' },
   evidence: [
     { src: null, alt: '', caption: null },
     { src: null, alt: '', caption: null },
     { src: null, alt: '', caption: null },
   ],
-  featured: n === 1,
-});
+};
 
-export const projects = categories.flatMap((c) => [blank(c.id, 1), blank(c.id, 2)]);
+/*
+  Only projects with real content belong here. A category with no project
+  is hidden from the site until one is added.
+  Titles are the project names. Everything else stays empty until it is
+  filled from verified material.
+*/
+const list = [
+  { slug: 'solo-party', category: 'events', title: 'Solo Party: first and second events' },
+  { slug: 'witu-tiktok-live', category: 'live-commerce', title: 'WitU / TikTok LIVE' },
+  {
+    slug: 'lynnonmi-content',
+    category: 'content',
+    title: '@lynnonmi content creation',
+    links: [{ text: 'Open @lynnonmi on Instagram', href: 'https://www.instagram.com/lynnonmi/' }],
+  },
+  { slug: 'photography-snap-sessions', category: 'photography', title: 'Photography and Snap Sessions', links: [{ text: 'Open the photography gallery', href: 'photography.html' }] },
+];
+
+// Waiting for category placement from the portfolio brief:
+//   Red Bull Korea, Pimadaziwin, Constant / Refilled
+
+export const featured = ['solo-party', 'witu-tiktok-live', 'lynnonmi-content'];
+
+export const projects = list.map((p) => {
+  const inCat = list.filter((q) => q.category === p.category);
+  return { ...base, ...p, no: String(inCat.indexOf(p) + 1).padStart(2, '0'), featured: featured.includes(p.slug) };
+});
 
 /*
   Photographs taken by Lynn. type is 'portrait' or 'snap'.

@@ -55,11 +55,11 @@ main:focus { outline: none; }
 .display { font: 400 clamp(2.6rem, 6.5vw, 5.4rem)/.95 var(--serif); letter-spacing: -.01em; }
 .display em { font-style: italic; color: var(--rose); }
 .display--s { font-size: clamp(2rem, 4vw, 3.2rem); }
-.textlink { font: 500 .78rem/1 var(--sans); letter-spacing: .14em; text-transform: uppercase; text-decoration: none; border-bottom: 1px solid currentColor; padding-bottom: 5px; align-self: flex-end; white-space: nowrap; }
+.textlink { font: 500 .78rem/1 var(--sans); letter-spacing: .14em; text-transform: uppercase; text-decoration: none; border-bottom: 1px solid currentColor; padding: 12px 0 5px; display: inline-block; align-self: flex-end; white-space: nowrap; }
 .textlink:hover { color: var(--rose-deep); }
 
 /* ---------- desk and band ---------- */
-.desk { max-width: 1600px; margin: 0 auto; }
+.desk { max-width: 1600px; margin: 0 auto; overflow-x: clip; }
 .band { position: relative; color: var(--cream); background: var(--char); }
 .top { display: flex; justify-content: space-between; align-items: baseline; padding: 22px var(--gut) 0; font: 500 .78rem var(--sans); letter-spacing: .08em; }
 .logo { text-decoration: none; font: 500 1.35rem var(--serif); letter-spacing: .02em; }
@@ -161,7 +161,7 @@ main:focus { outline: none; }
 .film__frame i { position: absolute; left: 6px; bottom: 4px; font: 500 .6rem var(--sans); color: var(--cream); font-style: normal; letter-spacing: .1em; }
 
 .about-note { display: grid; grid-template-columns: minmax(220px, 4fr) 6fr; gap: clamp(28px, 5vw, 80px); align-items: center; }
-.about-note .polaroid { margin: 10px 0 0 6%; }
+.about-note .polaroid { margin: 0 auto; }
 .note { background: #c6d0da; background-image: var(--grain); padding: clamp(24px, 3.5vw, 48px); transform: rotate(1deg); box-shadow: 0 12px 24px -10px #0006; display: flex; flex-direction: column; gap: 18px; align-items: flex-start; }
 .note .display em { color: var(--rose-deep); }
 
@@ -278,7 +278,7 @@ main:focus { outline: none; }
 
 /* ---------- About ---------- */
 .about-grid { display: grid; grid-template-columns: 4fr 6fr; gap: clamp(28px, 6vw, 96px); align-items: center; margin-bottom: clamp(60px, 8vw, 110px); }
-.about-grid .polaroid { margin: 20px auto 0; max-width: 360px; }
+.about-grid .polaroid { margin: 0 auto; max-width: 360px; }
 .about-grid__text { display: flex; flex-direction: column; gap: 22px; }
 .lead { font: 400 clamp(1.3rem, 2.2vw, 1.8rem)/1.35 var(--serif); max-width: 36ch; }
 .cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; align-items: start; }
@@ -323,7 +323,16 @@ main:focus { outline: none; }
   .about-grid__text { position: relative; padding-left: 22px; }
   .rings { display: block; background: radial-gradient(circle, var(--cream) 5px, #7d7468 5.5px, #7d7468 7px, transparent 7.5px) center 12% / 22px 22px no-repeat, radial-gradient(circle, var(--cream) 5px, #7d7468 5.5px, #7d7468 7px, transparent 7.5px) center 50% / 22px 22px no-repeat, radial-gradient(circle, var(--cream) 5px, #7d7468 5.5px, #7d7468 7px, transparent 7.5px) center 88% / 22px 22px no-repeat; left: -30px; }
 }
-@media (max-width: 640px) { .script-mark { right: -4%; bottom: 10%; font-size: 3.4rem; } .year-mark { right: 0; } }
+@media (max-width: 640px) { .script-mark { right: 6%; bottom: 3%; font-size: 2.6rem; } .year-mark { display: none; } .typed { max-width: 17ch; } }
+
+/* ---------- lace and ribbon ---------- */
+.lace-wrap { position: relative; width: 100%; max-width: 440px; margin: 0 auto; padding: 8% 6%; }
+.lace-wrap .polaroid { position: relative; z-index: 2; margin: 0 auto; }
+.doily { position: absolute; z-index: 0; width: 118%; left: -9%; top: -4%; height: auto; filter: drop-shadow(0 6px 8px #0003); transform: rotate(8deg); pointer-events: none; }
+.ribbon { position: absolute; z-index: 3; width: 74%; height: auto; left: -14%; top: 56%; transform: rotate(-14deg); filter: drop-shadow(0 3px 3px #0004); pointer-events: none; }
+.about-note .lace-wrap, .about-grid .lace-wrap, .contact__side .lace-wrap { margin-top: 10px; }
+.contact__side .ribbon { left: auto; right: -14%; top: 12%; transform: rotate(18deg); }
+@media (max-width: 640px) { .lace-wrap { max-width: 320px; } .ribbon { left: -6%; } .contact__side .ribbon { right: -6%; } }
 
 /* ---------- motion ---------- */
 @media (prefers-reduced-motion: reduce) {
@@ -396,13 +405,13 @@ const site = {
   name: 'Lynn Kim',
   year: 2026,
   // Fill these in. Empty values render as "to be added", not as broken links.
-  email: null, // e.g. 'name@example.com'
-  instagram: null, // e.g. { handle: '@name', url: 'https://instagram.com/name' }
+  email: 'eggielikestaco@gmail.com',
+  instagram: { handle: '@lynnonmi', url: 'https://www.instagram.com/lynnonmi/' },
   resume: null, // e.g. 'assets/Lynn-Kim-Resume.pdf'
   statement: 'Content, events, live commerce, brand marketing and photography.',
 };
 
-const categories = [
+const allCategories = [
   { id: 'content', label: 'Content', tone: 'pink', note: 'Written, visual and video content.' },
   { id: 'events', label: 'Events', tone: 'blue', note: 'Planned and produced events.' },
   { id: 'live-commerce', label: 'Live Commerce', tone: 'cream', note: 'Live sales broadcasts.' },
@@ -420,11 +429,7 @@ const categories = [
   results                           list of { label, value, verified } (verified must be true to show as a result)
   evidence                          list of { src, alt, caption } (src null = placeholder frame)
 */
-const blank = (category, n) => ({
-  slug: `${category}-${String(n).padStart(2, '0')}`,
-  category,
-  no: String(n).padStart(2, '0'),
-  title: null,
+const base = {
   year: null,
   client: null,
   role: null,
@@ -433,16 +438,42 @@ const blank = (category, n) => ({
   responsibilities: [],
   process: [],
   results: [],
+  links: [], // [{ text, href }]
   cover: { src: null, alt: '' },
   evidence: [
     { src: null, alt: '', caption: null },
     { src: null, alt: '', caption: null },
     { src: null, alt: '', caption: null },
   ],
-  featured: n === 1,
-});
+};
 
-const projects = categories.flatMap((c) => [blank(c.id, 1), blank(c.id, 2)]);
+/*
+  Only projects with real content belong here. A category with no project
+  is hidden from the site until one is added.
+  Titles are the project names. Everything else stays empty until it is
+  filled from verified material.
+*/
+const list = [
+  { slug: 'solo-party', category: 'events', title: 'Solo Party: first and second events' },
+  { slug: 'witu-tiktok-live', category: 'live-commerce', title: 'WitU / TikTok LIVE' },
+  {
+    slug: 'lynnonmi-content',
+    category: 'content',
+    title: '@lynnonmi content creation',
+    links: [{ text: 'Open @lynnonmi on Instagram', href: 'https://www.instagram.com/lynnonmi/' }],
+  },
+  { slug: 'photography-snap-sessions', category: 'photography', title: 'Photography and Snap Sessions', links: [{ text: 'Open the photography gallery', href: '?page=photography' }] },
+];
+
+// Waiting for category placement from the portfolio brief:
+//   Red Bull Korea, Pimadaziwin, Constant / Refilled
+
+const featuredSlugs = ['solo-party', 'witu-tiktok-live', 'lynnonmi-content'];
+
+const projects = list.map((p) => {
+  const inCat = list.filter((q) => q.category === p.category);
+  return { ...base, ...p, no: String(inCat.indexOf(p) + 1).padStart(2, '0'), featured: featuredSlugs.includes(p.slug) };
+});
 
 /*
   Photographs taken by Lynn. type is 'portrait' or 'snap'.
@@ -485,7 +516,9 @@ const about = {
 const page = (new URLSearchParams(location.search).get('page') || 'home');
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-const cat = (id) => categories.find((c) => c.id === id);
+const categories = allCategories.filter((c) => projects.some((p) => p.category === c.id));
+const cat = (id) => allCategories.find((c) => c.id === id);
+const WORDS = ['No', 'One', 'Two', 'Three', 'Four', 'Five', 'Six'];
 
 /* ---------- small building blocks ---------- */
 
@@ -505,14 +538,47 @@ function media({ src, alt, width, height }, tone, label) {
   return `<div class="ph ph--${tone}" role="img" aria-label="Placeholder: ${esc(label)}"><span>${esc(label)}</span></div>`;
 }
 
+
+/* Lace doily, drawn once as a scalloped disc with punched rings. */
+let doilyN = 0;
+function doily(cls = '') {
+  const id = `dm${doilyN++}`;
+  const c = 100;
+  const pt = (r, a) => [c + r * Math.cos(a), c + r * Math.sin(a)];
+  const N = 46;
+  let edge = '';
+  for (let i = 0; i < N; i++) {
+    const a0 = (i / N) * Math.PI * 2, a1 = ((i + 1) / N) * Math.PI * 2;
+    const [x0, y0] = pt(90, a0), [x1, y1] = pt(90, a1);
+    edge += (i ? '' : `M${x0.toFixed(1)} ${y0.toFixed(1)}`) + `A6.6 6.6 0 0 1 ${x1.toFixed(1)} ${y1.toFixed(1)}`;
+  }
+  const ring = (r, n, rad) => Array.from({ length: n }, (_, i) => { const [x, y] = pt(r, (i / n) * Math.PI * 2 + (rad ? 0 : 0)); return `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${rad}" fill="#000"/>`; }).join('');
+  return `<svg class="doily ${cls}" viewBox="0 0 200 200" aria-hidden="true" focusable="false">
+    <defs><mask id="${id}"><rect width="200" height="200" fill="#fff"/>${ring(80, 46, 2.6)}${ring(70, 23, 4.2)}${ring(59, 34, 2.4)}${ring(47, 17, 4)}${ring(34, 24, 2.2)}${ring(20, 8, 3.6)}</mask></defs>
+    <path d="${edge}Z" fill="#f7f2e8" mask="url(#${id})"/>
+    <g fill="none" stroke="#c9bfae" stroke-width=".7" opacity=".8"><circle cx="100" cy="100" r="72"/><circle cx="100" cy="100" r="45"/><circle cx="100" cy="100" r="30"/></g>
+  </svg>`;
+}
+
+/* Ribbon strip with swallow-tail ends. */
+function ribbon(cls = '') {
+  return `<svg class="ribbon ${cls}" viewBox="0 0 260 44" aria-hidden="true" focusable="false">
+    <path d="M0 0H260L244 22L260 44H0L16 22Z" fill="#8f9fb3"/>
+    <path d="M16 6H244M16 38H244" stroke="#f3ebdc" stroke-opacity=".55" stroke-width="1" fill="none"/>
+    <path d="M0 0H260L244 22L260 44H0L16 22Z" fill="#1f1e20" fill-opacity=".06"/>
+  </svg>`;
+}
+
 const label = (text) => `<span class="label">${esc(text)}</span>`;
 
-function polaroid({ img, caption, tone, tilt = 0, clipped = false, taped = false, ph = 'Photo placeholder' }) {
-  return `<figure class="polaroid" style="--tilt:${tilt}deg">
+function polaroid({ img, caption, tone, tilt = 0, clipped = false, taped = false, lace = false, bow = false, ph = 'Photo placeholder' }) {
+  const fig = `<figure class="polaroid" style="--tilt:${tilt}deg">
     ${clipped ? clip() : ''}${taped ? '<span class="tape" aria-hidden="true"></span>' : ''}
     <div class="polaroid__img">${media(img, tone, ph)}</div>
     <figcaption>${caption}</figcaption>
   </figure>`;
+  if (!lace && !bow) return fig;
+  return `<div class="lace-wrap">${lace ? doily() : ''}${bow ? ribbon() : ''}${fig}</div>`;
 }
 
 /* ---------- layout ---------- */
@@ -578,7 +644,7 @@ function spines() {
     ${categories
       .map(
         (c, i) => `<li class="spine spine--${c.tone}" style="--i:${i}">
-        <a href="?page=work#${c.id}"><span class="spine__label">${esc(c.label)}</span><span class="spine__count">${projects.filter((p) => p.category === c.id).length} files</span></a>
+        <a href="?page=work#${c.id}"><span class="spine__label">${esc(c.label)}</span><span class="spine__count">${projects.filter((p) => p.category === c.id).length} ${projects.filter((p) => p.category === c.id).length === 1 ? 'file' : 'files'}</span></a>
       </li>`
       )
       .join('')}
@@ -588,7 +654,7 @@ function spines() {
 /* ---------- pages ---------- */
 
 function home() {
-  const featured = projects.filter((p) => p.featured).slice(0, 3);
+  const featured = featuredSlugs.map((s) => projects.find((p) => p.slug === s)).filter(Boolean);
   const stage = `<div class="stage stage--home">
     <h1 class="giant">${esc(site.name)}</h1>
     <div class="stack" aria-hidden="false">
@@ -613,7 +679,7 @@ function home() {
   </section>
 
   <section class="block block--spines" aria-labelledby="drawer">
-    <h2 id="drawer" class="display display--s">Five <em>folders</em></h2>
+    <h2 id="drawer" class="display display--s">${WORDS[categories.length]} <em>${categories.length === 1 ? 'folder' : 'folders'}</em></h2>
     ${spines()}
   </section>
 
@@ -633,7 +699,7 @@ function home() {
 
   <section class="block block--about" aria-labelledby="ab">
     <div class="about-note">
-      ${polaroid({ img: about.portrait, tone: 'rose', caption: `${stamp()}<span>Portrait to be added</span>`, tilt: -3, clipped: true, ph: 'Portrait of Lynn' })}
+      ${polaroid({ img: about.portrait, tone: 'rose', caption: `${stamp()}<span>Portrait to be added</span>`, tilt: -3, clipped: true, lace: true, bow: true, ph: 'Portrait of Lynn' })}
       <div class="note">
         <h2 id="ab" class="display display--s">About <em>Lynn</em></h2>
         <p>${about.intro ? esc(about.intro) : pending('Introduction in Lynn\'s own words to be added.')}</p>
@@ -659,7 +725,7 @@ function work() {
         <div class="folder__inner">
           <header class="folder__head">
             <h2 class="display display--s">${esc(c.label)}</h2>
-            <p>${esc(c.note)} <span class="count">${list.length} files</span></p>
+            <p>${esc(c.note)} <span class="count">${list.length} ${list.length === 1 ? 'file' : 'files'}</span></p>
           </header>
           <div class="folder__files">${list.map((p, i) => projectCard(p, i)).join('')}</div>
         </div>
@@ -671,7 +737,7 @@ function work() {
     <div class="cabinet__stack">${folders}</div>
   </div>
   <p class="hint">Select a tab, or use the left and right arrow keys, to bring a folder forward.</p>`;
-  const html = shell(plainStage('Archive / 02', 'Work', 'Five folders. Bring one forward to see the projects inside.'), body, 'work');
+  const html = shell(plainStage('Archive / 02', 'Work', `${WORDS[categories.length]} ${categories.length === 1 ? 'folder' : 'folders'}. Bring one forward to see the projects inside.`), body, 'work');
   return { html, after: initCabinet };
 }
 
@@ -787,6 +853,7 @@ function projectPage() {
       ${verified.length ? '' : '<p class="small">Only verified figures are shown here.</p>'}</section>
   </div>
 
+  ${p.links.length ? `<p class="links">${p.links.map((l) => `<a class="textlink" href="${esc(l.href)}"${l.href.startsWith('http') ? ' target="_blank" rel="noopener"' : ''}>${esc(l.text)}</a>`).join('')}</p>` : ''}
   <section class="evidence" aria-labelledby="d5"><h2 id="d5" class="display display--s">Visual <em>evidence</em></h2><div class="evidence__row">${ev}</div></section>
 
   <nav class="pager" aria-label="Other projects">
@@ -878,7 +945,7 @@ function aboutPage() {
     items.length ? `<ul class="plain">${items.map(render).join('')}</ul>` : `<ul class="plain plain--ph">${empty.map((e) => `<li>${pending(e)}</li>`).join('')}</ul>`;
   const body = `
   <section class="about-grid">
-    <div class="about-grid__photo">${polaroid({ img: about.portrait, tone: 'pink', tilt: 2.5, clipped: true, caption: `${stamp()}<span>Portrait to be added</span>`, ph: 'Portrait of Lynn' })}</div>
+    <div class="about-grid__photo">${polaroid({ img: about.portrait, tone: 'pink', tilt: 2.5, clipped: true, lace: true, caption: `${stamp()}<span>Portrait to be added</span>`, ph: 'Portrait of Lynn' })}</div>
     <div class="about-grid__text"><span class="rings" aria-hidden="true"></span>
       <h2 class="display">Hello, I'm <em class="script-em">Lynn</em></h2>
       <p class="lead">${about.intro ? esc(about.intro) : pending('Introduction in Lynn\'s own words to be added. Two to four sentences on who she is and what she makes.')}</p>
@@ -920,7 +987,7 @@ function contactPage() {
         <div><dt>Resume</dt><dd>${cv}</dd></div>
       </dl>
     </div>
-    <div class="contact__side"><div class="stamp-card"><span>Lynn Kim</span><b>Archive ${site.year}</b><i>Content / Events / Live Commerce / Brand Marketing / Photography</i></div>${polaroid({ img: { src: null }, tone: 'blue', tilt: -2, clipped: true, caption: `${stamp()}<span>Photo to be added</span>`, ph: 'Photo' })}</div>
+    <div class="contact__side"><div class="stamp-card"><span>Lynn Kim</span><b>Archive ${site.year}</b><i>Content / Events / Live Commerce / Brand Marketing / Photography</i></div>${polaroid({ img: { src: null }, tone: 'blue', tilt: -2, clipped: true, lace: true, bow: true, caption: `${stamp()}<span>Photo to be added</span>`, ph: 'Photo' })}</div>
   </section>`;
   return shell(plainStage('Archive / 05', 'Contact', 'Write, follow along or take the resume.'), body, 'contact');
 }

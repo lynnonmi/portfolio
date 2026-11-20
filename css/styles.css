@@ -45,11 +45,11 @@ main:focus { outline: none; }
 .display { font: 400 clamp(2.6rem, 6.5vw, 5.4rem)/.95 var(--serif); letter-spacing: -.01em; }
 .display em { font-style: italic; color: var(--rose); }
 .display--s { font-size: clamp(2rem, 4vw, 3.2rem); }
-.textlink { font: 500 .78rem/1 var(--sans); letter-spacing: .14em; text-transform: uppercase; text-decoration: none; border-bottom: 1px solid currentColor; padding-bottom: 5px; align-self: flex-end; white-space: nowrap; }
+.textlink { font: 500 .78rem/1 var(--sans); letter-spacing: .14em; text-transform: uppercase; text-decoration: none; border-bottom: 1px solid currentColor; padding: 12px 0 5px; display: inline-block; align-self: flex-end; white-space: nowrap; }
 .textlink:hover { color: var(--rose-deep); }
 
 /* ---------- desk and band ---------- */
-.desk { max-width: 1600px; margin: 0 auto; }
+.desk { max-width: 1600px; margin: 0 auto; overflow-x: clip; }
 .band { position: relative; color: var(--cream); background: var(--char); }
 .top { display: flex; justify-content: space-between; align-items: baseline; padding: 22px var(--gut) 0; font: 500 .78rem var(--sans); letter-spacing: .08em; }
 .logo { text-decoration: none; font: 500 1.35rem var(--serif); letter-spacing: .02em; }
@@ -151,7 +151,7 @@ main:focus { outline: none; }
 .film__frame i { position: absolute; left: 6px; bottom: 4px; font: 500 .6rem var(--sans); color: var(--cream); font-style: normal; letter-spacing: .1em; }
 
 .about-note { display: grid; grid-template-columns: minmax(220px, 4fr) 6fr; gap: clamp(28px, 5vw, 80px); align-items: center; }
-.about-note .polaroid { margin: 10px 0 0 6%; }
+.about-note .polaroid { margin: 0 auto; }
 .note { background: #c6d0da; background-image: var(--grain); padding: clamp(24px, 3.5vw, 48px); transform: rotate(1deg); box-shadow: 0 12px 24px -10px #0006; display: flex; flex-direction: column; gap: 18px; align-items: flex-start; }
 .note .display em { color: var(--rose-deep); }
 
@@ -268,7 +268,7 @@ main:focus { outline: none; }
 
 /* ---------- About ---------- */
 .about-grid { display: grid; grid-template-columns: 4fr 6fr; gap: clamp(28px, 6vw, 96px); align-items: center; margin-bottom: clamp(60px, 8vw, 110px); }
-.about-grid .polaroid { margin: 20px auto 0; max-width: 360px; }
+.about-grid .polaroid { margin: 0 auto; max-width: 360px; }
 .about-grid__text { display: flex; flex-direction: column; gap: 22px; }
 .lead { font: 400 clamp(1.3rem, 2.2vw, 1.8rem)/1.35 var(--serif); max-width: 36ch; }
 .cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; align-items: start; }
@@ -313,7 +313,16 @@ main:focus { outline: none; }
   .about-grid__text { position: relative; padding-left: 22px; }
   .rings { display: block; background: radial-gradient(circle, var(--cream) 5px, #7d7468 5.5px, #7d7468 7px, transparent 7.5px) center 12% / 22px 22px no-repeat, radial-gradient(circle, var(--cream) 5px, #7d7468 5.5px, #7d7468 7px, transparent 7.5px) center 50% / 22px 22px no-repeat, radial-gradient(circle, var(--cream) 5px, #7d7468 5.5px, #7d7468 7px, transparent 7.5px) center 88% / 22px 22px no-repeat; left: -30px; }
 }
-@media (max-width: 640px) { .script-mark { right: -4%; bottom: 10%; font-size: 3.4rem; } .year-mark { right: 0; } }
+@media (max-width: 640px) { .script-mark { right: 6%; bottom: 3%; font-size: 2.6rem; } .year-mark { display: none; } .typed { max-width: 17ch; } }
+
+/* ---------- lace and ribbon ---------- */
+.lace-wrap { position: relative; width: 100%; max-width: 440px; margin: 0 auto; padding: 8% 6%; }
+.lace-wrap .polaroid { position: relative; z-index: 2; margin: 0 auto; }
+.doily { position: absolute; z-index: 0; width: 118%; left: -9%; top: -4%; height: auto; filter: drop-shadow(0 6px 8px #0003); transform: rotate(8deg); pointer-events: none; }
+.ribbon { position: absolute; z-index: 3; width: 74%; height: auto; left: -14%; top: 56%; transform: rotate(-14deg); filter: drop-shadow(0 3px 3px #0004); pointer-events: none; }
+.about-note .lace-wrap, .about-grid .lace-wrap, .contact__side .lace-wrap { margin-top: 10px; }
+.contact__side .ribbon { left: auto; right: -14%; top: 12%; transform: rotate(18deg); }
+@media (max-width: 640px) { .lace-wrap { max-width: 320px; } .ribbon { left: -6%; } .contact__side .ribbon { right: -6%; } }
 
 /* ---------- motion ---------- */
 @media (prefers-reduced-motion: reduce) {
