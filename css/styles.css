@@ -10,6 +10,7 @@
   --char-2: #2c2a2d;
   --ink: #272427;
   --mute: #7d7468;
+  --script: 'Pinyon Script', 'Snell Roundhand', cursive;
   --serif: 'Cormorant Garamond', 'Cormorant', Georgia, 'Times New Roman', serif;
   --sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
   --gut: clamp(16px, 4vw, 56px);
@@ -294,6 +295,25 @@ main:focus { outline: none; }
 .btn:hover { background: var(--rose-deep); }
 .btn--off { background: transparent; color: var(--mute); border: 1px dashed var(--mute); font-style: italic; text-transform: none; letter-spacing: .02em; font-size: .9rem; }
 .contact__side .polaroid { margin: 0 auto; }
+
+/* ---------- details from references 6 and 7 ---------- */
+.script-em { font-family: var(--script); font-style: normal; font-weight: 400; color: var(--rose); font-size: 1.18em; letter-spacing: 0; padding-right: .06em; }
+.script-mark { position: absolute; z-index: 4; right: -14%; bottom: 14%; font: 400 clamp(3.4rem, 8vw, 6.6rem)/1 var(--script); color: var(--rose); transform: rotate(-9deg); text-shadow: 0 1px 0 #fff8; pointer-events: none; }
+.year-mark { position: absolute; z-index: 4; right: -12%; bottom: 8%; font: 500 .8rem var(--sans); letter-spacing: .1em; color: var(--rose-deep); }
+.tape { position: absolute; z-index: 5; top: -12px; left: 50%; width: 92px; height: 26px; transform: translateX(-50%) rotate(-3deg); background: #d7c79a99; background-image: var(--grain); box-shadow: 0 1px 2px #0003; }
+.rings { position: absolute; left: -34px; top: 0; bottom: 0; width: 22px; display: none; }
+.stamp-card { position: relative; background: var(--paper); background-image: var(--grain); padding: 26px 22px; margin: 0 auto 36px; max-width: 320px; text-align: center; display: flex; flex-direction: column; gap: 6px; filter: drop-shadow(0 8px 10px #0004); transform: rotate(1.5deg);
+  -webkit-mask: radial-gradient(circle 5px at 50% 0, #0000 96%, #000) top / 14px 100% repeat-x, radial-gradient(circle 5px at 50% 100%, #0000 96%, #000) bottom / 14px 100% repeat-x, radial-gradient(circle 5px at 0 50%, #0000 96%, #000) left / 100% 14px repeat-y, radial-gradient(circle 5px at 100% 50%, #0000 96%, #000) right / 100% 14px repeat-y;
+  -webkit-mask-composite: source-in; mask-composite: intersect; }
+.stamp-card span { font: 400 2rem/1 var(--script); color: var(--rose-deep); }
+.stamp-card b { font: 600 .62rem var(--sans); letter-spacing: .2em; text-transform: uppercase; }
+.stamp-card i { font: 400 .7rem/1.4 var(--sans); font-style: normal; color: var(--mute); }
+.ftab--cream[aria-selected='true'], .tabs a[aria-current='page'] { text-shadow: 0 1px 0 #fffa; }
+@media (min-width: 961px) {
+  .about-grid__text { position: relative; padding-left: 22px; }
+  .rings { display: block; background: radial-gradient(circle, var(--cream) 5px, #7d7468 5.5px, #7d7468 7px, transparent 7.5px) center 12% / 22px 22px no-repeat, radial-gradient(circle, var(--cream) 5px, #7d7468 5.5px, #7d7468 7px, transparent 7.5px) center 50% / 22px 22px no-repeat, radial-gradient(circle, var(--cream) 5px, #7d7468 5.5px, #7d7468 7px, transparent 7.5px) center 88% / 22px 22px no-repeat; left: -30px; }
+}
+@media (max-width: 640px) { .script-mark { right: -4%; bottom: 10%; font-size: 3.4rem; } .year-mark { right: 0; } }
 
 /* ---------- motion ---------- */
 @media (prefers-reduced-motion: reduce) {

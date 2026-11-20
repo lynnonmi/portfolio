@@ -25,9 +25,9 @@ function media({ src, alt, width, height }, tone, label) {
 
 const label = (text) => `<span class="label">${esc(text)}</span>`;
 
-function polaroid({ img, caption, tone, tilt = 0, clipped = false, ph = 'Photo placeholder' }) {
+function polaroid({ img, caption, tone, tilt = 0, clipped = false, taped = false, ph = 'Photo placeholder' }) {
   return `<figure class="polaroid" style="--tilt:${tilt}deg">
-    ${clipped ? clip() : ''}
+    ${clipped ? clip() : ''}${taped ? '<span class="tape" aria-hidden="true"></span>' : ''}
     <div class="polaroid__img">${media(img, tone, ph)}</div>
     <figcaption>${caption}</figcaption>
   </figure>`;
@@ -116,6 +116,8 @@ function home() {
         ${polaroid({ img: { src: null }, tone: 'pink', caption: `${stamp('Placeholder')}<span>Portrait of Lynn, to be added</span>`, clipped: true, ph: 'Portrait of Lynn' })}
         <p class="typed">${esc(site.statement)}</p>
       </div>
+      <span class="script-mark" aria-hidden="true">portfolio</span>
+      <span class="year-mark" aria-hidden="true">(${site.year})</span>
     </div>
   </div>`;
 
@@ -276,7 +278,7 @@ function projectPage() {
     : [1, 2, 3].map((k) => `<div class="metric metric--ph"><span class="metric__v">${pending('Verified figure')}</span><span class="metric__l">${pending(`Metric ${k}, with its source`)}</span></div>`).join('');
 
   const ev = p.evidence
-    .map((e, i) => polaroid({ img: e, tone: c.tone, tilt: [-2, 1.5, -1][i % 3], clipped: i === 1, caption: e.caption ? esc(e.caption) : `${stamp()}<span>Evidence ${i + 1}</span>`, ph: `Evidence ${i + 1}` }))
+    .map((e, i) => polaroid({ img: e, tone: c.tone, tilt: [-2, 1.5, -1][i % 3], clipped: i === 1, taped: i === 0, caption: e.caption ? esc(e.caption) : `${stamp()}<span>Evidence ${i + 1}</span>`, ph: `Evidence ${i + 1}` }))
     .join('');
 
   const prev = projects[(idx - 1 + projects.length) % projects.length];
@@ -395,8 +397,8 @@ function aboutPage() {
   const body = `
   <section class="about-grid">
     <div class="about-grid__photo">${polaroid({ img: about.portrait, tone: 'pink', tilt: 2.5, clipped: true, caption: `${stamp()}<span>Portrait to be added</span>`, ph: 'Portrait of Lynn' })}</div>
-    <div class="about-grid__text">
-      <h2 class="display">Hello, I'm <em>Lynn</em></h2>
+    <div class="about-grid__text"><span class="rings" aria-hidden="true"></span>
+      <h2 class="display">Hello, I'm <em class="script-em">Lynn</em></h2>
       <p class="lead">${about.intro ? esc(about.intro) : pending('Introduction in Lynn\'s own words to be added. Two to four sentences on who she is and what she makes.')}</p>
       <p class="small">Areas of work: Content, Events, Live Commerce, Brand Marketing and Photography.</p>
     </div>
@@ -429,14 +431,14 @@ function contactPage() {
   <section class="contact">
     <div class="note-pad">
       ${clip('clip--rose')}
-      <h2 class="display">Have a project <em>in mind?</em></h2>
+      <h2 class="display">Have a project <em class="script-em">in mind?</em></h2>
       <dl class="contact__list">
         <div><dt>Email</dt><dd>${email}</dd></div>
         <div><dt>Instagram</dt><dd>${ig}</dd></div>
         <div><dt>Resume</dt><dd>${cv}</dd></div>
       </dl>
     </div>
-    <div class="contact__side">${polaroid({ img: { src: null }, tone: 'blue', tilt: -2, clipped: true, caption: `${stamp()}<span>Photo to be added</span>`, ph: 'Photo' })}</div>
+    <div class="contact__side"><div class="stamp-card"><span>Lynn Kim</span><b>Archive ${site.year}</b><i>Content / Events / Live Commerce / Brand Marketing / Photography</i></div>${polaroid({ img: { src: null }, tone: 'blue', tilt: -2, clipped: true, caption: `${stamp()}<span>Photo to be added</span>`, ph: 'Photo' })}</div>
   </section>`;
   return shell(plainStage('Archive / 05', 'Contact', 'Write, follow along or take the resume.'), body, 'contact');
 }
